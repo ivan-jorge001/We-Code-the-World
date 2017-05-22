@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const QuASchema = new Schema({
   authorOfQuestion:[{
-username:{type:String}
+username:{type:String},
 profpic:{type:String}
   }],
   question:{type:String},
