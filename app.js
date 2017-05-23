@@ -6,6 +6,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
+const session      = require('express-session');
+const passport     = require('passport');
+const flash        = require('connect-flash');
+require('./config/passport-config.js');
 
 
 mongoose.connect('mongodb://localhost/wecodetheworld');
@@ -27,6 +31,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
+app.use( session({
+  secret: 'wecodetheworld',
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(flash());
+
+// These need to come AFTER the session middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use((req,res,next)=>{
   if (req.user) {
@@ -38,6 +54,8 @@ app.use((req,res,next)=>{
 // ===========================================ROUTES=====================================
 const index = require('./routes/index');
 app.use('/', index);
+const Auth = require('./routes/auth-routes.js');
+app.use('/', Auth);
 // ===========================================END ROUTES=================================
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

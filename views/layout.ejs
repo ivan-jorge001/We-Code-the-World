@@ -38,6 +38,7 @@
     <!-- Page JS Plugins CSS go here -->
 
     <!-- OneUI CSS framework -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" id="css-main" href="./assets/css/oneui.min.css">
     <link rel="stylesheet" href="./stylesheets/loginsingup.css">
 
@@ -45,8 +46,21 @@
     <!-- <link rel="stylesheet" id="css-theme" href="./assets/css/themes/flat.min.css"> -->
     <!-- END Stylesheets -->
 </head>
+<%if( typeof successMessage !== 'undefined'){%>
+<div class="successMessage">
+<center><span><%= successMessage%></span></center>
+</div>
+<%}%>
 
-<body>
+<%if( typeof failMessage !== 'undefined'){%>
+<div class="failMessage">
+<center><span><%= failMessage%></span></center>
+</div>
+<%}%>
+
+<header>
+</header>
+<body id="body">
     <!-- Page Container -->
     <!--
             Available Classes:
@@ -113,7 +127,61 @@
 
         <!-- Sidebar -->
         <nav id="sidebar">
-            <%- navbar%>
+          <div class="content bg-gray-lighter">
+              <div class="row items-push">
+                  <div class="col-sm-7">
+                      <h1 class="page-heading">
+          Title <small>Subtitle.</small>
+      </h1>
+                  </div>
+                  <div class="col-sm-5 text-right hidden-xs">
+                      <ol class="breadcrumb push-10-t">
+                          <li>Category</li>
+                          <li><a class="link-effect" href="">Page</a></li>
+                      </ol>
+                  </div>
+              </div>
+          </div>
+          <!-- END Page Header -->
+
+          <!-- Page Content -->
+          <div class="content">
+              <!-- My Block -->
+              <div class="block">
+                  <div class="block-header">
+                      <ul class="block-options">
+                          <li>
+                              <button type="button"><i class="si si-settings"></i></button>
+                          </li>
+                          <li>
+                              <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                          </li>
+                          <li>
+                              <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                          </li>
+                          <li>
+                              <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                          </li>
+                          <li>
+                              <button type="button" data-toggle="block-option" data-action="close"><i class="si si-close"></i></button>
+                          </li>
+                      </ul>
+                      <h3 class="block-title">My Block</h3>
+                  </div>
+                  <div class="block-content">
+                      <p>...</p>
+                  </div>
+              </div>
+              <!-- END My Block -->
+          </div>
+
+
+
+          <%# ========================NAV BAR=================================%>
+              <%# ========================NAV BAR=================================%>
+                  <%# ========================NAV BAR=================================%>
+
+
         </nav>
         <!-- END Sidebar -->
 
@@ -129,7 +197,7 @@
                     </button>
                   <%}else{%>
                         <ol class="nav push-10-t">
-                            <a class="nav-link" data-toggle="modal" data-target="#login-modal"> Sign Up / Log In </a></li>
+                            <a id= 'signlog' class="nav-link" data-toggle="modal" data-target="#signuplogin"> Sign Up / Log In </a></li>
                         </ol>
                   <%};%>
                 </li>
@@ -170,101 +238,151 @@
 
         <!-- Main Container -->
         <main id="main-container">
-          <%# =============================LOGIN FORM===============================%>
-          <!-- BEGIN # MODAL LOGIN -->
-          <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header" align="center">
-                  <img class="img-circle" id="img_logo" src="http://bootsnipp.com/img/logo.jpg">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </button>
+
+          <%# <!-- END Header Navigation Right -->%>
+          <!-- Sidebar Scroll Container -->
+          <div id="sidebar-scroll">
+              <!-- Sidebar Content -->
+              <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
+              <div class="sidebar-content">
+                  <!-- Side Header -->
+                  <div class="side-header side-content bg-white-op">
+                      <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
+                      <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
+<i class="fa fa-times"></i>
+</button>
+                      <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
+                      <div class="btn-group pull-right">
+                          <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
+  <i class="si si-drop"></i>
+</button>
+                          <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
+                              <li>
+                                  <a data-toggle="theme" data-theme="default" tabindex="-1" href="javascript:void(0)">
+                                      <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">Default</span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a data-toggle="theme" data-theme="./assets/css/themes/amethyst.min.css" tabindex="-1" href="javascript:void(0)">
+                                      <i class="fa fa-circle text-amethyst pull-right"></i> <span class="font-w600">Amethyst</span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a data-toggle="theme" data-theme="./assets/css/themes/city.min.css" tabindex="-1" href="javascript:void(0)">
+                                      <i class="fa fa-circle text-city pull-right"></i> <span class="font-w600">City</span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a data-toggle="theme" data-theme="./assets/css/themes/flat.min.css" tabindex="-1" href="javascript:void(0)">
+                                      <i class="fa fa-circle text-flat pull-right"></i> <span class="font-w600">Flat</span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a data-toggle="theme" data-theme="./assets/css/themes/modern.min.css" tabindex="-1" href="javascript:void(0)">
+                                      <i class="fa fa-circle text-modern pull-right"></i> <span class="font-w600">Modern</span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a data-toggle="theme" data-theme="./assets/css/themes/smooth.min.css" tabindex="-1" href="javascript:void(0)">
+                                      <i class="fa fa-circle text-smooth pull-right"></i> <span class="font-w600">Smooth</span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
+                      <a class="h5 text-white" href="/">
+                          <span class="h4 font-w400 sidebar-mini-hide " style="color:white">We Can</span> <span class="h4 font-w700 sidebar-mini-hide " style="color:white"> Code It </span>
+                      </a>
+                  </div>
+                  <!-- END Side Header -->
+
+                  <!-- Side Content -->
+                  <div class="side-content">
+                      <ul class="nav-main">
+                          <li>
+                              <a class="active" href="/"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                          </li>
+                          <li class="nav-main-heading"><span class="sidebar-mini-hide">Header</span></li>
+                          <li>
+                              <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Dropdown</span></a>
+                              <ul>
+                                  <li>
+                                      <a href="/">Link #1</a>
+                                  </li>
+                                  <li>
+                                      <a href="/">Link #2</a>
+                                  </li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+                  <!-- END Side Content -->
+              </div>
+              <!-- Sidebar Content -->
+          </div>
+          <!-- END Sidebar Scroll Container -->
+
+            <div class="container signuplogin modal fade" id='signuplogin' style= "margin-top: 170px;" >
+              <div class="row">
+                <div class="col-md-offset-3 col-md-5">
+                  <form  id="formLogin" action="/user/login" method="post">
+                    <div id="login-form" class="form-container" data-form-container style="color: rgb(198, 40, 40); background: rgb(255, 205, 210);">
+                      <div class="row">
+                        <div class="form-title">
+                          <span>Login</span>
+                        </div>
+                      </div>
+                      <div class="input-container">
+                        <div class="row" style="display:none">
+                          <span class="req-input valid confirm-password" >
+                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your email."> </span>
+                            <input type="email" data-min-length="8" placeholder="Email" name="email" >
+                          </span>
+                        </div>
+
+                          <div class="row">
+                            <span class="req-input valid" >
+                              <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your Username."> </span>
+                              <input type="text" data-min-length="8" placeholder="Username" name="username">
+                            </span>
+                          </div>
+
+                        <div class="row">
+                          <span class="req-input input-password invalid">
+                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password must be at least 8 characters long."> </span>
+                            <input type="password" data-min-length="8" placeholder="Password" name="password">
+                          </span>
+                        </div>
+
+                        <div class="row" style="display:none">
+                          <span class="req-input confirm-password">
+                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password Must Match Initial Password Field."> </span>
+                            <input type="password" data-min-length="8" placeholder="Confirm Password" name="confirmPassword">
+                          </span>
+                        </div>
+
+                        <div class="row">
+                          <a class="create-account" > Create an Account </a>
+                        </div>
+
+                        <div class="row submit-row">
+                          <button class="btn btn-block submit-form invalid">Login</button>
+                        </div>
+                        <div class="oauth-buttons">
+                          <span><i class="fa fa-facebook"></i> </span>
+                          <span><i class="fa fa-google-plus"></i> </span>
+                          <span><i class="fa fa-linkedin"></i> </span>
+                          <span><i class="fa fa-twitter"></i> </span>
+                        </div>
+
+
+                      </div>
+                    </div>
+
+                  </form>
                 </div>
-
-                <!-- Begin # DIV Form -->
-                <div id="div-forms">
-
-                  <!-- Begin # Login Form -->
-                  <form id="login-form" action="/user/login" method="post">
-                    <div class="modal-body">
-                      <div id="div-login-msg">
-                        <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                        <span id="text-login-msg">Type your username and password.</span>
-                      </div>
-                      <input id="login_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
-                      <input id="login_password" class="form-control" type="password" placeholder="Password" required>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> Remember me
-                        </label>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
-                      </div>
-                      <div>
-                        <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
-                        <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
-                      </div>
-                    </div>
-                  </form>
-                  <!-- End # Login Form -->
-
-                  <!-- Begin | Lost Password Form -->
-                  <form id="lost-form" style="display:none;">
-                    <div class="modal-body">
-                      <div id="div-lost-msg">
-                        <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
-                        <span id="text-lost-msg">Type your e-mail.</span>
-                      </div>
-                      <input id="lost_email" class="form-control" type="text" placeholder="E-Mail (type ERROR for error effect)" required>
-                    </div>
-                    <div class="modal-footer">
-                      <div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
-                      </div>
-                      <div>
-                        <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
-                        <button id="lost_register_btn" type="button" class="btn btn-link">Register</button>
-                      </div>
-                    </div>
-                  </form>
-                  <!-- End | Lost Password Form -->
-
-                  <!-- Begin | Register Form -->
-                  <form id="register-form" style="display:none;" method="post" action="/user/signup">
-                    <div class="modal-body">
-                      <div id="div-register-msg">
-                        <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
-                        <span id="text-register-msg">Register an account.</span>
-                      </div>
-                      <input id="register_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
-                      <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required>
-                      <input id="register_password" class="form-control" type="password" placeholder="Password" required>
-                    </div>
-                    <div class="modal-footer">
-                      <div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
-                      </div>
-                      <div>
-                        <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
-                        <button id="register_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
-                      </div>
-                    </div>
-                  </form>
-                  <!-- End | Register Form -->
-
-                </div>
-                <!-- End # DIV Form -->
 
               </div>
             </div>
-          </div>
-          <%#==============================END LOGIN FORM============================= %>
-          <%# <!-- END Header Navigation Right -->%>
-            <%- main%>
         </main>
         <!-- END Main Container -->
 

@@ -31,13 +31,16 @@ const userSchema = new Schema({
         type: String
     },
     portafolio: {
-        type: String
+        pic: {type:String},
+        link:{type:String}
     },
     role: {
         type: String,
         enum: ['user', 'admin'],
         default: 'user'
     }
+},{
+  timestamps: true
 });
 
 module.exports = userSchema;
