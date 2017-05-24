@@ -81,21 +81,21 @@
         </div>
         <!-- /.container -->
         <%# THIS IS FOR THE NOTIFICATION %>
-
-
+        <%if (typeof successMessage !== 'undefined') {%>
             <% if ( successMessage.length > 0 ) { %>
+
                 <div class="successMessage ">
                     <input id="success" name="" value="<%= successMessage%>">
                 </div>
                 <% } %>
+              <%}%>
 
-
-
-
+              <%if (typeof failMessage !== 'undefined') {%>
                     <% if ( failMessage.length > 0 ) { %>
                         <div class="failMessage">
                             <input id="fail" name="" value="<%= failMessage%>">
                         </div>
+                        <%}%>
                         <%}%>
                             <!-- Page Container -->
                             <!--

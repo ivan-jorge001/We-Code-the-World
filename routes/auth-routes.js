@@ -62,5 +62,25 @@ router.get('/user/logout', (req, res, next) => {
     res.redirect('/');
 });
 
+router.get('/auth/facebook/',passport.authenticate('facebook'));
+router.get('/auth/facebook/callback',passport.authenticate('facebook',{
+  successFlash:'Your login was successful with your Facebook',
+  successRedirect:'/',
+  failureRedirect:'/',
+  failureFlash:'You Facebook login was unsuccesful'
+}));
+router.get('/auth/google/',passport.authenticate('google',{scope: ["https://www.googleapis.com/auth/plus.login",
+        "https://www.googleapis.com/auth/plus.profile.emails.read"
+    ]}));
+
+    router.get('/auth/google/callback',passport.authenticate('google',{
+      successRedirect:'/',
+      failureRedirect:'/',
+      successFlash:'Your Google account was verified',
+      failMessage:'Your Google account cant be verified'
+
+    }));
+
+
 
 module.exports = router;
