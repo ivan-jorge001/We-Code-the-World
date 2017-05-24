@@ -16,4 +16,7 @@ colorRep:{type:String}
   timestamps: true
 });
 
-module.exports = langSchema;
+
+const Lang = mongoose.model('languages', langSchema);
+
+module.exports = Lang;

@@ -31,16 +31,29 @@ const userSchema = new Schema({
         type: String
     },
     portafolio: {
-        pic: {type:String},
-        link:{type:String}
+        pic: {
+            type: String
+        },
+        link: {
+            type: String
+        }
     },
     role: {
         type: String,
         enum: ['user', 'admin'],
         default: 'user'
+    },
+    facebookID: {
+        type: String
+    },
+    //gooogle ids
+    googleID: {
+        type: String
     }
-},{
-  timestamps: true
+}, {
+    timestamps: true
 });
 
-module.exports = userSchema;
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

@@ -14,4 +14,6 @@ phone:{type:String}
   timestamps: true
 });
 
-module.exports = jobsSchema;
+const Job = mongoose.model('jobs', jobsSchema);
+
+module.exports = Job;

@@ -1,4 +1,39 @@
+// =================================notification
+function createNoty(message, type) {
+  var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert">';
+  html += '<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
+  html += message;
+  html += '</div>';
+  $(html).hide().prependTo('#noty-holder').slideDown();
+}
+// =================================notification
+
 $(function(){
+// NOTIFICATION============================================
+if ($('#success').val() !== undefined && $('#fail').val() === undefined) {
+  const message = $('#success').val();
+
+  if (message !== undefined) {
+  createNoty(`${message}`, 'success');
+  }
+}else if ($('#success').val() === undefined && $('#fail').val() !== undefined) {
+  const message = $('#fail').val();
+
+  if (message !== undefined) {
+  createNoty(`${message}`, 'danger');
+  }
+}
+
+
+
+
+
+    $('.page-alert .close').click(function(e) {
+      e.preventDefault();
+      $(this).closest('.page-alert').slideUp();
+    });
+
+// ====================================ENDNOTIFICATION
 $('#signlog').on('click',()=>{
   $('#signuplogin').toggleClass("signuplogin");
   if ($('#signuplogin').hasClass('signuplogin')){
@@ -70,11 +105,11 @@ $('#signlog').on('click',()=>{
 		}
 	});
 
-})
+});
 
 function resetForm(target){
 	var container = target;
-	container.find(".valid, .invalid").removeClass("valid invalid")
+	container.find(".valid, .invalid").removeClass("valid invalid");
 	container.css("background", "");
 	container.css("color", "");
 }

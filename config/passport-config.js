@@ -1,10 +1,10 @@
-const User             = require('../models/user-model.js');
-const passport         = require('passport');
-const FbStrategy       = require('passport-facebook');
-const GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
-const LocalStrategy    = require('passport-local').Strategy;
-const bcrypt           = require('bcrypt');
-const githubStrategy   = require('passport-github2');
+const User = require('../models/user-model.js');
+const passport = require('passport');
+const FbStrategy = require('passport-facebook');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
+const githubStrategy = require('passport-github2');
 
 passport.serializeUser((user, cb) => {
     // "cb" is short for "callback"
@@ -24,3 +24,34 @@ passport.deserializeUser((userId, cb) => {
         cb(null, theUser);
     });
 });
+ passport.use( new FbStrategy({},()=>{}));
+
+passport.use(new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password'
+}, (loginUsername, loginPassword, next) => {
+    User.findOne({
+        username: loginUsername
+    }, (err, theUser) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        if (!theUser) {
+            next(null, false, {
+                message: 'Wrong Username'
+            });
+            return;
+        }
+        console.log(theUser);
+        if (!bcrypt.compareSync(loginPassword, theUser.password)) {
+            next(null, false, {
+                message: 'Wrong Password'
+            });
+            return;
+        }
+        next(null, theUser, {
+            message: `Login for ${theUser.username} successful. 🤣`
+        });
+    });
+}));

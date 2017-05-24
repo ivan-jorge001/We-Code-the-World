@@ -39,6 +39,7 @@ app.use( session({
 
 app.use(flash());
 
+
 // These need to come AFTER the session middleware
 app.use(passport.initialize());
 app.use(passport.session());

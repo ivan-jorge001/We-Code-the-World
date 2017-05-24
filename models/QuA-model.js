@@ -10,6 +10,6 @@ const QuASchema = new Schema({
 },{
   timestamps: true
 });
+const QuA = mongoose.model('questions', QuASchema);
 
-
-module.exports = QuASchema;
+module.exports = QuA;

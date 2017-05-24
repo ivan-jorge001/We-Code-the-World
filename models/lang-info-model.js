@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const QuA = require('./QuA-model.js');
 const infolangSchema = new Schema({
-  
+
   name:{type:String},
   Docs:{type:String},
   tutorials:[{
@@ -13,4 +13,6 @@ const infolangSchema = new Schema({
   timestamps: true
 });
 
-module.exports = infolangSchema;
+const InfoLang = mongoose.model('infolanguages', infolangSchema);
+
+module.exports = InfoLang;

@@ -11,4 +11,6 @@ team:{type:String}
   timestamps: true
 });
 
-module.exports = projectsSchema;
+const Project = mongoose.model('projects', projectsSchema);
+
+module.exports = Project;
