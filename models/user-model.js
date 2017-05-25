@@ -49,6 +49,9 @@ const userSchema = new Schema({
     //gooogle ids
     googleID: {
         type: String
+    },
+    linkedinID: {
+        type: String
     }
 }, {
     timestamps: true

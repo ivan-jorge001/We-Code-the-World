@@ -27,8 +27,35 @@ passport.deserializeUser((userId, cb) => {
 });
 
 passport.use(new LinkedInStrategy({
-  
-}))
+  clientID:  process.env.LINKIN_ID,
+  clientSecret:  process.env.LINKIN_SECRET,
+  callbackURL: "/auth/link/callback",
+  scope: ['r_emailaddress', 'r_basicprofile'],
+},(accessToken, refreshToken, profile, done)=>{
+  User.findOne({linkedinID:profile.id},(err,theUser)=>{
+    if (err) {
+      done(err);
+      return;
+    }
+    if (theUser) {
+      done(null,theUser);
+      return;
+    }
+
+    const newUser = new User({
+      linkedinID:profile.id,
+      name:profile.displayName
+    });
+    newUser.save((err)=>{
+      if (err) {
+        done(err);
+        return;
+      }
+      done(null,newUser);
+    });
+  });
+
+}));
 
 passport.use(new FbStrategy({
     clientID: process.env.FACEBOOK_ID,
