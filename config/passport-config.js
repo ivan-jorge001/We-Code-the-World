@@ -6,6 +6,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const githubStrategy = require('passport-github2');
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+const GitHubTokenStrategy = require('passport-github-token');
+
 
 passport.serializeUser((user, cb) => {
     // "cb" is short for "callback"
@@ -26,34 +28,74 @@ passport.deserializeUser((userId, cb) => {
     });
 });
 
-passport.use(new LinkedInStrategy({
-  clientID:  process.env.LINKIN_ID,
-  clientSecret:  process.env.LINKIN_SECRET,
-  callbackURL: "/auth/link/callback",
-  scope: ['r_emailaddress', 'r_basicprofile'],
-},(accessToken, refreshToken, profile, done)=>{
-  User.findOne({linkedinID:profile.id},(err,theUser)=>{
-    if (err) {
-      done(err);
-      return;
-    }
-    if (theUser) {
-      done(null,theUser);
-      return;
-    }
+passport.use(new githubStrategy({
+    clientID: process.env.GITHUB_ID,
+    clientSecret: process.env.GITHUB_SECRET,
+    passReqToCallback: '/auth/github/callback'
+}, (req, accessToken, refreshToken, profile, next) => {
+  console.log(' =================================================================');
+  console.log('GitHUB Profile =======================');
+  console.log(profile);
+  console.log(' ===================================================================');
+    User.findOne({
+        githubID: profile.id
+    }, (err, theUser) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        if (theUser) {
+          next(null,theUser);
+          return;
+        }
+        const newUser = new User({
+          githubID:profile.id
+        });
+        newUser.save((err)=>{
+          if (err) {
+            next(err);
+            return;
+          }
+          next(null,newUser);
+        });
+    });
+}));
 
-    const newUser = new User({
-      linkedinID:profile.id,
-      name:profile.displayName
+
+passport.use(new LinkedInStrategy({
+    clientID: process.env.LINKIN_ID,
+    clientSecret: process.env.LINKIN_SECRET,
+    callbackURL: "/auth/link/callback",
+    scope: ['r_emailaddress', 'r_basicprofile'],
+}, (accessToken, refreshToken, profile, done) => {
+  console.log(' =================================================================');
+  console.log('Linkedin Profile =======================');
+  console.log(profile);
+  console.log(' ===================================================================');
+    User.findOne({
+        linkedinID: profile.id
+    }, (err, theUser) => {
+        if (err) {
+            done(err);
+            return;
+        }
+        if (theUser) {
+            done(null, theUser);
+            return;
+        }
+
+        const newUser = new User({
+            linkedinID: profile.id,
+            name: profile.displayName
+        });
+        newUser.save((err) => {
+            if (err) {
+                done(err);
+                return;
+            }
+            done(null, newUser);
+        });
     });
-    newUser.save((err)=>{
-      if (err) {
-        done(err);
-        return;
-      }
-      done(null,newUser);
-    });
-  });
 
 }));
 
@@ -93,42 +135,42 @@ passport.use(new FbStrategy({
 
 }));
 passport.use(new GoogleStrategy({
-    clientID: '215813965017-b8o52vimsk97r1fma259fevvbihu5khb.apps.googleusercontent.com',
-    clientSecret:'n4TK8Z2echGCopjWXk2d3xcY',
+    clientID: process.env.GOOGLE_ID,
+    clientSecret: process.env.GOOGLE_SECRET,
     callbackURL: '/auth/google/callback'
-},(accessToken,refreshToken,profile,done)=>{
-  console.log(' =================================================================');
- console.log('GOOGLE Profile =======================');
- console.log(profile);
- console.log(' ===================================================================');
- User.findOne({
-         googleID: profile.id,
-         name: profile.displayName
-     }, (err, foundUser) => {
-         if (err) {
-             done(err);
-             return;
-         }
-         if (foundUser) {
-             done(null, foundUser);
-             return;
-         }
-         const theUser = new User({
-             googleID: profile.id,
+}, (accessToken, refreshToken, profile, done) => {
+    console.log(' =================================================================');
+    console.log('GOOGLE Profile =======================');
+    console.log(profile);
+    console.log(' ===================================================================');
+    User.findOne({
+        googleID: profile.id,
+        name: profile.displayName
+    }, (err, foundUser) => {
+        if (err) {
+            done(err);
+            return;
+        }
+        if (foundUser) {
+            done(null, foundUser);
+            return;
+        }
+        const theUser = new User({
+            googleID: profile.id,
 
-         });
-         if (!theUser.name) {
-             theUser.name = profile.emails[0].value;
-         }
-         theUser.save((err) => {
-             if (err) {
-                 done(err);
-                 return;
-             }
-             done(null, theUser);
-         });
-     });
- }));
+        });
+        if (!theUser.name) {
+            theUser.name = profile.emails[0].value;
+        }
+        theUser.save((err) => {
+            if (err) {
+                done(err);
+                return;
+            }
+            done(null, theUser);
+        });
+    });
+}));
 
 
 passport.use(new LocalStrategy({

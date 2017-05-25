@@ -80,12 +80,20 @@ router.get('/auth/google/',passport.authenticate('google',{scope: ["https://www.
       failMessage:'Your Google account cant be verified'
 
     }));
-    app.get('/auth/linkedin',passport.authenticate('linkedin', { state: 'SOME STATE'  }));
-    app.get('/auth/link/callback', passport.authenticate('linkedin', {
+    router.get('/auth/linkedin',passport.authenticate('linkedin', { state: 'SOME STATE'  }));
+    router.get('/auth/link/callback', passport.authenticate('linkedin', {
       successRedirect: '/',
       failureRedirect: '/',
       successFlash:'Your Linkedin account has been verified',
-      failureFlash:"Your Linkedin account couldn't be verified" 
+      failureFlash:"Your Linkedin account couldn't be verified"
+    }));
+
+    router.get('/auth/github',passport.authenticate('github-token'));
+    router.get('/auth/github/callback', passport.authenticate('github-token', {
+      successRedirect: '/',
+      failureRedirect: '/',
+      successFlash:'Your GitHub account has been verified',
+      failureFlash:"Your GitHub account couldn't be verified"
     }));
 
 module.exports = router;

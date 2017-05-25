@@ -52,6 +52,9 @@ const userSchema = new Schema({
     },
     linkedinID: {
         type: String
+    },
+    githubID:{
+        type: String
     }
 }, {
     timestamps: true
