@@ -5,7 +5,7 @@ const ensure = require('connect-ensure-login');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
-router.post('/user/signup', ensure.ensureNotLoggedIn('/'),(req, res, next) => {
+router.post('/user/signup', ensure.ensureNotLoggedIn('/'), (req, res, next) => {
     const usernamegiven = req.body.username;
     const emailgiven = req.body.email;
     const password = req.body.password;
@@ -46,11 +46,11 @@ router.post('/user/signup', ensure.ensureNotLoggedIn('/'),(req, res, next) => {
     });
 });
 
-router.post('/user/login', ensure.ensureNotLoggedIn('/'),passport.authenticate('local',{
-        successRedirect: '/',
-         successFlash: true, // req.flash('success')
-         failureRedirect: '/',
-         failureFlash: true // req.flash('error')
+router.post('/user/login', ensure.ensureNotLoggedIn('/'), passport.authenticate('local', {
+    successRedirect: '/',
+    successFlash: true, // req.flash('success')
+    failureRedirect: '/',
+    failureFlash: true // req.flash('error')
 }));
 
 router.get('/user/logout', (req, res, next) => {
@@ -62,38 +62,46 @@ router.get('/user/logout', (req, res, next) => {
     res.redirect('/');
 });
 
-router.get('/auth/facebook/',passport.authenticate('facebook'));
-router.get('/auth/facebook/callback',passport.authenticate('facebook',{
-  successFlash:'Your login was successful with your Facebook',
-  successRedirect:'/',
-  failureRedirect:'/',
-  failureFlash:'You Facebook login was unsuccesful'
+router.get('/auth/facebook/', passport.authenticate('facebook'));
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successFlash: 'Your login was successful with your Facebook',
+    successRedirect: '/',
+    failureRedirect: '/',
+    failureFlash: 'You Facebook login was unsuccesful'
 }));
-router.get('/auth/google/',passport.authenticate('google',{scope: ["https://www.googleapis.com/auth/plus.login",
+router.get('/auth/google/', passport.authenticate('google', {
+    scope: ["https://www.googleapis.com/auth/plus.login",
         "https://www.googleapis.com/auth/plus.profile.emails.read"
-    ]}));
+    ]
+}));
 
-    router.get('/auth/google/callback',passport.authenticate('google',{
-      successRedirect:'/',
-      failureRedirect:'/',
-      successFlash:'Your Google account was verified',
-      failMessage:'Your Google account cant be verified'
+router.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/',
+    successFlash: 'Your Google account was verified',
+    failMessage: 'Your Google account cant be verified'
 
-    }));
-    router.get('/auth/linkedin',passport.authenticate('linkedin', { state: 'SOME STATE'  }));
-    router.get('/auth/link/callback', passport.authenticate('linkedin', {
-      successRedirect: '/',
-      failureRedirect: '/',
-      successFlash:'Your Linkedin account has been verified',
-      failureFlash:"Your Linkedin account couldn't be verified"
-    }));
+}));
+router.get('/auth/linkedin', passport.authenticate('linkedin', {
+    state: 'SOME STATE'
+}));
+router.get('/auth/link/callback', passport.authenticate('linkedin', {
+    successRedirect: '/',
+    failureRedirect: '/',
+    successFlash: 'Your Linkedin account has been verified',
+    failureFlash: "Your Linkedin account couldn't be verified"
+}));
 
-    router.get('/auth/github',passport.authenticate('github-token'));
-    router.get('/auth/github/callback', passport.authenticate('github-token', {
-      successRedirect: '/',
-      failureRedirect: '/',
-      successFlash:'Your GitHub account has been verified',
-      failureFlash:"Your GitHub account couldn't be verified"
-    }));
+router.get('/auth/github', passport.authenticate('github', {
+    scope: ['user:email']
+}));
+router.get('/auth/github/callback/:clientID',
+    passport.authenticate('github', {
+        failureRedirect: '/',
+        failureFlash: "Your GitHub Account Couldn't Be Verified",
+        successRedirect: '/',
+        successFlash: "Your Github Account Have Been Successfully Verified"
+    })
+);
 
 module.exports = router;

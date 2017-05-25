@@ -6,7 +6,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const githubStrategy = require('passport-github2');
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
-const GitHubTokenStrategy = require('passport-github-token');
+const GitHubTokenStrategy = require('passport-github2');
 
 
 passport.serializeUser((user, cb) => {
@@ -28,38 +28,20 @@ passport.deserializeUser((userId, cb) => {
     });
 });
 
-passport.use(new githubStrategy({
+passport.use(new GitHubTokenStrategy({
     clientID: process.env.GITHUB_ID,
     clientSecret: process.env.GITHUB_SECRET,
     passReqToCallback: '/auth/github/callback'
-}, (req, accessToken, refreshToken, profile, next) => {
+}, function(accessToken, refreshToken, profile, done) {
   console.log(' =================================================================');
   console.log('GitHUB Profile =======================');
   console.log(profile);
   console.log(' ===================================================================');
-    User.findOne({
-        githubID: profile.id
-    }, (err, theUser) => {
-        if (err) {
-            next(err);
-            return;
-        }
-        if (theUser) {
-          next(null,theUser);
-          return;
-        }
-        const newUser = new User({
-          githubID:profile.id
-        });
-        newUser.save((err)=>{
-          if (err) {
-            next(err);
-            return;
-          }
-          next(null,newUser);
-        });
+    User.findOrCreate({ githubID: profile.id }, function (err, user) {
+      return done(err, user);
     });
-}));
+  }
+));
 
 
 passport.use(new LinkedInStrategy({
