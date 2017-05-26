@@ -5,205 +5,203 @@
 
             <%- contentFor( 'main')%>
 
-                                    <!-- Page Header -->
-                                    <div class="content bg-gray-lighter">
-                                        <div class="row items-push">
-                                            <div class="col-sm-7">
-                                                <h1 class="page-heading">
+                <!-- Page Header -->
+                <div class="content bg-gray-lighter">
+                    <div class="row items-push">
+                        <div class="col-sm-7">
+                            <h1 class="page-heading">
                 Title <small>Subtitle.</small>
             </h1>
-                                            </div>
-                                            <div class="col-sm-5 text-right hidden-xs">
-                                                <ol class="breadcrumb push-10-t">
-                                                    <li>Category</li>
-                                                    <li><a class="link-effect" href="">Page</a></li>
-                                                </ol>
-                                            </div>
+                        </div>
+                        <div class="col-sm-5 text-right hidden-xs">
+                            <ol class="breadcrumb push-10-t">
+                                <li>Category</li>
+                                <li><a class="link-effect" href="">Page</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Header -->
+
+                <!-- Page Content -->
+                <div class="content">
+                    <!-- My Block -->
+                    <div class="block">
+                        <div class="block-header">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button"><i class="si si-settings"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="close"><i class="si si-close"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">My Block</h3>
+                        </div>
+                        <div class="block-content">
+                            <p>...</p>
+                        </div>
+                    </div>
+                    <!-- END My Block -->
+                </div>
+
+
+                <div class="container signuplogin modal fade" id='signuplogin' style="margin-top: 170px;">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-5">
+                            <form id="formLogin" action="/user/login" method="post">
+                                <div id="login-form" class="form-container" data-form-container style="color: rgb(198, 40, 40); background: rgb(255, 205, 210);">
+                                    <div class="row">
+                                        <div class="form-title">
+                                            <span>Login</span>
                                         </div>
                                     </div>
-                                    <!-- END Page Header -->
-
-                                    <!-- Page Content -->
-                                    <div class="content">
-                                        <!-- My Block -->
-                                        <div class="block">
-                                            <div class="block-header">
-                                                <ul class="block-options">
-                                                    <li>
-                                                        <button type="button"><i class="si si-settings"></i></button>
-                                                    </li>
-                                                    <li>
-                                                        <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
-                                                    </li>
-                                                    <li>
-                                                        <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                                                    </li>
-                                                    <li>
-                                                        <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
-                                                    </li>
-                                                    <li>
-                                                        <button type="button" data-toggle="block-option" data-action="close"><i class="si si-close"></i></button>
-                                                    </li>
-                                                </ul>
-                                                <h3 class="block-title">My Block</h3>
-                                            </div>
-                                            <div class="block-content">
-                                                <p>...</p>
-                                            </div>
-                                        </div>
-                                        <!-- END My Block -->
-                                    </div>
-
-
-                                    <div class="container signuplogin modal fade" id='signuplogin' style="margin-top: 170px;">
-                                        <div class="row">
-                                            <div class="col-md-offset-3 col-md-5">
-                                                <form id="formLogin" action="/user/login" method="post">
-                                                    <div id="login-form" class="form-container" data-form-container style="color: rgb(198, 40, 40); background: rgb(255, 205, 210);">
-                                                        <div class="row">
-                                                            <div class="form-title">
-                                                                <span>Login</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="input-container">
-                                                            <div class="row" style="display:none">
-                                                                <span class="req-input valid confirm-password">
+                                    <div class="input-container">
+                                        <div class="row" style="display:none">
+                                            <span class="req-input valid confirm-password">
                                                                             <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your email."> </span>
-                                                                <input type="email" data-min-length="8" placeholder="Email" name="email">
-                                                                </span>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <span class="req-input valid">
-                                                                              <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your Username."> </span>
-                                                                <input type="text" data-min-length="8" placeholder="Username" name="username">
-                                                                </span>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <span class="req-input input-password invalid">
-                                                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password must be at least 8 characters long."> </span>
-                                                                <input type="password" data-min-length="8" placeholder="Password" name="password">
-                                                                </span>
-                                                            </div>
-
-                                                            <div class="row" style="display:none">
-                                                                <span class="req-input confirm-password">
-                                                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password Must Match Initial Password Field."> </span>
-                                                                <input type="password" data-min-length="8" placeholder="Confirm Password" name="confirmPassword">
-                                                                </span>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <a class="create-account"> Create an Account </a>
-                                                            </div>
-
-                                                            <div class="row submit-row">
-                                                                <button class="btn btn-block submit-form invalid">Login</button>
-                                                            </div>
-                                                            <div class="oauth-buttons">
-                                                                <a href="/auth/facebook"><i class="fa fa-facebook"></i> </a>
-                                                                <a href="/auth/google"><i class="fa fa-google-plus"></i> </a>
-                                                                <a href="/auth/linkedin"><i class="fa fa-linkedin"></i> </a>
-                                                                <a href="/auth/github"><i class="fa fa-github"></i> </a>
-
-                                                            </div>
-
-
-                                                        </div>
-                                                    </div>
-
-                                                </form>
-                                            </div>
-
+                                            <input type="email" data-min-length="8" placeholder="Email" name="email">
+                                            </span>
                                         </div>
+
+                                        <div class="row">
+                                            <span class="req-input valid">
+                                                                              <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your Username."> </span>
+                                            <input type="text" data-min-length="8" placeholder="Username" name="username">
+                                            </span>
+                                        </div>
+
+                                        <div class="row">
+                                            <span class="req-input input-password invalid">
+                                                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password must be at least 8 characters long."> </span>
+                                            <input type="password" data-min-length="8" placeholder="Password" name="password">
+                                            </span>
+                                        </div>
+
+                                        <div class="row" style="display:none">
+                                            <span class="req-input confirm-password">
+                                                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password Must Match Initial Password Field."> </span>
+                                            <input type="password" data-min-length="8" placeholder="Confirm Password" name="confirmPassword">
+                                            </span>
+                                        </div>
+
+                                        <div class="row">
+                                            <a class="create-account"> Create an Account </a>
+                                        </div>
+
+                                        <div class="row submit-row">
+                                            <button class="btn btn-block submit-form invalid">Login</button>
+                                        </div>
+                                        <div class="oauth-buttons">
+                                            <a href="/auth/facebook"><i class="fa fa-facebook"></i> </a>
+                                            <a href="/auth/google"><i class="fa fa-google-plus"></i> </a>
+                                            <a href="/auth/linkedin"><i class="fa fa-linkedin"></i> </a>
+                                        </div>
+
+
                                     </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
 
 
 
-                                    <%# ========================NAV BAR=================================%>
-                                        <%# ========================NAV BAR=================================%>
-                                            <%# ========================NAV BAR=================================%>
+                <%# ========================NAV BAR=================================%>
+                    <%# ========================NAV BAR=================================%>
+                        <%# ========================NAV BAR=================================%>
 
 
-                                                <%- contentFor( 'navbar')%>
-                                                    <!-- Sidebar Scroll Container -->
-                                                    <div id="sidebar-scroll">
-                                                        <!-- Sidebar Content -->
-                                                        <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
-                                                        <div class="sidebar-content">
-                                                            <!-- Side Header -->
-                                                            <div class="side-header side-content bg-white-op">
-                                                                <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
-                                                                <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
+                            <%- contentFor( 'navbar')%>
+                                <!-- Sidebar Scroll Container -->
+                                <div id="sidebar-scroll">
+                                    <!-- Sidebar Content -->
+                                    <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
+                                    <div class="sidebar-content">
+                                        <!-- Side Header -->
+                                        <div class="side-header side-content bg-white-op">
+                                            <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
+                                            <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
                     <i class="fa fa-times"></i>
                 </button>
-                                                                <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
-                                                                <div class="btn-group pull-right">
-                                                                    <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
+                                            <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
+                                            <div class="btn-group pull-right">
+                                                <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
                         <i class="si si-drop"></i>
                     </button>
-                                                                    <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
-                                                                        <li>
-                                                                            <a data-toggle="theme" data-theme="default" tabindex="-1" href="javascript:void(0)">
-                                                                                <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">Default</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a data-toggle="theme" data-theme="./assets/css/themes/amethyst.min.css" tabindex="-1" href="javascript:void(0)">
-                                                                                <i class="fa fa-circle text-amethyst pull-right"></i> <span class="font-w600">Amethyst</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a data-toggle="theme" data-theme="./assets/css/themes/city.min.css" tabindex="-1" href="javascript:void(0)">
-                                                                                <i class="fa fa-circle text-city pull-right"></i> <span class="font-w600">City</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a data-toggle="theme" data-theme="./assets/css/themes/flat.min.css" tabindex="-1" href="javascript:void(0)">
-                                                                                <i class="fa fa-circle text-flat pull-right"></i> <span class="font-w600">Flat</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a data-toggle="theme" data-theme="./assets/css/themes/modern.min.css" tabindex="-1" href="javascript:void(0)">
-                                                                                <i class="fa fa-circle text-modern pull-right"></i> <span class="font-w600">Modern</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a data-toggle="theme" data-theme="./assets/css/themes/smooth.min.css" tabindex="-1" href="javascript:void(0)">
-                                                                                <i class="fa fa-circle text-smooth pull-right"></i> <span class="font-w600">Smooth</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <a class="h5 text-white" href="/">
-                                                                    <span class="h4 font-w400 sidebar-mini-hide " style="color:white">We Can</span> <span class="h4 font-w700 sidebar-mini-hide " style="color:white"> Code It </span>
-                                                                </a>
-                                                            </div>
-                                                            <!-- END Side Header -->
+                                                <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
+                                                    <li>
+                                                        <a data-toggle="theme" data-theme="default" tabindex="-1" href="javascript:void(0)">
+                                                            <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">Default</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="theme" data-theme="./assets/css/themes/amethyst.min.css" tabindex="-1" href="javascript:void(0)">
+                                                            <i class="fa fa-circle text-amethyst pull-right"></i> <span class="font-w600">Amethyst</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="theme" data-theme="./assets/css/themes/city.min.css" tabindex="-1" href="javascript:void(0)">
+                                                            <i class="fa fa-circle text-city pull-right"></i> <span class="font-w600">City</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="theme" data-theme="./assets/css/themes/flat.min.css" tabindex="-1" href="javascript:void(0)">
+                                                            <i class="fa fa-circle text-flat pull-right"></i> <span class="font-w600">Flat</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="theme" data-theme="./assets/css/themes/modern.min.css" tabindex="-1" href="javascript:void(0)">
+                                                            <i class="fa fa-circle text-modern pull-right"></i> <span class="font-w600">Modern</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="theme" data-theme="./assets/css/themes/smooth.min.css" tabindex="-1" href="javascript:void(0)">
+                                                            <i class="fa fa-circle text-smooth pull-right"></i> <span class="font-w600">Smooth</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <a class="h5 text-white" href="/">
+                                                <span class="h4 font-w400 sidebar-mini-hide " style="color:white">We Can</span> <span class="h4 font-w700 sidebar-mini-hide " style="color:white"> Code It </span>
+                                            </a>
+                                        </div>
+                                        <!-- END Side Header -->
 
-                                                            <!-- Side Content -->
-                                                            <div class="side-content">
-                                                                <ul class="nav-main">
-                                                                    <li>
-                                                                        <a class="active" href="/"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
-                                                                    </li>
-                                                                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Header</span></li>
-                                                                    <li>
-                                                                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Dropdown</span></a>
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="/">Link #1</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="/">Link #2</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <!-- END Side Content -->
-                                                        </div>
-                                                        <!-- Sidebar Content -->
-                                                    </div>
-                                                    <!-- END Sidebar Scroll Container -->
+                                        <!-- Side Content -->
+                                        <div class="side-content">
+                                            <ul class="nav-main">
+                                                <li>
+                                                    <a class="active" href="/"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                                                </li>
+                                                <li class="nav-main-heading"><span class="sidebar-mini-hide">Header</span></li>
+                                                <li>
+                                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Dropdown</span></a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="/">Link #1</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/">Link #2</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- END Side Content -->
+                                    </div>
+                                    <!-- Sidebar Content -->
+                                </div>
+                                <!-- END Sidebar Scroll Container -->

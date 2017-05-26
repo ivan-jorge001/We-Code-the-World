@@ -15,7 +15,8 @@ const userSchema = new Schema({
         type: String
     },
     profilepic: {
-        type: String
+        type: String,
+        default:'images/profilepic/download.jpeg'
     },
     language: [String],
     lookingforjob: {
@@ -51,9 +52,6 @@ const userSchema = new Schema({
         type: String
     },
     linkedinID: {
-        type: String
-    },
-    githubID:{
         type: String
     }
 }, {

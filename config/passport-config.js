@@ -4,9 +4,7 @@ const FbStrategy = require('passport-facebook');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const githubStrategy = require('passport-github2');
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
-const GitHubTokenStrategy = require('passport-github2');
 
 
 passport.serializeUser((user, cb) => {
@@ -28,30 +26,17 @@ passport.deserializeUser((userId, cb) => {
     });
 });
 
-passport.use(new GitHubTokenStrategy({
-    clientID: process.env.GITHUB_ID,
-    clientSecret: process.env.GITHUB_SECRET,
-    passReqToCallback: '/auth/github/callback'
-}, function(accessToken, refreshToken, profile, done) {
-  console.log(' =================================================================');
-  console.log('GitHUB Profile =======================');
-  console.log(profile);
-  console.log(' ===================================================================');
-    User.findOrCreate({ githubID: profile.id }, function (err, user) {
-      return done(err, user);
-    });
-  }
-));
+
 
 
 passport.use(new LinkedInStrategy({
     clientID: process.env.LINKIN_ID,
     clientSecret: process.env.LINKIN_SECRET,
     callbackURL: "/auth/link/callback",
-    scope: ['r_emailaddress', 'r_basicprofile'],
+    scope: ['r_emailaddress', 'r_basicprofile']
 }, (accessToken, refreshToken, profile, done) => {
   console.log(' =================================================================');
-  console.log('Linkedin Profile =======================');
+  console.log('Linkedin5 Profile =======================');
   console.log(profile);
   console.log(' ===================================================================');
     User.findOne({
@@ -68,8 +53,13 @@ passport.use(new LinkedInStrategy({
 
         const newUser = new User({
             linkedinID: profile.id,
-            name: profile.displayName
+            name:profile.displayName,
+            email:profile.emails[0].value,
+            username:profile.emails[0].value,
+            profilepic:profile.photos[0]
         });
+        console.log(newUser);
+
         newUser.save((err) => {
             if (err) {
                 done(err);
@@ -84,7 +74,8 @@ passport.use(new LinkedInStrategy({
 passport.use(new FbStrategy({
     clientID: process.env.FACEBOOK_ID,
     clientSecret: process.env.FACEBOOK_SECRET,
-    callbackURL: '/auth/facebook/callback'
+    callbackURL: '/auth/facebook/callback',
+    profileFields: ['id', 'displayName', 'photos', 'email']
 }, (accessToken, refreshToken, profile, done) => {
     console.log(' =================================================================');
     console.log('facebook Profile =======================');
@@ -104,8 +95,12 @@ passport.use(new FbStrategy({
 
         const newUser = new User({
             facebookID: profile.id,
-            name: profile.displayName
+            name:profile.displayName,
+            email:profile.emails[0].value,
+            username:profile.emails[0].value,
+            profilepic:profile.photos[0].value
         });
+        console.log(newUser);
         newUser.save((err) => {
             if (err) {
                 done(err);
@@ -126,8 +121,7 @@ passport.use(new GoogleStrategy({
     console.log(profile);
     console.log(' ===================================================================');
     User.findOne({
-        googleID: profile.id,
-        name: profile.displayName
+        googleID: profile.id
     }, (err, foundUser) => {
         if (err) {
             done(err);
@@ -139,11 +133,13 @@ passport.use(new GoogleStrategy({
         }
         const theUser = new User({
             googleID: profile.id,
-
+            name:profile.displayName,
+            email:profile.emails[0].value,
+            username:profile.emails[0].value,
+            profilepic:profile.photos[0].value
         });
-        if (!theUser.name) {
-            theUser.name = profile.emails[0].value;
-        }
+        console.log(theUser);
+
         theUser.save((err) => {
             if (err) {
                 done(err);

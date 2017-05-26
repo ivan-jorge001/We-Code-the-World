@@ -53,7 +53,7 @@ router.post('/user/login', ensure.ensureNotLoggedIn('/'), passport.authenticate(
     failureFlash: true // req.flash('error')
 }));
 
-router.get('/user/logout', (req, res, next) => {
+router.get('/user/logout',ensure.ensureLoggedIn('/'), (req, res, next) => {
     // req.logout() method provided by Passport
     req.logout();
 
@@ -62,46 +62,34 @@ router.get('/user/logout', (req, res, next) => {
     res.redirect('/');
 });
 
-router.get('/auth/facebook/', passport.authenticate('facebook'));
+router.get('/auth/facebook/',ensure.ensureNotLoggedIn('/'), passport.authenticate('facebook'));
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successFlash: 'Your login was successful with your Facebook',
     successRedirect: '/',
     failureRedirect: '/',
     failureFlash: 'You Facebook login was unsuccesful'
 }));
-router.get('/auth/google/', passport.authenticate('google', {
+router.get('/auth/google/',ensure.ensureNotLoggedIn('/'), passport.authenticate('google', {
     scope: ["https://www.googleapis.com/auth/plus.login",
         "https://www.googleapis.com/auth/plus.profile.emails.read"
     ]
 }));
 
-router.get('/auth/google/callback', passport.authenticate('google', {
+router.get('/auth/google/callback',ensure.ensureNotLoggedIn('/'), passport.authenticate('google', {
     successRedirect: '/',
     failureRedirect: '/',
     successFlash: 'Your Google account was verified',
     failMessage: 'Your Google account cant be verified'
 
 }));
-router.get('/auth/linkedin', passport.authenticate('linkedin', {
+router.get('/auth/linkedin', ensure.ensureNotLoggedIn('/'),passport.authenticate('linkedin', {
     state: 'SOME STATE'
 }));
-router.get('/auth/link/callback', passport.authenticate('linkedin', {
+router.get('/auth/link/callback',ensure.ensureNotLoggedIn('/'), passport.authenticate('linkedin', {
     successRedirect: '/',
     failureRedirect: '/',
     successFlash: 'Your Linkedin account has been verified',
     failureFlash: "Your Linkedin account couldn't be verified"
 }));
-
-router.get('/auth/github', passport.authenticate('github', {
-    scope: ['user:email']
-}));
-router.get('/auth/github/callback/:clientID',
-    passport.authenticate('github', {
-        failureRedirect: '/',
-        failureFlash: "Your GitHub Account Couldn't Be Verified",
-        successRedirect: '/',
-        successFlash: "Your Github Account Have Been Successfully Verified"
-    })
-);
 
 module.exports = router;
