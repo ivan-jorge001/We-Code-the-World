@@ -1,20 +1,42 @@
+
+var count = 0;
+
 $('#addLanguage').on('click', () => {
+    count++;
+
     var language = $('#selectLanguage').val();
+    var child = $(`.${language}`);
+
+    console.log(child);
     console.log(language);
+
+
     if (language !== undefined) {
-        $('#resultOfLanguage').append(`<label class ="deleteLanlabel s3-btn5" type = "label" name="language" style="padding:5px; width:auto; margin:5px;"> ${language}<a id ="deleteLan" class="fa fa-times Xhover" style="text-decoration:none; margin-left:10px; " ></a></label>`);
-        return;
+        if (child.length < 1) {
+
+            $('#resultOfLanguage').append(`
+              <label id = ` + count + ` class ="deleteLanlabel s3-btn5 ${language}" name="language" style="padding:5px; width:auto; margin:5px;"> ${language}<a  class="fa fa-times Xhover" style="text-decoration:none; margin-left:10px; " ></a></label>
+              <script type="text/javascript">
+
+            document.getElementById(` + count + `).addEventListener('click', () => {
+              document.getElementById(` + count + `).remove()
+            });
+            </script>
+`);
+
+            return;
+        }else {
+          console.log('its already there');
+          return;
+        }
     } else {
         return;
     }
 });
 
-var delet = $('#deleteLan');
-console.log(delet);
-delet.on('click',()=>{
-  console.log('get in here');
-$(this).parent('.deleteLanlabel').detach();
-});
+
+
+
 // ============Language you prefred update profile================================
 
 // =================================notification

@@ -2,9 +2,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
     <div class="mainbody container-fluid">
-        <form action="/profile/update">
+        <form action="/profile/update" action="post" enctype="multipart/form-data">
             <div style="padding-top:50px;"> </div>
-            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="col-lg-12 col-md-12">
+                <div class="panel panel-default ">
+                    <div class="panel-body">
+                        <h1 class="panel-title pull-left" style="font-size:30px;"><strong>Profile</strong></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 ">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 class="panel-title pull-left">Your photo</h3>
@@ -14,36 +21,40 @@
                                 <img class="thumbnail img-responsive" src="<%= user.profilepic%>" width="300px" height="300px">
                             </div>
                             <div class="col-lg-12 col-md-12">
-                                <button class="s3-btn s3-btn2" style="padding:10px;"><i class="fa fa-upload" aria-hidden="true"></i> Upload a new profile photo!</button>
+                                <label for="inputUpload" class="s3-btn s3-btn2" style="padding:10px;" type="button">
+                                  <i class="fa fa-upload" aria-hidden="true"></i> Upload a new profile photo!</label>
+                                <input id="inputUpload" type="file" name="inputUpload" style="visibility:hidden;">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h1 class="panel-title pull-left" style="font-size:30px;"><strong>Profile</strong></h1>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3 class="panel-title pull-left">Your Name</h3>
+                        <h3 class="panel-title pull-left">Basic Info</h3>
                         <br><br>
-                        <form class="form-horizontal">
-                            <label for="First_name">First name</label>
-                            <input type="text" class="form-control" id="First_name" placeholder="John" value="John">
-                            <label for="Last_name">Last name</label>
-                            <input type="email" class="form-control" id="Last_name" placeholder="Doe" value="Doe">
-                        </form>
+                        <label for="inputName">Name</label>
+                        <input id="inputName" class="form-control" type='text' name="inputName" value="<%=user.name%>">
+                        <label for="inputEmail">Email</label>
+                        <input id="inputEmail" class="form-control" type='email' name="inputEmail" value="<%=user.email%>">
+                        <label for="inputUsername">Username</label>
+                        <input id="inputUsername" class="form-control" type='text' name="inputUsername" value="<%=user.username%>">
+                        <label for="inputPassword">Password</label>
+                        <input id="inputPassword" class="form-control" type='password' name="inputPassword" value="">
+                        <label for="inputConfirmPass">Confirm Password</label>
+                        <input id="inputConfirmPass" class="form-control" type='password' name="inputConfirmPass" value="">
+                        <label for="inputBio" >Your bio</label>
+                        <textarea id="inputBio" name="inputBio" class="form-control" rows="3"></textarea>
+                      </div>
                     </div>
-                </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 class="panel-title pull-left"> What are your <strong>Preferred Programing Languge</strong></h3>
                         <br><br>
                         <input list="language" id="selectLanguage" class="form-control">
-                        <datalist id="language"  class="">
+                        <datalist id="language" class="">
                          <option value="" selected="selected"></option>
                          <option value="Java"></option>
                          <option value="C"></option>
@@ -96,29 +107,17 @@
                          <option value="VHDL"></option>
                          <option value="Awk"></option>
                      </datalist>
-                     <br>
-                     <div id="resultOfLanguage">
+                        <br>
+                        <div id="resultOfLanguage">
 
-                     </div>
-                     <br>
-                     <button id="addLanguage" class="s3-btn s3-btn2" type="button" style="height:30px; width:50px; padding:0px;">Add +</button>
+                        </div>
+                        <input id="inputLookingforjob" type="checkbox" name="inputLookingforjob" value="" style="margin:20px; margin-right:5px;">
+                        <label for="inputLookingforjob"> Looking For Job ?</label>
+                        <br>
+                        <button id="addLanguage" class="s3-btn s3-btn2" type="button" style="height:30px; width:50px; padding:0px;">Add +</button>
+                        <hr>
                     </div>
                 </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3 class="panel-title pull-left">My extended profile</h3>
-                        <br><br>
-                        <p>Visibility of your extended profile:</p>
-                        ...
-                        <br><br>
-                        <label>Your bio</label>
-                        <textarea class="form-control" rows="3"></textarea>
-
-
-                    </div>
-                </div>
-                <hr>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <button class="s3-btn s3-btn5" type="button" style="padding:10px;"><i class="fa fa-fw fa-times" aria-hidden="true"></i> Cancel</button>

@@ -39,6 +39,7 @@ const userSchema = new Schema({
             type: String
         }
     },
+    bio:{type:String},
     role: {
         type: String,
         enum: ['user', 'admin'],
