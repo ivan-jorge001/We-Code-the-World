@@ -21,11 +21,12 @@
                         </div>
                         <div class="col-lg-12 col-md-12">
                             <%#================FORM PIC============================== %>
-                                <form id="form-pic" action="/profile/profilepic" method="post">
+                                <form id="form-pic" action="/profile/profilepic" method="post" enctype="multipart/form-data">
                                     <label for="inputUpload" class="s3-btn s3-btn2" style="padding:10px;" type="button">
                                   <i class="fa fa-upload" aria-hidden="true"></i> Upload a new profile photo!</label>
                                     <input id="inputUpload" type="file" name="inputUpload" style="visibility:hidden;">
                                 </form>
+
                                 <%#================FORM PIC============================== %>
                         </div>
                     </div>
@@ -61,7 +62,9 @@
                                                         <hr style="margin:5px;">
                     </div>
                     <div class="form-basic" style="display:none;">
-                        <form id="" action="/profile/basic" method="get">
+                      <%#================FORM PIC============================== %>
+
+                        <form id="" action="/profile/basic" method="post">
                             <label for="inputName">Name</label>
                             <input id="inputName" class="form-control" type='text' name="inputName" value="<%=user.name%>">
                             <label for="inputEmail">Email</label>
@@ -78,6 +81,8 @@
                                         <button id="basic-Cancel" class="s3-btn s3-btn5" type="button" style="padding:5px;"><i class="fa fa-fw fa-times" aria-hidden="true"></i> Cancel</button>
                                         <button class="s3-btn s3-btn2" style="padding:5px; " type="submit"><i class="fa fa-fw fa-check" aria-hidden="true" ></i> Save Changes</button>
                         </form>
+                        <%#================FORM PIC============================== %>
+
                     </div>
                 </div>
             </div>
@@ -86,15 +91,17 @@
                     <h3 class="panel-title pull-left">Update Password</h3><button id="passShow" class="fa fa-edit" type="button" style="float:right; background-color:white; border:none;"></button>
                     <br><br>
                     <div class="form-password" style="display:none;">
-                        <label for="inputCurrentPassword">Current Password</label>
-                        <input id="inputCurrentPassword" data-min-length="8" title="Password must be at least 8 characters long." class="form-control" type='password' name="inputCurrentPassword" value="">
-                        <label for="inputPassword">Password</label>
-                        <input id="inputPassword" data-min-length="8" title="Password must be at least 8 characters long." class="form-control" type='password' name="inputPassword" value="">
-                        <label for="inputConfirmPass">Confirm Password</label>
-                        <input id="inputConfirmPass" data-min-length="8" title="Password must be at least 8 characters long." class="form-control" type='password' name="inputConfirmPass" value="">
-                        <br>
-                        <button id="pass-Cancel" class="s3-btn s3-btn5" type="button" style="padding:5px;"><i class="fa fa-fw fa-times" aria-hidden="true"></i> Cancel</button>
-                        <button class="s3-btn s3-btn2" style="padding:5px; " type="submit"><i class="fa fa-fw fa-check" aria-hidden="true" ></i> Save Changes</button>
+                        <form class="" action="/profile/password" method="post">
+                            <label for="inputCurrentPassword">Current Password</label>
+                            <input id="inputCurrentPassword" data-min-length="8" title="Password must be at least 8 characters long." class="form-control" type='password' name="inputCurrentPassword" value="">
+                            <label for="inputPassword">Password</label>
+                            <input id="inputPassword" data-min-length="8" title="Password must be at least 8 characters long." class="form-control" type='password' name="inputPassword" value="">
+                            <label for="inputConfirmPass">Confirm Password</label>
+                            <input id="inputConfirmPass" data-min-length="8" title="Password must be at least 8 characters long." class="form-control" type='password' name="inputConfirmPass" value="">
+                            <br>
+                            <button id="pass-Cancel" class="s3-btn s3-btn5" type="button" style="padding:5px;"><i class="fa fa-fw fa-times" aria-hidden="true"></i> Cancel</button>
+                            <button class="s3-btn s3-btn2" style="padding:5px; " type="submit"><i class="fa fa-fw fa-check" aria-hidden="true" ></i> Save Changes</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -112,8 +119,9 @@
 
 
                     <div class="form-lang" style="display:none;">
-                        <input list="language" id="selectLanguage" class="form-control">
-                        <datalist id="language" class="">
+                        <form class="" action="/profile/lang" method="get">
+                            <input list="language" id="selectLanguage" class="form-control">
+                            <datalist id="language" class="">
                          <option value="" selected="selected"></option>
                          <option value="Java"></option>
                          <option value="C"></option>
@@ -166,27 +174,28 @@
                          <option value="VHDL"></option>
                          <option value="Awk"></option>
                      </datalist>
-                        <br>
-                        <div id="resultOfLanguage">
-                            <%if(typeof user.language !== 'undefined'){%>
-                                <%user.language.forEach((oneLang)=>{%>
-                                    <label for="<%=oneLang%>" id="<%=oneLang%>" class="deleteLanlabel s3-btn5 <%=oneLang%>" name="" style="padding:5px; width:auto; margin:5px;"><%=oneLang%><a class="fa fa-times Xhover" style="text-decoration:none; margin-left:10px; "></a></label>
-                                    <script type="text/javascript">
-                                        document.getElementById("<%=oneLang%>").addEventListener('click', () => {
-                                            document.getElementById("<%=oneLang%>").remove();
-                                        });
-                                    </script>
-                                    <%});%>
-                                        <%};%>
-                        </div>
-                        <input id="inputLookingforjob" type="checkbox" name="inputLookingforjob" value="FALSE" style="margin:20px; margin-right:5px;">
-                        <label for="inputLookingforjob"> Looking For Job ?</label>
-                        <br>
-                        <button id="addLanguage" class="s3-btn s3-btn2" type="button" style="height:30px; width:50px; padding:0px;">Add +</button>
+                            <br>
+                            <div id="resultOfLanguage">
+                                <%if(typeof user.language !== 'undefined'){%>
+                                    <%user.language.forEach((oneLang)=>{%>
+                                        <label for="<%=oneLang%>" id="<%=oneLang%>" class="deleteLanlabel s3-btn5 <%=oneLang%>" name="" style="padding:5px; width:auto; margin:5px;"><%=oneLang%><a class="fa fa-times Xhover" style="text-decoration:none; margin-left:10px; "></a></label>
+                                        <script type="text/javascript">
+                                            document.getElementById("<%=oneLang%>").addEventListener('click', () => {
+                                                document.getElementById("<%=oneLang%>").remove();
+                                            });
+                                        </script>
+                                        <%});%>
+                                            <%};%>
+                            </div>
+                            <input id="inputLookingforjob" type="checkbox" name="inputLookingforjob" value="FALSE" style="margin:20px; margin-right:5px;">
+                            <label for="inputLookingforjob"> Looking For Job ?</label>
+                            <br>
+                            <button id="addLanguage" class="s3-btn s3-btn2" type="button" style="height:30px; width:50px; padding:0px;">Add +</button>
 
-                        <hr>
-                        <button id="lang-Cancel" class="s3-btn s3-btn5" type="button" style="padding:5px;"><i class="fa fa-fw fa-times" aria-hidden="true"></i> Cancel</button>
-                        <button class="s3-btn s3-btn2" style="padding:5px; " type="submit"><i class="fa fa-fw fa-check" aria-hidden="true" ></i> Save Changes</button>
+                            <hr>
+                            <button id="lang-Cancel" class="s3-btn s3-btn5" type="button" style="padding:5px;"><i class="fa fa-fw fa-times" aria-hidden="true"></i> Cancel</button>
+                            <button class="s3-btn s3-btn2" style="padding:5px; " type="submit"><i class="fa fa-fw fa-check" aria-hidden="true" ></i> Save Changes</button>
+                        </form>
                     </div>
                 </div>
             </div>

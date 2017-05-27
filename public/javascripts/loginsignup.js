@@ -1,3 +1,7 @@
+$('#inputUpload').on('change',()=>{
+  $('#form-pic').submit();
+});
+
 var basic = $('#basicShow'),
 pass = $('#passShow'),
 lang = $('#langShow');
