@@ -5,8 +5,12 @@ const multer = require('multer');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const User = require('../models/user-model.js');
+const nodemailer = require('nodemailer');
+var async = require('async');
+var crypto = require('crypto');
+router.post('/forgot/password',ensure.ensureNotLoggedIn('/'),(req,res,next)=>{
 
-
+})
 router.get("/profile", ensure.ensureLoggedIn('/'), (req, res, next) => {
     res.render('user/profile-view.ejs', {
         successMessage: req.flash('success'),
@@ -64,20 +68,20 @@ router.post('/profile/password', ensure.ensureLoggedIn('/'), (req, res, next) =>
         actualPassword = req.body.inputPassword;
     if (confirmPassword && actualPassword && current) {
         if (bcrypt.compareSync(current, req.user.password)) {
-            if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(actualPassword) === true) {
-                if (confirmPassword === actualPassword) {
+            if (confirmPassword === actualPassword) {
+                if (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,32}$/.test(actualPassword) === true) {
                     if (confirmPassword && actualPassword && bcrypt.compareSync(current, req.user.password)) {
                         const salt = bcrypt.genSaltSync(10);
                         const hashPass = bcrypt.hashSync(req.body.inputPassword, salt);
                         req.user.password = hashPass;
-                    } 
+                    }
                 } else {
-                    req.flash('error', `Your New Password don't Match`);
+                    req.flash('error', `Minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number:`);
                     res.redirect('/profile');
                     return;
                 }
             } else {
-                req.flash('error', `Minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number:`);
+                req.flash('error', `Your New Password don't Match`);
                 res.redirect('/profile');
                 return;
             }
@@ -101,77 +105,40 @@ router.post('/profile/password', ensure.ensureLoggedIn('/'), (req, res, next) =>
     });
 
 });
-// router.post('/profile/update', ensure.ensureLoggedIn('/'), profileUpload.single('inputUpload'), (req, res, next) => {
-// console.log(req.body.language+'===========================================');
-// console.log(req.body+'===========================================');
-//     const email = req.body.inputEmail,
-//         name = req.body.inputName,
-//         username = req.body.inputUsername,
-//         password = req.body.inputPassword,
-//         confirmPassword = req.body.inputConfirmPassword,
-//         profilepic = `/profilepic/${req.file.filename}`,
-//         bio = req.body.inputBio,
-//         language= req.body.language,
-//         lookingforjob = req.body.inputLookingforjob;
-//
-//         if (name) {
-//     req.user.name = name;
-//         }
-//     if (email) {
-// req.user.email = email;
-//     }
-//     if (profilepic) {
-// req.user.profilepic = profilepic;
-//     }
-//     if (bio) {
-// req.user.bio = bio;
-//     }
-//     if (language) {
-//       language.forEach((oneLang)=>{
-//         req.user.language.push(oneLang);
-//       });
-//     }
-//     req.user.lookingforjob = lookingforjob;
-//
-//     if (username) {
-//       User.findOne({username:username},(err,found)=>{
-//         if (err) {
-//           next(err);
-//           return;
-//         }
-//         if (found) {
-//           req.flash('success','The Username Selected is Already Taken');
-//           res.redirect('/profile');
-//         }
-//         req.user.username= username;
-//       });
-//
-//     }
-//     // if (req.body.inputConfirmPass && req.body.inputPassword && req.body.inputCurrentPassword) {
-//     //     if (req.body.inputConfirmPass === req.body.inputPassword) {
-//     //       if (bcrypt.compareSync(req.body.inputCurrentPassword, req.user.password)) {
-//     //         const salt = bcrypt.genSaltSync(10);
-//     //         const hashPass = bcrypt.HashSync(req.body.inputCurrentPassword,salt);
-//     //         req.user.password = hashPass;
-//     //       }else {
-//     //         req.flash('warn','Your current Password dont Math');
-//     //         res.redirect('/profile');
-//     //       }
-//     //     }else {
-//     //       req.flash('warn','Your New Password Dont Match');
-//     //       res.redirect('/profile');
-//     //     }
-//     // }else {
-//     //   return;
-//     // }
-//     req.user.save((err) => {
-//         if (err) {
-//             next(err);
-//             return;
-//         }
-//         req.flash('success', 'You have Successfully Updated Your Profile');
-//         res.redirect('/profile');
-//     });
-//
-// });
+router.post('/profile/new', ensure.ensureLoggedIn('/'), (req, res, next) => {
+    const
+        confirmPassword = req.body.inputConfirmPass,
+        actualPassword = req.body.inputPassword;
+    if (confirmPassword && actualPassword) {
+        if (confirmPassword === actualPassword) {
+            if (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,32}$/.test(actualPassword) === true) {
+                const salt = bcrypt.genSaltSync(10);
+                const hashPass = bcrypt.hashSync(req.body.inputPassword, salt);
+                req.user.password = hashPass;
+            } else {
+                req.flash('error', `Minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number:`);
+                res.redirect('/profile');
+                return;
+            }
+        } else {
+            req.flash('error', `Your Passwords don't Match`);
+            res.redirect('/profile');
+            return;
+        }
+
+    } else {
+        req.flash('error', `Please fill in all the Blanks`);
+        res.redirect('/profile');
+        return;
+    }
+    req.user.save((err) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        req.flash('success', 'You have Successfully Created Your Password');
+        res.redirect('/profile');
+    });
+
+});
 module.exports = router;

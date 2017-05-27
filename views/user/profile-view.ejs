@@ -90,6 +90,7 @@
                 <div class="panel-body">
                     <h3 class="panel-title pull-left">Update Password</h3><button id="passShow" class="fa fa-edit" type="button" style="float:right; background-color:white; border:none;"></button>
                     <br><br>
+                    <%if(typeof user.password !== 'undefined'){%>
                     <div class="form-password" style="display:none;">
                         <form class="" action="/profile/password" method="post">
                             <label for="inputCurrentPassword">Current Password</label>
@@ -103,6 +104,19 @@
                             <button class="s3-btn s3-btn2" style="padding:5px; " type="submit"><i class="fa fa-fw fa-check" aria-hidden="true" ></i> Save Changes</button>
                         </form>
                     </div>
+                  <%}else {%>
+                    <div class="form-password" style="display:none;">
+                        <form class="" action="/profile/new" method="post">
+                            <label for="inputPassword">New Password: </label>
+                            <input id="inputPassword" data-min-length="8" title="Password must be at least 8 characters long." class="form-control" type='password' name="inputPassword" value="">
+                            <label for="inputConfirmPass">Confirm Password</label>
+                            <input id="inputConfirmPass" data-min-length="8" title="Password must be at least 8 characters long." class="form-control" type='password' name="inputConfirmPass" value="">
+                            <br>
+                            <button id="pass-Cancel" class="s3-btn s3-btn5" type="button" style="padding:5px;"><i class="fa fa-fw fa-times" aria-hidden="true"></i> Cancel</button>
+                            <button class="s3-btn s3-btn2" style="padding:5px; " type="submit"><i class="fa fa-fw fa-check" aria-hidden="true" ></i> Save Changes</button>
+                        </form>
+                    </div>
+                  <%}%>
                 </div>
             </div>
             <div class="panel panel-default">

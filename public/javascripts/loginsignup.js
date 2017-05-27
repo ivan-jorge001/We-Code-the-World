@@ -1,3 +1,12 @@
+
+$('#forgotPass').on("click",()=>{
+  $('#signuplogin1').fadeOut(600,()=>{
+    $('#forgotPassDIV').fadeIn();
+  });
+
+
+});
+
 $('#inputUpload').on('change',()=>{
   $('#form-pic').submit();
 });
@@ -126,6 +135,9 @@ $(function() {
 
     // ====================================ENDNOTIFICATION
     $('#signlog').on('click', () => {
+$('#forgotPassDIV').hide();
+        $('#signuplogin1').fadeIn(600);
+
         $('#signuplogin').toggleClass("signuplogin");
         if ($('#signuplogin').hasClass('signuplogin')) {
             $('#body').css('background-color', '');
@@ -170,6 +182,7 @@ $(function() {
     $(".create-account").on('click', function() {
         if ($(".confirm-password").is(":visible")) {
             $(this).text("Create an Account");
+            $('#forgotPass').fadeIn();
             $(this).closest("[data-form-container]").find(".submit-form").text("Login");
             $(".confirm-password").parent().slideUp(function() {
                 validate($(this).closest("[data-form-container]"));
@@ -177,6 +190,7 @@ $(function() {
         } else {
             $('#formLogin').attr('action', '/user/signup');
             $(this).closest("[data-form-container]").find(".submit-form").text("Create Account");
+            $('#forgotPass').fadeOut();
             $(this).text("Already Have an Account");
             $(".confirm-password").parent().slideDown(function() {
                 validate($(this).closest("[data-form-container]"));
