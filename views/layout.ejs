@@ -50,6 +50,7 @@
 
 
 <body id="body">
+    <div id="noty-holder"></div>
     <%# THIS IS FOR THE NOTIFICATION %>
 
         <!-- HERE IS WHERE THE NOTY WILL APPEAR-->
@@ -101,12 +102,13 @@
                                                             <div class="side-header side-content">
                                                                 <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
                                                                 <button class="btn btn-default pull-right" type="button" data-toggle="layout" data-action="side_overlay_close">
-                                                                <i class="fa fa-times"></i>
-                                                                </button>
+                                              <i class="fa fa-times"></i>
+                                            </button>
                                                                 <a href="/profile" style="text-decoration:none;">
-                                                                <img class="media-object img-circle" src="<%=user.profilepic%>" width="50px" height="45px" style="margin-right:8px; margin-top:-5px;">
-                                                                <%if (typeof user.name === 'undefined') {%>
-                                                                  <span class="font-w600 push-10-l"><%=user.username%></span></a>
+                                        <img class="media-object img-circle" src="<%=user.profilepic%>" width="50px" height="45px" style="margin-right:8px; margin-top:-5px;">
+                                        <%if (typeof user.name === 'undefined') {%>
+                                          <span class="font-w600 push-10-l"><%=user.username%></span></a>
+
                                                                 <%}else {%>
                                                                     <span class="font-w600 push-10-l"><%=user.name%></span></a>
                                                                     <%}%>

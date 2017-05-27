@@ -42,6 +42,53 @@ bio: req.body.inputBio
         res.redirect('/profile');
     });
 });
+router.post('/profile/password', ensure.ensureLoggedIn('/'), (req, res, next) => {
+
+  User.findByIdAndUpdate(req.user._id, {
+    name: req.body.inputName,
+email: req.body.inputEmail,
+username: req.body.inputUsername,
+bio: req.body.inputBio
+  }, (err, theUser) => {
+      if (err) {
+          next(err);
+          return;
+      }
+      req.flash('success', 'Profile Updated ');
+      res.redirect('/profile');
+  });
+
+      if (req.body.inputConfirmPass && req.body.inputPassword && req.body.inputCurrentPassword) {
+          if (req.body.inputConfirmPass === req.body.inputPassword) {
+            if (bcrypt.compareSync(req.body.inputCurrentPassword, req.user.password)) {
+              const salt = bcrypt.genSaltSync(10);
+              const hashPass = bcrypt.HashSync(req.body.inputCurrentPassword,salt);
+              req.user.password = hashPass;
+            }else {
+              req.flash('error','Your current Password dont Math');
+              res.redirect('/profile');
+              return;
+            }
+          }else {
+            req.flash('error','Your New Password Dont Match');
+            res.redirect('/profile');
+            return;
+          }
+      }else {
+        req.flash('error', 'Please Fill In all the Fields');
+        res.redirect('/profile');
+        return;
+      }
+      req.user.save((err) => {
+          if (err) {
+              next(err);
+              return;
+          }
+          req.flash('success', 'You have Successfully Updated Your Password');
+          res.redirect('/profile');
+      });
+
+});
 // router.post('/profile/update', ensure.ensureLoggedIn('/'), profileUpload.single('inputUpload'), (req, res, next) => {
 // console.log(req.body.language+'===========================================');
 // console.log(req.body+'===========================================');

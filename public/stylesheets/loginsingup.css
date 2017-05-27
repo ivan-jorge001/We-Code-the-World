@@ -389,7 +389,7 @@
     width: 100%;
     top: 0;
     font-weight: bold;
-    z-index: 1031; /* Max Z-Index in Fixed Nav Menu is 1030*/
+    z-index: 2031; /* Max Z-Index in Fixed Nav Menu is 1030*/
     text-align: center;
     position: fixed;
 }
