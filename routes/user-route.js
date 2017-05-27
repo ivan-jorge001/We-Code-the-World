@@ -8,13 +8,16 @@ const User = require('../models/user-model.js');
 
 
 router.get("/profile", ensure.ensureLoggedIn('/'), (req, res, next) => {
-    res.render('user/profile-view.ejs', { successMessage:req.flash('success'), failMessage:req.flash('error')}  );
+    res.render('user/profile-view.ejs', {
+        successMessage: req.flash('success'),
+        failMessage: req.flash('error')
+    });
 });
 const profileUpload = multer({
     dest: path.join(__dirname, '../public/profilepic')
 });
 router.post('/profile/profilepic', ensure.ensureLoggedIn('/'), profileUpload.single('inputUpload'), (req, res, next) => {
-  console.log('gets in the post');
+    console.log('gets in the post');
     User.findByIdAndUpdate(req.user._id, {
         profilepic: `/profilepic/${req.file.filename}`
     }, (err, theUser) => {
@@ -22,17 +25,30 @@ router.post('/profile/profilepic', ensure.ensureLoggedIn('/'), profileUpload.sin
             next(err);
             return;
         }
-console.log(theUser);
+        console.log(theUser);
         req.flash('success', 'Picture Uploaded');
         res.redirect('/profile');
     });
 });
 router.post('/profile/basic', ensure.ensureLoggedIn('/'), (req, res, next) => {
+    User.findOne({
+        username: req.body.inputUsername
+    }, (err, found) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        if (found) {
+            req.flash('error', 'Your Selected Username is Taken, Please Choose a New One');
+            res.redirect('/profile');
+            return;
+        }
+    });
     User.findByIdAndUpdate(req.user._id, {
-      name: req.body.inputName,
-email: req.body.inputEmail,
-username: req.body.inputUsername,
-bio: req.body.inputBio
+        name: req.body.inputName,
+        email: req.body.inputEmail,
+        username: req.body.inputUsername,
+        bio: req.body.inputBio
     }, (err, theUser) => {
         if (err) {
             next(err);
@@ -43,50 +59,46 @@ bio: req.body.inputBio
     });
 });
 router.post('/profile/password', ensure.ensureLoggedIn('/'), (req, res, next) => {
-
-  User.findByIdAndUpdate(req.user._id, {
-    name: req.body.inputName,
-email: req.body.inputEmail,
-username: req.body.inputUsername,
-bio: req.body.inputBio
-  }, (err, theUser) => {
-      if (err) {
-          next(err);
-          return;
-      }
-      req.flash('success', 'Profile Updated ');
-      res.redirect('/profile');
-  });
-
-      if (req.body.inputConfirmPass && req.body.inputPassword && req.body.inputCurrentPassword) {
-          if (req.body.inputConfirmPass === req.body.inputPassword) {
-            if (bcrypt.compareSync(req.body.inputCurrentPassword, req.user.password)) {
-              const salt = bcrypt.genSaltSync(10);
-              const hashPass = bcrypt.HashSync(req.body.inputCurrentPassword,salt);
-              req.user.password = hashPass;
-            }else {
-              req.flash('error','Your current Password dont Math');
-              res.redirect('/profile');
-              return;
+    const current = req.body.inputCurrentPassword,
+        confirmPassword = req.body.inputConfirmPass,
+        actualPassword = req.body.inputPassword;
+    if (confirmPassword && actualPassword && current) {
+        if (bcrypt.compareSync(current, req.user.password)) {
+            if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(actualPassword) === true) {
+                if (confirmPassword === actualPassword) {
+                    if (confirmPassword && actualPassword && bcrypt.compareSync(current, req.user.password)) {
+                        const salt = bcrypt.genSaltSync(10);
+                        const hashPass = bcrypt.hashSync(req.body.inputPassword, salt);
+                        req.user.password = hashPass;
+                    } 
+                } else {
+                    req.flash('error', `Your New Password don't Match`);
+                    res.redirect('/profile');
+                    return;
+                }
+            } else {
+                req.flash('error', `Minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number:`);
+                res.redirect('/profile');
+                return;
             }
-          }else {
-            req.flash('error','Your New Password Dont Match');
+        } else {
+            req.flash('error', `Your Current Password Don't Match`);
             res.redirect('/profile');
             return;
-          }
-      }else {
-        req.flash('error', 'Please Fill In all the Fields');
+        }
+    } else {
+        req.flash('error', `Please fill in all the Blanks`);
         res.redirect('/profile');
         return;
-      }
-      req.user.save((err) => {
-          if (err) {
-              next(err);
-              return;
-          }
-          req.flash('success', 'You have Successfully Updated Your Password');
-          res.redirect('/profile');
-      });
+    }
+    req.user.save((err) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        req.flash('success', 'You have Successfully Updated Your Password');
+        res.redirect('/profile');
+    });
 
 });
 // router.post('/profile/update', ensure.ensureLoggedIn('/'), profileUpload.single('inputUpload'), (req, res, next) => {
