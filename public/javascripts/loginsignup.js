@@ -1,8 +1,53 @@
+var basic = $('#basicShow'),
+pass = $('#passShow'),
+lang = $('#langShow');
 
-var count = 0;
+var basicCancel = $('#basic-Cancel'),
+passCancel = $('#pass-Cancel'),
+langCancel = $('#lang-Cancel');
+
+basicCancel.on('click',()=>{
+  console.log('i get in here');
+$('.show-basic').fadeIn(1000);
+$('.form-basic').fadeOut();
+});
+langCancel.on('click',()=>{
+  console.log('i get in here');
+  $('.show-lang').fadeIn(1000);
+  $('.form-lang').fadeOut();
+});
+passCancel.on('click',()=>{
+$('.form-password').fadeOut(1000);
+});
+
+basic.on('click',()=>{
+  console.log('i get in here');
+$('.show-basic').fadeOut();
+$('.form-basic').fadeIn(1000);
+});
+lang.on('click',()=>{
+  console.log('i get in here');
+  $('.show-lang').fadeOut();
+  $('.form-lang').fadeIn(1000);
+});
+pass.on('click',()=>{
+$('.form-password').fadeIn(1000);
+});
+var checked = 0;
+$('#inputLookingforjob').on('click',()=>{
+  checked++;
+  if (checked%2 === 0) {
+     $('#inputLookingforjob').val('false');
+   } else {
+     $('#inputLookingforjob').val( 'true');
+   }
+console.log($('#inputLookingforjob').val());
+});
+
+
 
 $('#addLanguage').on('click', () => {
-    count++;
+
 
     var language = $('#selectLanguage').val();
     var child = $(`.${language}`);
@@ -15,11 +60,12 @@ $('#addLanguage').on('click', () => {
         if (child.length < 1) {
 
             $('#resultOfLanguage').append(`
-              <label id = ` + count + ` class ="deleteLanlabel s3-btn5 ${language}" name="language" style="padding:5px; width:auto; margin:5px;"> ${language}<a  class="fa fa-times Xhover" style="text-decoration:none; margin-left:10px; " ></a></label>
+              <label for = ${language} id ="${language}" class ="deleteLanlabel s3-btn5 ${language}" name="" style="padding:5px; width:auto; margin:5px;"> ${language}<a  class="fa fa-times Xhover" style="text-decoration:none; margin-left:10px; " ></a><input type="hidden" id="${language}" name="language" value="${language}"></label>
+
               <script type="text/javascript">
 
-            document.getElementById(` + count + `).addEventListener('click', () => {
-              document.getElementById(` + count + `).remove()
+            document.getElementById("${language}").addEventListener('click', () => {
+              document.getElementById("${language}").remove();
             });
             </script>
 `);
@@ -51,13 +97,13 @@ function createNoty(message, type) {
 
 $(function() {
     // NOTIFICATION============================================
-    if ($('#success').val() !== undefined && $('#fail').val() === undefined) {
+    if ($('#success').val() !== undefined && $('#fail').val() === undefined ) {
         const message = $('#success').val();
 
         if (message !== undefined) {
             createNoty(`${message}`, 'success');
         }
-    } else if ($('#success').val() === undefined && $('#fail').val() !== undefined) {
+    } else if ($('#success').val() === undefined && $('#fail').val() !== undefined ) {
         const message = $('#fail').val();
 
         if (message !== undefined) {
