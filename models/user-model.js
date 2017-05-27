@@ -16,7 +16,7 @@ const userSchema = new Schema({
     },
     profilepic: {
         type: String,
-        default:'images/profilepic/download.jpeg'
+        default: 'images/profilepic/download.jpeg'
     },
     language: [String],
     lookingforjob: {
@@ -39,7 +39,9 @@ const userSchema = new Schema({
             type: String
         }
     },
-    bio:{type:String},
+    bio: {
+        type: String
+    },
     role: {
         type: String,
         enum: ['user', 'admin'],
@@ -54,6 +56,12 @@ const userSchema = new Schema({
     },
     linkedinID: {
         type: String
+    },
+    resetPasswordToken: {
+        type: String
+    },
+    resetPasswordExpires: {
+        type: Date
     }
 }, {
     timestamps: true

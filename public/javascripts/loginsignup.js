@@ -1,4 +1,12 @@
+$('#submitbut').on('click',()=>{
+  $('#newPass').fadeOut(700);
+  $('#newpassform').submit();
+});
 
+$('#newPassword').ready(()=>{
+  $('#newPassword').click();
+  $('#newPass').fadeIn(700);
+});
 $('#forgotPass').on("click",()=>{
   $('#signuplogin1').fadeOut(600,()=>{
     $('#forgotPassDIV').fadeIn();

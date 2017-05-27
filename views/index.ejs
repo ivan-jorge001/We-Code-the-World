@@ -127,15 +127,15 @@
                                     </div>
                                     <div class="input-container">
                                         <div class="row">
-                                          <div class="form-title">
-                                              <span style="font-size:20px;"> Please Insert Your <br>Username or Password </span>
-                                          </div>
+                                            <div class="form-title">
+                                                <span style="font-size:20px;"> Please Insert Your <br>Username or Password </span>
+                                            </div>
                                         </div>
 
                                         <div class="row">
                                             <span class="req-input message-box valid">
-                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Email or Username"> </span>
-                                            <input type="text" name="inputForgotpass" data-min-length="8" >
+                                              <span class="input-status" data-toggle="tooltip" data-placement="top" title="Email or Username"> </span>
+                                            <input type="text" name="inputForgotpass" data-min-length="8">
                                         </div>
                                         <div class="row submit-row">
                                             <button type="submit" class="btn btn-block submit-form valid">Submit</button>
@@ -144,16 +144,52 @@
                                 </div>
                             </form>
                         </div>
+
+
+
                     </div>
                 </div>
 
 
+                <%if(typeof reset !=='undefined' && reset === true ){%>
+                  <a id='newPassword' class="nav-link" data-toggle="modal" data-target="#newPass"></a></li>
+                    <div class="container signuplogin modal fade" id='newPass' style="margin-top: 170px;">
+                        <div class="col-md-offset-3 col-md-5" id="">
+                            <form action="" id="newpassform" method="post">
+                                <div id="contact-form" class="form-container" data-form-container style="color: rgb(46, 125, 50); background: rgb(200, 230, 201);">
+                                    <div class="row">
+                                        <div class="form-title">
+                                            <span>New Password </span>
+                                        </div>
+                                    </div>
+                                    <div class="input-container">
+                                        <div class="row">
+                                            <span class="req-input message-box valid">
+                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="New Password" > </span>
+                                            <input type="text" name="inputPassword" data-min-length="8" placeholder="New Password">
+                                        </div>
+                                        <div class="row">
+                                            <span class="req-input message-box valid">
+                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Confirm Password" > </span>
+                                            <input type="text" name="inputConfirmPass" data-min-length="8" placeholder="Confirm Password">
+                                        </div>
+                                        <div class="row submit-row">
+                                            <button type="button" id="submitbut" class="btn btn-block submit-form valid">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <%}%>
 
 
-                <%# ========================NAV BAR=================================%>
-                    <%# ========================NAV BAR=================================%>
+
+
                         <%# ========================NAV BAR=================================%>
+                            <%# ========================NAV BAR=================================%>
+                                <%# ========================NAV BAR=================================%>
 
 
 
-                            <!-- END Sidebar Scroll Container -->
+                                    <!-- END Sidebar Scroll Container -->
