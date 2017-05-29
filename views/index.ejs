@@ -32,21 +32,55 @@
                                 </div>
                                 </span>
                                 <br><br>
+                                <div class=" col-xs-offset-3 col-md-7" style="">
+                                    <div id= "changefont" style="font-size:30px;  max-height: 400px;  overflow: auto;" contenteditable >
+                                    Whats on your Mind?
+                                    </div>
 
-                                <br><br>
-                                <div id="picGoesHere"></div>
-                                <hr>
-                                <span class="pull-left">
+                                </div>
+                                br
+                                <script>
+                                var counter = 0;
+                                    document.getElementById('changefont').addEventListener('click', () => {
+                                      counter ++
+                                      if (counter ===1) {
+                                        document.getElementById('changefont').style.fontSize = '15px';
+                                      document.getElementById('changefont').innerHTML = '';
+                                      }
+                                    });
+                                </script>
+
+                                <script type="text/javascript">
+                                    var de = function(event) {
+                                        console.log(event);
+                                        var input = event.target;
+                                        console.log(input.id)
+                                        $(`#${input.id}`).remove();
+
+
+                                    };
+                                </script>
+                                <div class="row" style="text-align:left;">
+
+                                    <div id="picGoesHere" style="margin:10px;">
+                                    </div>
+
+                                    <hr>
+
+
+                                    <span class="pull-left">
                           <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Posts</a>
                           <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-tags" aria-hidden="true"></i> #Tags</a>
                           <label id ="postpiclabel" for="postpic" class="btn btn-link" style="text-decoration:none;"><input type="file" id="postpic" style="visibility:hidden;  display:none; width:auto; height:auto;" multiple><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Photos</label >
                                 <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Contacts</a>
                                 </span>
-                                <span class="pull-right">
+                                    <span class="pull-right">
                           <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-at" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Mention"></i></a>
                           <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-envelope-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Message"></i></a>
                           <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-ban" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Ignore"></i></a>
                         </span>
+                                </div>
+
                             </div>
                         </div>
                     </div>

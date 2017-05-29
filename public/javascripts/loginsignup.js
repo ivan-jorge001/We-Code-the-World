@@ -1,85 +1,77 @@
-var postPic = [];
-$("#postpiclabel :file").change(() => {
-    postPic.push($('#postpic').val());
 
-    postPic.forEach((pic) => {
-        $('#picGoesHere').append(`<img src="${pic}" style="width:100px; height:80px;" alt="">`);
-    });
+
+
+
+
+
+
+
+
+$('#submitbut').on('click',()=>{
+  $('#newPass').fadeOut(700);
+  $('#newpassform').submit();
 });
 
-
-
-
-
-
-
-
-
-$('#submitbut').on('click', () => {
-    $('#newPass').fadeOut(700);
-    $('#newpassform').submit();
+$('#newPassword').ready(()=>{
+  $('#newPassword').click();
+  $('#newPass').fadeIn(700);
 });
-
-$('#newPassword').ready(() => {
-    $('#newPassword').click();
-    $('#newPass').fadeIn(700);
-});
-$('#forgotPass').on("click", () => {
-    $('#signuplogin1').fadeOut(600, () => {
-        $('#forgotPassDIV').fadeIn();
-    });
+$('#forgotPass').on("click",()=>{
+  $('#signuplogin1').fadeOut(600,()=>{
+    $('#forgotPassDIV').fadeIn();
+  });
 
 
 });
 
-$('#inputUpload').on('change', () => {
-    $('#form-pic').submit();
+$('#inputUpload').on('change',()=>{
+  $('#form-pic').submit();
 });
 
 var basic = $('#basicShow'),
-    pass = $('#passShow'),
-    lang = $('#langShow');
+pass = $('#passShow'),
+lang = $('#langShow');
 
 var basicCancel = $('#basic-Cancel'),
-    passCancel = $('#pass-Cancel'),
-    langCancel = $('#lang-Cancel');
+passCancel = $('#pass-Cancel'),
+langCancel = $('#lang-Cancel');
 
-basicCancel.on('click', () => {
-    console.log('i get in here');
-    $('.show-basic').fadeIn(1000);
-    $('.form-basic').fadeOut();
+basicCancel.on('click',()=>{
+  console.log('i get in here');
+$('.show-basic').fadeIn(1000);
+$('.form-basic').fadeOut();
 });
-langCancel.on('click', () => {
-    console.log('i get in here');
-    $('.show-lang').fadeIn(1000);
-    $('.form-lang').fadeOut();
+langCancel.on('click',()=>{
+  console.log('i get in here');
+  $('.show-lang').fadeIn(1000);
+  $('.form-lang').fadeOut();
 });
-passCancel.on('click', () => {
-    $('.form-password').fadeOut(1000);
+passCancel.on('click',()=>{
+$('.form-password').fadeOut(1000);
 });
 
-basic.on('click', () => {
-    console.log('i get in here');
-    $('.show-basic').fadeOut();
-    $('.form-basic').fadeIn(1000);
+basic.on('click',()=>{
+  console.log('i get in here');
+$('.show-basic').fadeOut();
+$('.form-basic').fadeIn(1000);
 });
-lang.on('click', () => {
-    console.log('i get in here');
-    $('.show-lang').fadeOut();
-    $('.form-lang').fadeIn(1000);
+lang.on('click',()=>{
+  console.log('i get in here');
+  $('.show-lang').fadeOut();
+  $('.form-lang').fadeIn(1000);
 });
-pass.on('click', () => {
-    $('.form-password').fadeIn(1000);
+pass.on('click',()=>{
+$('.form-password').fadeIn(1000);
 });
 var checked = 0;
-$('#inputLookingforjob').on('click', () => {
-    checked++;
-    if (checked % 2 === 0) {
-        $('#inputLookingforjob').val('false');
-    } else {
-        $('#inputLookingforjob').val('true');
-    }
-    console.log($('#inputLookingforjob').val());
+$('#inputLookingforjob').on('click',()=>{
+  checked++;
+  if (checked%2 === 0) {
+     $('#inputLookingforjob').val('false');
+   } else {
+     $('#inputLookingforjob').val( 'true');
+   }
+console.log($('#inputLookingforjob').val());
 });
 
 
@@ -109,9 +101,9 @@ $('#addLanguage').on('click', () => {
 `);
 
             return;
-        } else {
-            console.log('its already there');
-            return;
+        }else {
+          console.log('its already there');
+          return;
         }
     } else {
         return;
@@ -135,13 +127,13 @@ function createNoty(message, type) {
 
 $(function() {
     // NOTIFICATION============================================
-    if ($('#success').val() !== undefined && $('#fail').val() === undefined) {
+    if ($('#success').val() !== undefined && $('#fail').val() === undefined ) {
         const message = $('#success').val();
 
         if (message !== undefined) {
             createNoty(`${message}`, 'success');
         }
-    } else if ($('#success').val() === undefined && $('#fail').val() !== undefined) {
+    } else if ($('#success').val() === undefined && $('#fail').val() !== undefined ) {
         const message = $('#fail').val();
 
         if (message !== undefined) {
@@ -160,7 +152,7 @@ $(function() {
 
     // ====================================ENDNOTIFICATION
     $('#signlog').on('click', () => {
-        $('#forgotPassDIV').hide();
+$('#forgotPassDIV').hide();
         $('#signuplogin1').fadeIn(600);
 
         $('#signuplogin').toggleClass("signuplogin");
