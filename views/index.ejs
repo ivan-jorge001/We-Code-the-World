@@ -6,190 +6,219 @@
             <%- contentFor( 'main')%>
 
                 <!-- Page Header -->
-                <div class="content bg-gray-lighter">
-                    <div class="row items-push">
-                        <div class="col-sm-7">
-                            <h1 class="page-heading">
-                Title <small>Subtitle.</small>
-            </h1>
-                        </div>
-                        <div class="col-sm-5 text-right hidden-xs">
-                            <ol class="breadcrumb push-10-t">
-                                <li>Category</li>
-                                <li><a class="link-effect" href="">Page</a></li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- END Page Header -->
+                <%if(typeof user !=='undefined'){%>
 
-                <!-- Page Content -->
-                <div class="content">
-                    <!-- My Block -->
-                    <div class="block">
-                        <div class="block-header">
-                            <ul class="block-options">
-                                <li>
-                                    <button type="button"><i class="si si-settings"></i></button>
-                                </li>
-                                <li>
-                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
-                                </li>
-                                <li>
-                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                                </li>
-                                <li>
-                                    <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
-                                </li>
-                                <li>
-                                    <button type="button" data-toggle="block-option" data-action="close"><i class="si si-close"></i></button>
-                                </li>
-                            </ul>
-                            <h3 class="block-title">My Block</h3>
-                        </div>
-                        <div class="block-content">
-                            <p>...</p>
+                    <div class="content">
+                        <div class=" items-push">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <span>
+                          <h1 class="panel-title pull-left" style="font-size:30px;"><img class="" src="<%=user.profilepic%>" width="40px" height="35px" style=" margin-right:10px; padding-bottom:5px;"><%=user.name%><i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="<%=user.name%> is sharing with you"></i></h1>
+                          <div class="dropdown pull-right">
+                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              Friends
+                              <span class="caret"></span>
+                                    </button>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#">Familly</a></li>
+                                        <li><a href="#"><i class="fa fa-fw fa-check" aria-hidden="true"></i> Friends</a></li>
+                                        <li><a href="#">Work</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#"><i class="fa fa-fw fa-plus" aria-hidden="true"></i> Add a new aspect</a></li>
+                                    </ul>
+                                </div>
+                                </span>
+                                <br><br>
+
+                                <br><br>
+                                <div id="picGoesHere"></div>
+                                <hr>
+                                <span class="pull-left">
+                          <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Posts</a>
+                          <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-tags" aria-hidden="true"></i> #Tags</a>
+                          <label id ="postpiclabel" for="postpic" class="btn btn-link" style="text-decoration:none;"><input type="file" id="postpic" style="visibility:hidden;  display:none; width:auto; height:auto;" multiple><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Photos</label >
+                                <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Contacts</a>
+                                </span>
+                                <span class="pull-right">
+                          <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-at" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Mention"></i></a>
+                          <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-envelope-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Message"></i></a>
+                          <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-ban" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Ignore"></i></a>
+                        </span>
+                            </div>
                         </div>
                     </div>
-                    <!-- END My Block -->
-                </div>
+                    </div>
+                    <%}%>
+                        <!-- Page Content -->
+                        <div class="content">
 
-
-                <div class="container signuplogin modal fade" id='signuplogin' style="margin-top: 170px;">
-                    <div class="row">
-                        <div class="col-md-offset-3 col-md-5" id="signuplogin1">
-                            <form id="formLogin" action="/user/login" method="post">
-                                <div id="login-form" class="form-container" data-form-container style="color: rgb(198, 40, 40); background: rgb(255, 205, 210);">
-                                    <div class="row">
-                                        <div class="form-title">
-                                            <span>Login</span>
-                                        </div>
-                                    </div>
-                                    <div class="input-container">
-                                        <div class="row" style="display:none">
-                                            <span class="req-input valid confirm-password">
-                                                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your email."> </span>
-                                            <input type="email" data-min-length="8" placeholder="Email" name="email">
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <span class="req-input valid">
-                                                                              <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your Username."> </span>
-                                            <input type="text" data-min-length="8" placeholder="Username" name="username">
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <span class="req-input input-password invalid">
-                                                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password must be at least 8 characters long."> </span>
-                                            <input type="password" data-min-length="8" placeholder="Password" name="password">
-                                            </span>
-                                        </div>
-
-                                        <div class="row" style="display:none">
-                                            <span class="req-input confirm-password">
-                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password Must Match Initial Password Field."> </span>
-                                            <input type="password" data-min-length="8" placeholder="Confirm Password" name="confirmPassword">
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <a class="create-account"> Create an Account </a>
-                                            <br>
-
-                                            <a id="forgotPass"> Forgot Password? </a>
-
-                                        </div>
-
-                                        <div class="row submit-row">
-                                            <button class="btn btn-block submit-form invalid">Login</button>
-                                        </div>
-                                        <div class="oauth-buttons">
-                                            <a href="/auth/facebook"><i class="fa fa-facebook"></i> </a>
-                                            <a href="/auth/google"><i class="fa fa-google-plus"></i> </a>
-                                            <a href="/auth/linkedin"><i class="fa fa-linkedin"></i> </a>
-                                        </div>
-
-
-                                    </div>
+                            <!-- My Block -->
+                            <div class="block">
+                                <div class="block-header">
+                                    <ul class="block-options">
+                                        <li>
+                                            <button type="button"><i class="si si-settings"></i></button>
+                                        </li>
+                                        <li>
+                                            <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                                        </li>
+                                        <li>
+                                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                        </li>
+                                        <li>
+                                            <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                                        </li>
+                                        <li>
+                                            <button type="button" data-toggle="block-option" data-action="close"><i class="si si-close"></i></button>
+                                        </li>
+                                    </ul>
+                                    <h3 class="block-title">My Block</h3>
                                 </div>
-
-                            </form>
+                                <div class="block-content">
+                                    <p>...</p>
+                                </div>
+                            </div>
+                            <!-- END My Block -->
                         </div>
-                        <div class="col-md-offset-3 col-md-5" id="forgotPassDIV" style="display:none;">
-                            <form action="/forgot/password" method="post">
-                                <div id="contact-form" class="form-container" data-form-container style="color: rgb(46, 125, 50); background: rgb(200, 230, 201);">
-                                    <div class="row">
-                                        <div class="form-title">
-                                            <span> Reset Your Password </span>
-                                        </div>
-                                    </div>
-                                    <div class="input-container">
-                                        <div class="row">
-                                            <div class="form-title">
-                                                <span style="font-size:20px;"> Please Insert Your <br>Username or Password </span>
+
+
+                        <div class="container signuplogin modal fade" id='signuplogin' style="margin-top: 170px;">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-5" id="signuplogin1">
+                                    <form id="formLogin" action="/user/login" method="post">
+                                        <div id="login-form" class="form-container" data-form-container style="color: rgb(198, 40, 40); background: rgb(255, 205, 210);">
+                                            <div class="row">
+                                                <div class="form-title">
+                                                    <span>Login</span>
+                                                </div>
+                                            </div>
+                                            <div class="input-container">
+                                                <div class="row" style="display:none">
+                                                    <span class="req-input valid confirm-password">
+                                                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your email."> </span>
+                                                    <input type="email" data-min-length="8" placeholder="Email" name="email">
+                                                    </span>
+                                                </div>
+
+                                                <div class="row">
+                                                    <span class="req-input valid">
+                                                                              <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your Username."> </span>
+                                                    <input type="text" data-min-length="8" placeholder="Username" name="username">
+                                                    </span>
+                                                </div>
+
+                                                <div class="row">
+                                                    <span class="req-input input-password invalid">
+                                                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password must be at least 8 characters long."> </span>
+                                                    <input type="password" data-min-length="8" placeholder="Password" name="password">
+                                                    </span>
+                                                </div>
+
+                                                <div class="row" style="display:none">
+                                                    <span class="req-input confirm-password">
+                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password Must Match Initial Password Field."> </span>
+                                                    <input type="password" data-min-length="8" placeholder="Confirm Password" name="confirmPassword">
+                                                    </span>
+                                                </div>
+
+                                                <div class="row">
+                                                    <a class="create-account"> Create an Account </a>
+                                                    <br>
+
+                                                    <a id="forgotPass"> Forgot Password? </a>
+
+                                                </div>
+
+                                                <div class="row submit-row">
+                                                    <button class="btn btn-block submit-form invalid">Login</button>
+                                                </div>
+                                                <div class="oauth-buttons">
+                                                    <a href="/auth/facebook"><i class="fa fa-facebook"></i> </a>
+                                                    <a href="/auth/google"><i class="fa fa-google-plus"></i> </a>
+                                                    <a href="/auth/linkedin"><i class="fa fa-linkedin"></i> </a>
+                                                </div>
+
+
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <span class="req-input message-box valid">
+                                    </form>
+                                </div>
+                                <div class="col-md-offset-3 col-md-5" id="forgotPassDIV" style="display:none;">
+                                    <form action="/forgot/password" method="post">
+                                        <div id="contact-form" class="form-container" data-form-container style="color: rgb(46, 125, 50); background: rgb(200, 230, 201);">
+                                            <div class="row">
+                                                <div class="form-title">
+                                                    <span> Reset Your Password </span>
+                                                </div>
+                                            </div>
+                                            <div class="input-container">
+                                                <div class="row">
+                                                    <div class="form-title">
+                                                        <span style="font-size:20px;"> Please Insert Your <br>Username or Password </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <span class="req-input message-box valid">
                                               <span class="input-status" data-toggle="tooltip" data-placement="top" title="Email or Username"> </span>
-                                            <input type="text" name="inputForgotpass" data-min-length="8">
+                                                    <input type="text" name="inputForgotpass" data-min-length="8">
+                                                </div>
+                                                <div class="row submit-row">
+                                                    <button type="submit" class="btn btn-block submit-form valid">Submit</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="row submit-row">
-                                            <button type="submit" class="btn btn-block submit-form valid">Submit</button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
 
 
 
-                    </div>
-                </div>
-
-
-                <%if(typeof reset !=='undefined' && reset === true ){%>
-                  <a id='newPassword' class="nav-link" data-toggle="modal" data-target="#newPass"></a></li>
-                    <div class="container signuplogin modal fade" id='newPass' style="margin-top: 170px;">
-                        <div class="col-md-offset-3 col-md-5" id="">
-                            <form action="" id="newpassform" method="post">
-                                <div id="contact-form" class="form-container" data-form-container style="color: rgb(46, 125, 50); background: rgb(200, 230, 201);">
-                                    <div class="row">
-                                        <div class="form-title">
-                                            <span>New Password </span>
-                                        </div>
-                                    </div>
-                                    <div class="input-container">
-                                        <div class="row">
-                                            <span class="req-input message-box valid">
+                        <%if(typeof reset !=='undefined' && reset === true ){%>
+                            <a id='newPassword' class="nav-link" data-toggle="modal" data-target="#newPass"></a>
+                            </li>
+                            <div class="container signuplogin modal fade" id='newPass' style="margin-top: 170px;">
+                                <div class="col-md-offset-3 col-md-5" id="">
+                                    <form action="" id="newpassform" method="post">
+                                        <div id="contact-form" class="form-container" data-form-container style="color: rgb(46, 125, 50); background: rgb(200, 230, 201);">
+                                            <div class="row">
+                                                <div class="form-title">
+                                                    <span>New Password </span>
+                                                </div>
+                                            </div>
+                                            <div class="input-container">
+                                                <div class="row">
+                                                    <span class="req-input message-box valid">
                                             <span class="input-status" data-toggle="tooltip" data-placement="top" title="New Password" > </span>
-                                            <input type="text" name="inputPassword" data-min-length="8" placeholder="New Password">
-                                        </div>
-                                        <div class="row">
-                                            <span class="req-input message-box valid">
+                                                    <input type="text" name="inputPassword" data-min-length="8" placeholder="New Password">
+                                                </div>
+                                                <div class="row">
+                                                    <span class="req-input message-box valid">
                                             <span class="input-status" data-toggle="tooltip" data-placement="top" title="Confirm Password" > </span>
-                                            <input type="text" name="inputConfirmPass" data-min-length="8" placeholder="Confirm Password">
+                                                    <input type="text" name="inputConfirmPass" data-min-length="8" placeholder="Confirm Password">
+                                                </div>
+                                                <div class="row submit-row">
+                                                    <button type="button" id="submitbut" class="btn btn-block submit-form valid">Submit</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="row submit-row">
-                                            <button type="button" id="submitbut" class="btn btn-block submit-form valid">Submit</button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                    <%}%>
+                            </div>
+                            <%}%>
 
 
 
 
-                        <%# ========================NAV BAR=================================%>
-                            <%# ========================NAV BAR=================================%>
                                 <%# ========================NAV BAR=================================%>
+                                    <%# ========================NAV BAR=================================%>
+                                        <%# ========================NAV BAR=================================%>
 
 
 
-                                    <!-- END Sidebar Scroll Container -->
+                                            <!-- END Sidebar Scroll Container -->
