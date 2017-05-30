@@ -17,6 +17,7 @@ if (window.FileReader) {
                     var source = /^image/.test(file.type) ? this.result : "http://i.stack.imgur.com/t9QlH.png";
 
                        $('#picGoesHere').append(`<img src="${source}" id="${counter}" class="postimg" style="margin:5px; height:100px;"  onclick ="de(event)">`);
+                       $('#picGoesHere').append(`<input name = "postimg"  class ="${counter}" id="postimg" value="${$("#postpic").val()}" style="position:absolute; visibility:hidden; width:auto; height:auto;" multiple>`);
 
 
 

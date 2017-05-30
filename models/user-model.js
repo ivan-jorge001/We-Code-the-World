@@ -62,6 +62,11 @@ const userSchema = new Schema({
     },
     resetPasswordExpires: {
         type: Date
+    },
+    post:{
+      postForFriend:{type:String},
+      postForWork:{type:String},
+      postForEveryone:{type:String}
     }
 }, {
     timestamps: true

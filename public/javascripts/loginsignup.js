@@ -1,4 +1,40 @@
+$('#buttonPost').on('click',()=>{
+$('#inputPostContent').val(`${$('#changefont').text()}`);
 
+$('#postimg').val();
+console.log($('#postimg').val());
+
+$('#formpost').submit();
+});
+
+
+
+
+
+var coun = 0;
+$('#changefont').text(`What's On Your Mind?`);
+
+$(document).on('click',()=>{
+  if ($('#changefont').is(':empty')|| $('#changefont').text().length < 1 ) {
+    $('#changefont').text(`What's On Your Mind?`);
+      $('#changefont').css('font-size','25px');
+coun = 0;
+  }
+
+});
+
+$('#changefont').on('keydown',()=>{
+coun++;
+  if (coun < 2) {
+
+    $('#changefont').text('');
+  }
+});
+
+$('#changefont').on('click',()=>{
+  $('#changefont').css('font-size','15px');
+
+});
 
 
 
