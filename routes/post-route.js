@@ -40,7 +40,9 @@ newPost.save((err)=>{
     next(err);
     return;
   }
+
 console.log(newPost._id+'sssssssssssssssssssssssssssssssssssssssssss');
+
     req.flash('success',"Your Post was successful");
     res.redirect('/');
   });

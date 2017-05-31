@@ -9,8 +9,12 @@ whocanseeit: {
     enum: ['Friends', 'Work','Everyone'],
     default: 'everyone'
 },
-userwhocreateit:{type:String}
+userwhocreateit:{type:String},
 
-});
+
+}, {
+        // Adds createdAt & updatedAt to documents
+        timestamps: true
+    });
 const Post = mongoose.model('Post',postSchema);
 module.exports = Post;
