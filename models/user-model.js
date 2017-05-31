@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Post = require('./post-model.js');
 
 const userSchema = new Schema({
     email: {
@@ -64,9 +65,15 @@ const userSchema = new Schema({
         type: Date
     },
     post:{
-      postForFriend:[String],
-      postForWork:[String],
-      postForEveryone:[String]
+      postForFriend:[
+           String
+      ],
+      postForWork:[
+           String
+      ],
+      postForEveryone:[
+           String
+      ]
     }
 }, {
     timestamps: true

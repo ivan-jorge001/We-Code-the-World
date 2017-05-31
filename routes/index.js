@@ -1,5 +1,5 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const Post = require('../models/post-model.js');
 const User = require('../models/user-model.js');
 var array = [];
@@ -7,41 +7,57 @@ var array = [];
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  Post.find({whocanseeit:'Everyone'},(err,thePost)=>{
+    User.find({}, (err, theUser) => {
 
-if (err) {
-  next(err);
-  return;
-}
-if (thePost) {
+        if (err) {
+            next(err);
+            return;
+        }
+        if (theUser) {
+            console.log(theUser);
+            theUser.forEach((theUsers) => {
 
-  thePost.forEach((file)=>{
+                theUsers.post.postForEveryone.forEach((postsId) => {
+                    Post.findById(postsId, (err, thePost) => {
+                      var d = new Date();
+                      console.log(thePost.createdAt.getMinutes(),d.getMinutes()+"ssssssssssssssssssss");
+                        if (err) {
+                            next(err);
+                            return;
+                        }
+                        if (thePost) {
+                            var postContent = {
+                                nameofthePerson: theUsers.name,
+                                idofthePerson: thePost.userwhocreateit,
+                                content: thePost.content,
+                                photos: thePost.photos,
+                                profilepic:theUsers.profilepic,
+                                createat:-thePost.createdAt.getHours()+(d.getHours()) + ":" + (-thePost.createdAt.getMinutes()+(d.getMinutes()))
 
-    User.find({_id:file.userwhocreateit},(err,theUser1)=>{
-  console.log(`================${theUser1}==================`);
-      if (err) {
-        next(err);
-        return;
-      }
-      if (theUser1) {
-        next(theUser1);
-      array.push(theUser1);
-      console.log(`################${array}################`);
+                            };
+                            array.push(postContent);
+                            console.log(postContent);
+                        }
+                    });
+                });
+            });
+            res.render('index', {
+                successMessage: req.flash('success'),
+                failMessage: req.flash('error'),
+                post: array
+            });
+            array = [];
+            return;
 
-return ;
-      }
+        }
+        res.render('index', {
+            successMessage: req.flash('success'),
+            failMessage: req.flash('error'),
+            post: ['1','2']
+        });
+
+
     });
-    console.log(`&&&&&&&&&&&&&&&&&&&${array}&&&&&&&&&&&&&&&&&&&`);
-
-  });
-  console.log(`$$$$$$$$$$$$$$$$$$${array}$$$$$$$$$$$$$$$$$$`);
-  res.render('index', { successMessage:req.flash('success'), failMessage:req.flash('error'),post:thePost ,theUser:array  });
-array=[];
-  return;
-}
-res.render('index', { successMessage:req.flash('success'), failMessage:req.flash('error') });
-
-  });
 });
 
 module.exports = router;

@@ -594,3 +594,16 @@ a.s3-btn5 {
 .Xhover:hover{
   color: #d73e1b;
 };
+
+#carouselExampleIndicators{
+  position:fixed !important;
+  top:25% !important;
+}
+.modal-backdrop.in {
+    opacity: .75 !important;
+}
+#close{
+  color:white;
+  border:none;
+  background-color: black;
+}

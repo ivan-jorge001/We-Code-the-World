@@ -14,10 +14,6 @@ var cpUpload = upload.fields([{ name: 'imgpost', maxCount: 6 }]);
 router.post('/new/post', ensure.ensureLoggedIn('/'),cpUpload,(req,res,next)=>{
 
 
-
-
-
-
   const share = req.body.sharewith;
 const newPost = new Post();
   newPost.content = req.body.postcontent;
@@ -40,8 +36,20 @@ newPost.save((err)=>{
     next(err);
     return;
   }
+  if (newPost.whocanseeit === 'Friends') {
+req.user.post.postForFriend.push(newPost._id);
+  }else if (newPost.postForWork === 'Work') {
+req.user.post.postForFriend.push(newPost._id);
+  }else {
+    req.user.post.postForEveryone.push(newPost._id);
 
-console.log(newPost._id+'sssssssssssssssssssssssssssssssssssssssssss');
+  }
+  req.user.save((err)=>{
+    if (err) {
+      next(err);
+      return;
+    }
+  });
 
     req.flash('success',"Your Post was successful");
     res.redirect('/');

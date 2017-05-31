@@ -9,7 +9,15 @@ $('#formpost').submit();
 });
 
 
+$(document).ready(function(){
+    $('#signlog').click(function(){
+        $("#signuplogin").modal();
+    });
+    $('.modal-backdrop').click(function(){
+        $(".modal-backdrop").modal('hide');
+    });
 
+      });
 
 
 var coun = 0;
