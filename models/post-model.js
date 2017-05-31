@@ -2,14 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const postSchema = new Schema({
 content:{type:String},
-photos:[String],
+photos:[],
 people:{type:String},
 whocanseeit: {
     type: String,
-    enum: ['friends', 'work','everyone'],
+    enum: ['Friends', 'Work','Everyone'],
     default: 'everyone'
-}
+},
+userwhocreateit:{type:String}
 
 });
-const Post = mongoose.model('posts',postSchema);
+const Post = mongoose.model('Post',postSchema);
 module.exports = Post;

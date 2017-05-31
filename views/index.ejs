@@ -2,7 +2,6 @@
     <%# ======================== <BODY-MAIN CONTENT> =================================%>
         <%# ======================== <BODY> =================================%>
 
-
             <%- contentFor( 'main')%>
 
                 <!-- Page Header -->
@@ -11,7 +10,8 @@
                 <%if(typeof user !=='undefined'){%>
 
                     <div class="content">
-                        <form id ="formpost" class="" action="/new/post" method="post">
+                        <form id ="formpost" class="" action="/new/post" method="post" enctype="multipart/form-data">
+                        <input name="numberofpic" id="numberofpic" value="" style="display:none">
                             <div class=" items-push">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
@@ -64,7 +64,7 @@
 
                                         <span class="pull-left">
                           <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-tags" aria-hidden="true"></i> #Tags</a>
-                          <label id ="postpiclabel" for="postpic" class="btn btn-link" style="text-decoration:none;"><input type="file" id="postpic" style="visibility:hidden;  display:none; width:auto; height:auto;" multiple><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Photos</label >
+                          <label id ="postpiclabel" for="postpic" class="btn btn-link" style="text-decoration:none;"><input type="file" name="imgpost" id="postpic" style="  display:none; width:auto; height:auto;" ><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Photos</label >
                                 <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Contacts</a>
                                 </span>
                                         <span class="pull-right">
@@ -80,35 +80,7 @@
                     </div>
                     <%}%>
                         <!-- Page Content -->
-                        <div class="content">
-                            <!-- My Block -->
-                            <div class="block">
-                                <div class="block-header">
-                                    <ul class="block-options">
-                                        <li>
-                                            <button type="button"><i class="si si-settings"></i></button>
-                                        </li>
-                                        <li>
-                                            <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
-                                        </li>
-                                        <li>
-                                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                                        </li>
-                                        <li>
-                                            <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
-                                        </li>
-                                        <li>
-                                            <button type="button" data-toggle="block-option" data-action="close"><i class="si si-close"></i></button>
-                                        </li>
-                                    </ul>
-                                    <h3 class="block-title">My Block</h3>
-                                </div>
-                                <div class="block-content">
-                                    <p>...</p>
-                                </div>
-                            </div>
-                            <!-- END My Block -->
-                        </div>
+
 
 
                         <div class="container signuplogin modal fade" id='signuplogin' style="margin-top: 170px;">
@@ -239,7 +211,67 @@
                             <%}%>
 
 
+<div class="content">
 
+
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="pull-left">
+                                        <a href="#">
+                                            <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                                        </a>
+                                    </div>
+                                    <h4><a href="#" style="text-decoration:none;"><strong>John Doe</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                                    <span>
+                                        <div class="navbar-right">
+                                            <div class="dropdown">
+                                                <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    <i class="fa fa-cog" aria-hidden="true"></i>
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
+                                                    <li><a href="#"><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report</a></li>
+                                                    <li><a href="#"><i class="fa fa-fw fa-ban" aria-hidden="true"></i> Ignore</a></li>
+                                                    <li><a href="#"><i class="fa fa-fw fa-bell" aria-hidden="true"></i> Enable notifications for this post</a></li>
+                                                    <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Hide</a></li>
+                                                    <li role="separator" class="divider"></li>
+                                                    <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </span>
+                                    <hr>
+                                    <div class="post-content">
+                                        <p>Sample post content with picture.</p>
+                                        <img class="img-responsive" src="https://media.giphy.com/media/j1QQj6To9Pbxu/giphy.gif">
+                                        <p><br><a href="/tags/christmas" class="tag">#Christmas</a> <a href="/tags/caturday" class="tag">#Caturday</a></p>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="pull-right btn-group-xs">
+                                            <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Like</a>
+                                            <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
+                                            <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Comment</a>
+                                        </div>
+                                        <div class="pull-left">
+                                            <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Public <strong>via mobile</strong></p>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <hr>
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <a href="#">
+                                                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
 
                                 <%# ========================NAV BAR=================================%>
                                     <%# ========================NAV BAR=================================%>

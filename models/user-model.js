@@ -16,7 +16,7 @@ const userSchema = new Schema({
     },
     profilepic: {
         type: String,
-        default: 'images/profilepic/download.jpeg'
+        default: '/images/profilepic/download.jpeg'
     },
     language: [String],
     lookingforjob: {
@@ -64,9 +64,9 @@ const userSchema = new Schema({
         type: Date
     },
     post:{
-      postForFriend:{type:String},
-      postForWork:{type:String},
-      postForEveryone:{type:String}
+      postForFriend:[String],
+      postForWork:[String],
+      postForEveryone:[String]
     }
 }, {
     timestamps: true

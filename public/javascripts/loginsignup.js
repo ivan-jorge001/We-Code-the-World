@@ -1,8 +1,9 @@
+
 $('#buttonPost').on('click',()=>{
 $('#inputPostContent').val(`${$('#changefont').text()}`);
 
-$('#postimg').val();
-console.log($('#postimg').val());
+$('#postpic').remove();
+$('#numberofpic').val($('.postimg').length);
 
 $('#formpost').submit();
 });
