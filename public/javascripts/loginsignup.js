@@ -16,7 +16,12 @@ $(document).ready(function(){
     $('.modal-backdrop').click(function(){
         $(".modal-backdrop").modal('hide');
     });
-
+    // $(`#close`).on('click', () => {
+    //   console.log("Ivan");
+    //     $("#carouselfor1").css('display','none');
+    //     $(".modal-backdrop").remove();
+    //
+    //   });
       });
 
 
