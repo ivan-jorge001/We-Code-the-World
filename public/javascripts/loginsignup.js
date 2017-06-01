@@ -1,3 +1,10 @@
+$('.next').on('click',()=>{
+  $('.carousel').carousel('next');
+});
+$('.prev').on('click',()=>{
+  $('.carousel').carousel('prev');
+});
+
 
 $('#buttonPost').on('click',()=>{
 $('#inputPostContent').val(`${$('#changefont').text()}`);

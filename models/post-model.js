@@ -7,7 +7,7 @@ people:{type:String},
 whocanseeit: {
     type: String,
     enum: ['Friends', 'Work','Everyone'],
-    default: 'everyone'
+    default: 'Everyone'
 },
 userwhocreateit:{type:String},
 

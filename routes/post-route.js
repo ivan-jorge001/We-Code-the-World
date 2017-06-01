@@ -36,6 +36,7 @@ newPost.save((err)=>{
     next(err);
     return;
   }
+  
   if (newPost.whocanseeit === 'Friends') {
 req.user.post.postForFriend.push(newPost._id);
   }else if (newPost.postForWork === 'Work') {
