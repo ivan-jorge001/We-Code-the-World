@@ -106,7 +106,7 @@
                                                             <!-- Side Header -->
                                                             <div class="side-header side-content">
                                                                 <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
-                                                                <button class="btn btn-default pull-right" type="button" data-toggle="layout" data-action="side_overlay_close">
+                                                                <button class="btn btn-default pull-right" style ="color: #545454 !important; background-color: #f5f5f5 !important; padding:6px 12px !important; border-color: #e9e9e9 !important;" type="button" data-toggle="layout" data-action="side_overlay_close">
                                               <i class="fa fa-times"></i>
                                             </button>
                                                                 <a href="/profile" style="text-decoration:none;">
@@ -168,11 +168,9 @@
                                                                         <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
                                                                         <div class="btn-group pull-right">
                                                                             <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
-                                                                            <%if(typeof user !== 'undefined'){%>
-                                                                            <img class="  img-circle sidebar-mini-hide" src="<%=user.profilepic%>" width="35px" height="30px" style=" ">
-                                                                            <%}else {%>
+
                                                                               <i class="fa fa-code" style=" font-weight:600"></i>
-                                                                            <%}%>
+
 
                                                                             </button>
                                                                             <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
@@ -274,7 +272,7 @@
                                                                 <li>
                                                                     <%# <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->%>
                                                                         <%if(typeof user !== "undefined"){%>
-                                                                            <button class="btn btn-default" data-toggle="layout" data-action="side_overlay_toggle" type="button">
+                                                                            <button class="btn btn-default" style="color: #545454 !important; background-color: #f5f5f5 !important; padding:6px 12px !important; border-color: #e9e9e9 !important;" data-toggle="layout" data-action="side_overlay_toggle" type="button">
                                                       <i class="fa fa-tasks"></i>
                                                         </button>
                                                                             <%}else{%>
@@ -295,7 +293,7 @@
                                                                 </li>
                                                                 <li class="hidden-xs hidden-sm">
                                                                     <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
-                                                                    <button class="btn btn-default" data-toggle="layout" data-action="sidebar_mini_toggle" type="button">
+                                                                    <button class="btn btn-default" data-toggle="layout" data-action="sidebar_mini_toggle" style="color: #545454 !important; background-color: #f5f5f5 !important; padding:6px 12px !important; border-color: #e9e9e9 !important;" type="button">
                                                                       <i class="fa fa-ellipsis-v"></i>
                                                                     </button>
                                                                 </li>
@@ -341,7 +339,97 @@
                                                         <!-- END Footer -->
                                             </div>
                                             <!-- END Page Container -->
+                                            <div class="container signuplogin modal fade" id='signuplogin' style="margin-top: 170px;">
+                                                <div class="row">
+                                                    <div class="col-md-offset-3 col-md-5" id="signuplogin1">
+                                                        <form id="formLogin" action="/user/login" method="post">
+                                                            <div id="login-form" class="form-container" data-form-container style="color: rgb(198, 40, 40); background: rgb(255, 205, 210);">
+                                                                <div class="row">
+                                                                    <div class="form-title col-xs-12">
+                                                                        <span>Login</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-container">
+                                                                    <div class="row" style="display:none">
+                                                                        <span class="req-input valid confirm-password">
+                                                                                                <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your email."> </span>
+                                                                        <input type="email" data-min-length="8" placeholder="Email" name="email">
+                                                                        </span>
+                                                                    </div>
 
+                                                                    <div class="row">
+                                                                        <span class="req-input valid">
+                                                                                                  <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your Username."> </span>
+                                                                        <input type="text" data-min-length="8" placeholder="Username" name="username">
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <span class="req-input input-password invalid">
+                                                                                                <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password must be at least 8 characters long."> </span>
+                                                                        <input type="password" data-min-length="8" placeholder="Password" name="password">
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class="row" style="display:none">
+                                                                        <span class="req-input confirm-password">
+                                                                <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password Must Match Initial Password Field."> </span>
+                                                                        <input type="password" data-min-length="8" placeholder="Confirm Password" name="confirmPassword">
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <a class="create-account col-xs-12"> Create an Account </a>
+                                                                        <br>
+
+                                                                        <a id="forgotPass" class="col-xs-12"> Forgot Password? </a>
+
+                                                                    </div>
+
+                                                                    <div class="row submit-row">
+                                                                        <button class="btn btn-block submit-form invalid">Login</button>
+                                                                    </div>
+                                                                    <div class="oauth-buttons">
+                                                                        <a href="/auth/facebook"><i class="fa fa-facebook"></i> </a>
+                                                                        <a href="/auth/google"><i class="fa fa-google-plus"></i> </a>
+                                                                        <a href="/auth/linkedin"><i class="fa fa-linkedin"></i> </a>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-offset-3 col-md-5" id="forgotPassDIV" style="display:none;">
+                                                        <form action="/forgot/password" method="post">
+                                                            <div id="contact-form" class="form-container" data-form-container style="color: rgb(46, 125, 50); background: rgb(200, 230, 201);">
+                                                                <div class="row">
+                                                                    <div class="form-title col-xs-12">
+                                                                        <span> Reset Your Password </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-container">
+                                                                    <div class="row">
+                                                                        <div class="form-title col-xs-12">
+                                                                            <span style="font-size:20px;"> Please Insert Your <br>Username or Password </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <span class="req-input message-box valid">
+                                                                  <span class="input-status" data-toggle="tooltip" data-placement="top" title="Email or Username"> </span>
+                                                                        <input type="text" name="inputForgotpass" data-min-length="8">
+                                                                    </div>
+                                                                    <div class="row submit-row">
+                                                                        <button type="submit" class="btn btn-block submit-form valid">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
                                             <script src="/vendor/jquery/jquery.min.js"></script>
                                                 <script src="/vendor/tether/tether.min.js"></script>

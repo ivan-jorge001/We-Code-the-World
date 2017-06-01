@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
                 theUsers.post.postForEveryone.forEach((postsId) => {
                     Post.findById(postsId, (err, thePost) => {
                       var d = new Date();
-                      console.log(thePost.createdAt.getMinutes(),d.getMinutes()+"ssssssssssssssssssss");
+                      console.log(d.getTime() - thePost.createdAt.getTime()+"ssssssssssssssssssss");
                         if (err) {
                             next(err);
                             return;
@@ -32,10 +32,15 @@ router.get('/', (req, res, next) => {
                                 content: thePost.content,
                                 photos: thePost.photos,
                                 profilepic:theUsers.profilepic,
-                                createat:-thePost.createdAt.getHours()+(d.getHours()) + ":" + (-thePost.createdAt.getMinutes()+(d.getMinutes()))
+                                createat:d.getTime() - thePost.createdAt.getTime(),
 
                             };
                             array.push(postContent);
+                            array.sort(function(a, b) {
+                                a = a.createat;
+                                b = b.createat;
+                                return a>b ? 11 : a<b ? -1 : 0;
+                            });
                             console.log(postContent);
                         }
                     });

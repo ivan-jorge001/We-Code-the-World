@@ -311,5 +311,20 @@ router.post('/reset/:token', (req, res, next) => {
     });
 });
 
+router.get('/:id/profile',(req,res,next)=>{
+  console.log('inhere');
+  console.log(req.params.id);
+  User.findOne({_id:req.params.id},(err,theUser)=>{
+    if (err) {
+      next(err);
+      return;
+    }
+
+    if (theUser) {
+        res.render('user/user-profile.ejs',{anon:theUser});
+    }
+  });
+});
+
 
 module.exports = router;
