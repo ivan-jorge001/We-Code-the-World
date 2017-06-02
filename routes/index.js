@@ -46,15 +46,24 @@ router.get('/', (req, res, next) => {
                     });
                 });
             });
-            setTimeout(function() {
-                res.render('index', {
-                    successMessage: req.flash('success'),
-                    failMessage: req.flash('error'),
-                    post: array
-                });
-                array = [];
-            }, 900);
+            
 
+            setTimeout(function(d) {
+              function rend(d) {
+                res.render('index', {
+                  successMessage: req.flash('success'),
+                  failMessage: req.flash('error'),
+                  anon: theUser,
+                  post:array,
+                  useronpage:d
+                });
+              }
+              if (req.user !== undefined) {
+
+                if (req.user._id.equals(theUser._id)) {rend('same');}else {rend('different');}}else {rend('anon');}
+
+              array = [];
+            }, 900);
             return;
 
         }
