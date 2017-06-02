@@ -121,6 +121,7 @@
                             <%}%>
 
                                 <div class="content container" style="padding:30px;">
+
                                   <%var many = 0;%>
 
                                     <%post.forEach((pos)=>{%>
@@ -175,12 +176,14 @@
                                                 </small>
                                                 </h4>
 
+                                                <%if (typeof user !== 'undefined' ) {%>
+
+
                                                 <span>
                                     <div class="navbar-right">
                                         <div class="dropdown">
                                             <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="fa fa-cog" aria-hidden="true"></i>
-                                                <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
                                                     <li><a href="#"><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report</a></li>
@@ -193,14 +196,17 @@
                                             </div>
                                         </div>
                                         </span>
+                                      <%}%>
                                         <hr>
+                                        <div class="post-content" style="margin-right:58px">
+
+                                        <div id="" contenteditable="" style="font-size:30px;  max-height: 400px;  overflow: auto;">
+                                        <label style="font-size:25px;"><%=pos.content%></label>
+
+                                        </div>
                                         <%if (pos.photos.length > 0) {%>
 
 
-                                            <div class="post-content" style="margin-right:58px">
-                                                <p>
-                                                    <%=pos.content%>
-                                                </p>
 
 
                                                 <%if (pos.photos.length === 1) {%>
@@ -408,8 +414,8 @@
 
 
                                                     <p><br><a href="/tags/christmas" class="tag">#Christmas</a> <a href="/tags/caturday" class="tag">#Caturday</a></p>
-                                            </div>
                                             <%}%>
+                                            </div>
                                                 <hr>
                                                 <div>
                                                     <div class="pull-right btn-group-xs">

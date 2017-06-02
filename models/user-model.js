@@ -32,14 +32,14 @@ const userSchema = new Schema({
     connection: {
         type: String
     },
-    portafolio: {
+    portafolio: [{
         pic: {
             type: String
         },
         link: {
             type: String
         }
-    },
+    }],
     bio: {
         type: String
     },

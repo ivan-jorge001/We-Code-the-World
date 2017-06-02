@@ -53,7 +53,7 @@ coun++;
 });
 
 $('#changefont').on('click',()=>{
-  $('#changefont').css('font-size','15px');
+  $('#changefont').css('font-size','25px');
 
 });
 

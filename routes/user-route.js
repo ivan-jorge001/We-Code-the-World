@@ -5,9 +5,14 @@ const multer = require('multer');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const User = require('../models/user-model.js');
+const Post = require('../models/post-model.js');
+
 const nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
+var postForEveryone = [];
+var postForFriend = [];
+var postForWork = [];
 
 router.post('/forgot/password', ensure.ensureNotLoggedIn('/'), (req, res, next) => {
     async.waterfall([
@@ -288,7 +293,7 @@ router.post('/reset/:token', (req, res, next) => {
 
 
 
-        var smtpTransport = nodemailer.createTransport( {
+        var smtpTransport = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
                 user: process.env.GMAIL,
@@ -311,19 +316,79 @@ router.post('/reset/:token', (req, res, next) => {
     });
 });
 
-router.get('/:id/profile',(req,res,next)=>{
-  console.log('inhere');
-  console.log(req.params.id);
-  User.findOne({_id:req.params.id},(err,theUser)=>{
-    if (err) {
-      next(err);
-      return;
-    }
+router.get('/:id/profile', (req, res, next) => {
 
-    if (theUser) {
-        res.render('user/user-profile.ejs',{anon:theUser});
-    }
-  });
+    User.findOne({
+        _id: req.params.id
+    }, (err, theUser) => {
+        if (err) {
+            next(err);
+            return;
+        }
+
+        if (theUser) {
+
+            if (theUser.post.postForEveryone.length > 0) {
+
+
+
+                theUser.post.postForEveryone.forEach((onepost) => {
+
+
+                    Post.findById(onepost, (err, foundPost) => {
+                      var d = new Date();
+                        if (err) {
+                            next(err);
+                            return;
+                        }
+                        if (foundPost) {
+
+                          var postContent = {
+                              nameofthePerson: theUser.name,
+                              idofthePerson: foundPost.userwhocreateit,
+                              content: foundPost.content,
+                              photos: foundPost.photos,
+                              profilepic: theUser.profilepic,
+                              createat: d.getTime() - foundPost.createdAt.getTime(),
+
+                          };
+
+                            postForEveryone.push(postContent);
+
+                            postForEveryone.sort(function(a, b) {
+                                a = a.createat;
+                                b = b.createat;
+                                return a > b ? 11 : a < b ? -1 : 0;
+                            });
+                        }
+                    });
+                });
+            } else {
+                console.log("PoTATO!!!");
+                postForEveryone.push('Sorry no Post Found');
+            }
+            console.log("BANANA!!!5");
+
+
+            setTimeout(function(d) {
+              function rend(d) {
+                res.render('user/user-profile.ejs', {
+                  successMessage: req.flash('success'),
+                  failMessage: req.flash('error'),
+                  anon: theUser,
+                  post:postForEveryone,
+                  useronpage:d
+                });
+              }
+              if (req.user !== undefined) {
+
+                if (req.user._id.equals(theUser._id)) {rend('same');}else {rend('different');}}else {rend('anon');}
+
+              postForEveryone = [];
+            }, 500);
+        }
+    });
+
 });
 
 

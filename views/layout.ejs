@@ -106,7 +106,7 @@
                                                             <!-- Side Header -->
                                                             <div class="side-header side-content">
                                                                 <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
-                                                                <button class="btn btn-default pull-right" style ="color: #545454 !important; background-color: #f5f5f5 !important; padding:6px 12px !important; border-color: #e9e9e9 !important;" type="button" data-toggle="layout" data-action="side_overlay_close">
+                                                                <button class="btn btn-default pull-right" style="color: #545454 !important; background-color: #f5f5f5 !important; padding:6px 12px !important; border-color: #e9e9e9 !important;" type="button" data-toggle="layout" data-action="side_overlay_close">
                                               <i class="fa fa-times"></i>
                                             </button>
                                                                 <a href="/profile" style="text-decoration:none;">
@@ -124,19 +124,13 @@
                                                             <div class="side-content remove-padding-t">
                                                                 <!-- Block -->
                                                                 <div class="block pull-r-l">
-                                                                    <div class="block-header bg-gray-lighter">
-                                                                        <ul class="block-options">
-                                                                            <li>
-                                                                                <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                                                                            </li>
-                                                                            <li>
-                                                                                <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
-                                                                            </li>
-                                                                        </ul>
-                                                                        <h3 class="block-title">Block</h3>
-                                                                    </div>
+
                                                                     <div class="block">
-                                                                        <div class="block-header bg-gray-lighter">
+                                                                        <div class="rightsidebar block-header bg-gray-lighter">
+                                                                            <h3 class="block-title"><a href="/user/logout">Notification</a></h3>
+                                                                        </div>
+
+                                                                        <div class="rightsidebar block-header bg-gray-lighter">
                                                                             <h3 class="block-title"><a href="/user/logout">Log Out</a></h3>
                                                                         </div>
                                                                     </div>
@@ -160,7 +154,7 @@
                                                                 <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
                                                                 <div class="sidebar-content">
                                                                     <!-- Side Header -->
-                                                                    <div class="side-header side-content bg-white-op">
+                                                                    <div class="side-header side-content bg-white-op" style="padding-right:5px;">
                                                                         <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
                                                                         <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
                                                                           <i class="fa fa-times"></i>
@@ -173,7 +167,7 @@
 
 
                                                                             </button>
-                                                                            <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
+                                                                            <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide" class="font-size:20px !important;">
                                                                                 <li>
                                                                                     <a data-toggle="theme" data-theme="default" tabindex="-1" href="javascript:void(0)">
                                                                                         <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">Default</span>
@@ -215,49 +209,49 @@
 
                                                                     <!-- Side Content -->
                                                                     <div class="side-content">
-                                                                        <ul class="nav-main">
+                                                                        <ul class="nav-main" style="font-size:18px !important;">
                                                                             <li>
-                                                                              <%if(typeof user !== 'undefined'){%>
-                                                                                <a class="active" href="/"><i class="fa fa-tachometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
-                                                                              <%}else {%>
-                                                                                <a class="active" href="/"><i class="fa fa-tachometer"></i><span class="sidebar-mini-hide">Home</span></a>
-                                                                              <%}%>
+                                                                                <%if(typeof user !== 'undefined'){%>
+                                                                                    <a class="active" href="/"><i class="fa fa-tachometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                                                                                    <%}else {%>
+                                                                                        <a class="active" href="/"><i class="fa fa-tachometer"></i><span class="sidebar-mini-hide">Home</span></a>
+                                                                                        <%}%>
                                                                             </li>
                                                                             <li>
-                                                                              <%if(typeof user !== 'undefined'){%>
-                                                                                <a class="active" href="/"><i class="fa fa-usd"></i><span class="sidebar-mini-hide">Job Offers</span></a>
-                                                                              <%}else {%>
-                                                                                <a class="active" href="/"><i class="fa fa-usd"></i><span class="sidebar-mini-hide">Create Job Offer</span></a>
-                                                                              <%}%>
+                                                                                <%if(typeof user !== 'undefined'){%>
+                                                                                    <a class="active" href="/"><i class="fa fa-usd"></i><span class="sidebar-mini-hide">Job Offers</span></a>
+                                                                                    <%}else {%>
+                                                                                        <a class="active" href="/"><i class="fa fa-usd"></i><span class="sidebar-mini-hide">Create Job Offer</span></a>
+                                                                                        <%}%>
                                                                             </li>
                                                                             <li>
                                                                                 <a class="active" href="/"><i class="fa fa-users"></i><span class="sidebar-mini-hide">Questions</span></a>
                                                                             </li>
                                                                             <%if(typeof user === 'undefined'){%>
-                                                                            <li>
-                                                                                <a class="active" href="/"><i class="fa fa-bolt"></i><span class="sidebar-mini-hide">About</span></a>
-                                                                            </li>
-                                                                            <%}%>
-                                                                            <%if(typeof user !== 'undefined'){%>
-                                                                              <li>
-                                                                              <a class="active" href="/"><i class="fa fa-star"></i><span class="sidebar-mini-hide">Portafolio</span></a>
-                                                                              </li>
-                                                                              <li>
-                                                                              <a class="active" href="/"><i class="fa fa-usd"></i><span class="sidebar-mini-hide">Connection</span></a>
-                                                                              </li>
-                                                                            <%}%>
-                                                                            <li class="nav-main-heading"><span class="sidebar-mini-hide">Languages</span></li>
-                                                                            <li>
-                                                                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Dropdown</span></a>
-                                                                                <ul>
-                                                                                    <li>
-                                                                                        <a href="/">Link #1</a>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <a href="/">Link #2</a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </li>
+                                                                                <li>
+                                                                                    <a class="active" href="/"><i class="fa fa-bolt"></i><span class="sidebar-mini-hide">About</span></a>
+                                                                                </li>
+                                                                                <%}%>
+                                                                                    <%if(typeof user !== 'undefined'){%>
+                                                                                        <li>
+                                                                                            <a class="active" href="/"><i class="fa fa-star"></i><span class="sidebar-mini-hide">Portafolio</span></a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a class="active" href="/"><i class="fa fa-usd"></i><span class="sidebar-mini-hide">Connection</span></a>
+                                                                                        </li>
+                                                                                        <%}%>
+                                                                                            <li class="nav-main-heading"><span class="sidebar-mini-hide">Languages</span></li>
+                                                                                            <li>
+                                                                                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Dropdown</span></a>
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a href="/">Link #1</a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="/">Link #2</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
                                                                         </ul>
                                                                     </div>
                                                                     <!-- END Side Content -->
@@ -277,7 +271,7 @@
                                                         </button>
                                                                             <%}else{%>
                                                                                 <ol class="nav push-10-t">
-                                                                                    <a id='signlog' class="nav-link" > Sign Up / Log In </a></li>
+                                                                                    <a id='signlog' class="nav-link"> Sign Up / Log In </a></li>
                                                                 </ol>
                                                                 <%};%>
                                                                     </li>
@@ -432,13 +426,13 @@
                                             </div>
                                             <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
                                             <script src="/vendor/jquery/jquery.min.js"></script>
-                                                <script src="/vendor/tether/tether.min.js"></script>
-                                                <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+                                            <script src="/vendor/tether/tether.min.js"></script>
+                                            <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 
 
-                                                <!-- Custom scripts for this template -->
-                                                <script src="/javascripts/sb-admin.min.js"></script>
+                                            <!-- Custom scripts for this template -->
+                                            <script src="/javascripts/sb-admin.min.js"></script>
                                             <script src="/assets/js/oneui.min.js"></script>
                                             <script type="text/javascript" src="/javascripts/loginsignup.js"></script>
                                             <script type="text/javascript" src="/javascripts/post.js"></script>
