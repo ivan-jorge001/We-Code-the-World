@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/post-model.js');
+
+const Com = require('../models/comment-model.js');
 const multer = require('multer');
 const path = require('path');
 const ensure = require('connect-ensure-login');
@@ -81,11 +83,11 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
             console.log('BANANA 1');
 
             if (deletedpost) {
-              console.log('BANANA 2');
+                console.log('BANANA 2');
 
 
                 if (req.user._id.equals(deletedpost.userwhocreateit)) {
-                  console.log('BANANA 3');
+                    console.log('BANANA 3');
 
                     Post.findByIdAndRemove(postId, (err, dele) => {
                         if (err) {
@@ -95,7 +97,7 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
                         console.log('BANANA 4');
 
                         if (req.user.post.postForFriend.indexOf(postId) !== -1) {
-                          console.log('BANANA 5');
+                            console.log('BANANA 5');
 
                             req.user.post.postForFriend.remove(postId);
 
@@ -124,11 +126,11 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
             console.log('BANANA 1');
 
             if (deletedpost) {
-              console.log('BANANA 2');
+                console.log('BANANA 2');
 
 
                 if (req.user._id.equals(deletedpost.userwhocreateit)) {
-                  console.log('BANANA 3');
+                    console.log('BANANA 3');
 
                     Post.findByIdAndRemove(postId, (err, dele) => {
                         if (err) {
@@ -138,7 +140,7 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
                         console.log('BANANA 4');
 
                         if (req.user.post.postForWork.indexOf(postId) !== -1) {
-                          console.log('BANANA 5');
+                            console.log('BANANA 5');
 
                             req.user.post.postForWork.remove(postId);
 
@@ -166,11 +168,11 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
             console.log('BANANA 1');
 
             if (deletedpost) {
-              console.log('BANANA 2');
+                console.log('BANANA 2');
 
 
                 if (req.user._id.equals(deletedpost.userwhocreateit)) {
-                  console.log('BANANA 3');
+                    console.log('BANANA 3');
 
                     Post.findByIdAndRemove(postId, (err, dele) => {
                         if (err) {
@@ -180,7 +182,7 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
                         console.log('BANANA 4');
 
                         if (req.user.post.postForEveryone.indexOf(postId) !== -1) {
-                          console.log('BANANA 5');
+                            console.log('BANANA 5');
 
                             req.user.post.postForEveryone.remove(postId);
 
@@ -198,6 +200,58 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
     }
 });
 
+var uploadCom = multer({
+    dest: path.join(__dirname, '../public/postpic')
+});
+
+var cpUploadCom = upload.fields([{
+    name: 'imgcomment',
+    maxCount: 6
+}]);
+
+router.post('/:idofpost/comment',ensure.ensureLoggedIn('/'),cpUploadCom, (req, res, next) => {
+    const postId = req.params.idofpost;
+
+var comment  = {
+content:req.body.content,
+author:req.user._id
+};
+
+if (req.files!== undefined) {
+  req.files.imgcomment.forEach((pic)=>{
+    comment.photos.push(pic);
+  });
+}
+    Post.findById(postId, (err, foundPost) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        if (foundPost) {
+          const OneCom = new Com(comment);
+          foundPost.comment.push(OneCom);
+
+          foundPost.save((err)=>{
+            if (err) {
+              next(err);
+              return;
+            }
+            req.flash('success','Comment was Posted');
+            res.redirect('/');
+          });
+        }else {
+          req.flash('error','Comment was NOT Posted');
+          res.redirect('/');
+        }
+
+
+    });
+
+
+
+
+
+});
 
 
 
