@@ -46,7 +46,7 @@ router.get('/', (req, res, next) => {
                     });
                 });
             });
-            
+
 
             setTimeout(function(d) {
               function rend(d) {

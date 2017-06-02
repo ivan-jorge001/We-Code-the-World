@@ -176,10 +176,12 @@
                                                 </small>
                                                 </h4>
 
+
                                                         <%if (typeof user !== 'undefined' ) {%>
 
 
-                                                            <%if (useronpage !== 'anon') {%>
+
+
 
 
                                                                 <span>
@@ -192,8 +194,10 @@
                                                                               <li><a href="#"><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report</a></li>
                                                                               <li><a href="#"><i class="fa fa-fw fa-ban" aria-hidden="true"></i> Ignore</a></li>
                                                                               <li><a href="#"><i class="fa fa-fw fa-bell" aria-hidden="true"></i> Enable notifications for this post</a></li>
-                                                                              <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Hide</a></li>
-                                                                              <%if (useronpage === 'same') {%>
+                                                                              <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i></a></li>
+
+                                                                              <%if (user._id.equals(pos.userwhocreateit)) {%>
+
                                                                               <li role="separator" class="divider"></li>
                                                                               <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
                                                                               <%}%>
@@ -201,7 +205,7 @@
                                                                       </div>
                                                                   </div>
                                                                   </span>
-                                                                <%}%>
+
                                                                 <%}%>
                                                                     <hr>
                                                                     <div class="post-content" style="margin-right:58px">
