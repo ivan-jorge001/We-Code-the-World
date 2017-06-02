@@ -345,6 +345,7 @@ router.get('/:id/profile', (req, res, next) => {
 
                           var postContent = {
                             category:foundPost.whocanseeit,
+                            comment:[],
                               nameofthePerson: theUser.name,
                               usernameoftheperson:theUser.username,
                               idofpost:foundPost._id,
@@ -356,7 +357,41 @@ router.get('/:id/profile', (req, res, next) => {
 
                           };
 
+                          foundPost.comment.forEach((coment)=>{
+                            User.findById(coment.author,(err,userwhoComment)=>{
+                              if (err) {
+                                next(err);
+                                return;
+                              }
+                              if (userwhoComment) {
+                                var comments = {
+                                  authorPhoto:userwhoComment.profilepic,
+                                  content:coment.content,
+                                  timeCreated:d.getTime() - coment.createdAt.getTime(),
+                                  comentPic:coment.photos
 
+
+                                };
+                                if (userwhoComment.name !== undefined) {
+                                  comments.authorName = userwhoComment.name;
+                                }else {
+                                  comments.authorName = userwhoComment.username;
+                                }
+
+
+                                 postContent.comment.push(comments);
+                                 postContent.comment.sort(function(a, b) {
+                                   a = a.timeCreated;
+                                   b = b.timeCreated;
+                                   return a > b ? 11 : a < b ? -1 : 0;
+                                 });
+                                 console.log(postContent.comment);
+                              }
+
+
+
+                            });
+                          });
 
 
                             postForEveryone.push(postContent);
