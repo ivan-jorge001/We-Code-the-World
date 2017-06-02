@@ -20,14 +20,16 @@ router.get('/', (req, res, next) => {
                 theUsers.post.postForEveryone.forEach((postsId) => {
                     Post.findById(postsId, (err, thePost) => {
                         var d = new Date();
-                        console.log(d.getTime() - thePost.createdAt.getTime() + "ssssssssssssssssssss");
                         if (err) {
                             next(err);
                             return;
                         }
                         if (thePost) {
                             var postContent = {
+                              category:thePost.whocanseeit,
                                 nameofthePerson: theUsers.name,
+                                usernameoftheperson:theUsers.username,
+                                idofpost:thePost._id,
                                 idofthePerson: thePost.userwhocreateit,
                                 content: thePost.content,
                                 photos: thePost.photos,
@@ -49,20 +51,25 @@ router.get('/', (req, res, next) => {
 
 
             setTimeout(function(d) {
-              function rend(d) {
-                res.render('index', {
-                  successMessage: req.flash('success'),
-                  failMessage: req.flash('error'),
-                  anon: theUser,
-                  post:array,
-                  useronpage:d
-                });
-              }
-              if (req.user !== undefined) {
 
-                if (req.user._id.equals(theUser._id)) {rend('same');}else {rend('different');}}else {rend('anon');}
+                function rend(d) {
+                    res.render('index', {
+                        successMessage: req.flash('success'),
+                        failMessage: req.flash('error'),
+                        post: array,
+                        useronpage: d
+                    });
+                }
+                if (req.user !== undefined) {
+                  console.log(req.user._id.toString());
 
-              array = [];
+                        rend('login');
+
+                } else {
+                    rend('needsto');
+                }
+
+                array = [];
             }, 900);
             return;
 

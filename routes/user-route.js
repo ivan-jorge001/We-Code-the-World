@@ -344,7 +344,10 @@ router.get('/:id/profile', (req, res, next) => {
                         if (foundPost) {
 
                           var postContent = {
+                            category:foundPost.whocanseeit,
                               nameofthePerson: theUser.name,
+                              usernameoftheperson:theUser.username,
+                              idofpost:foundPost._id,
                               idofthePerson: foundPost.userwhocreateit,
                               content: foundPost.content,
                               photos: foundPost.photos,
@@ -352,6 +355,9 @@ router.get('/:id/profile', (req, res, next) => {
                               createat: d.getTime() - foundPost.createdAt.getTime(),
 
                           };
+
+
+
 
                             postForEveryone.push(postContent);
 
