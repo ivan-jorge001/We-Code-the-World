@@ -5,12 +5,12 @@ const QuA = require('./QuA-model.js');
 
 const langSchema = new Schema({
   name:{type:String},
+  profilepic:{type:String, default:'/profilepic/code.jpg'},
 tools:[infoLang.schema],
 framework:[infoLang.schema],
 libaries:[infoLang.schema],
 addedByWho:{type:String},
 question:[QuA.schema],
-imgofLang:{type:String},
 colorRep:{type:String}
 },{
   timestamps: true

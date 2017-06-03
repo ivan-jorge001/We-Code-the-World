@@ -1,3 +1,6 @@
+
+
+
 $('.next').on('click',()=>{
   $('.carousel').carousel('next');
 });
@@ -17,6 +20,12 @@ $('#formpost').submit();
 
 
 $(document).ready(function(){
+
+  $('#buttonCreate').click(function(){
+      $("#createLang").modal();
+  });
+
+
     $('#signlog').click(function(){
         $("#signuplogin").modal();
     });
@@ -34,10 +43,12 @@ $(document).ready(function(){
 
 var coun = 0;
 $('#changefont').text(`What's On Your Mind?`);
+$('.changefont1').text(`Ask Away ?`);
 
 $(document).on('click',()=>{
   if ($('#changefont').is(':empty')|| $('#changefont').text().length < 1 ) {
     $('#changefont').text(`What's On Your Mind?`);
+    $('.changefont1').text(`Ask Away ?`);
       $('#changefont').css('font-size','25px');
 coun = 0;
   }

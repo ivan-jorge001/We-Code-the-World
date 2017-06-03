@@ -315,7 +315,6 @@ router.get('/:id/show',(req,res,next)=>{
         }
       });
       setTimeout(function() {
-console.log(array+'lllllllllllllllllllllllllllllllllllllll');
               res.render('post/post-view.ejs', {
                   successMessage: req.flash('success'),
                   failMessage: req.flash('error'),

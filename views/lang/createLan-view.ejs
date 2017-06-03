@@ -1,0 +1,120 @@
+<%-contentFor('main')%>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+<div class="mainbody container-fluid">
+    <div class="row">
+
+        <div style="padding-top:50px;"> </div>
+        <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div align="center">
+                            <img class="thumbnail img-responsive" src="<%=lang.profilepic%>" width="300px" height="300px">
+                        </div>
+                        <div class="media-body">
+                            <hr>
+                            <h3><strong>Bio</strong></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                            <hr>
+                            <h3><strong>Location</strong></h3>
+                            <p>Earth</p>
+                            <hr>
+                            <h3><strong>Gender</strong></h3>
+                            <p>Unknown</p>
+                            <hr>
+                            <h3><strong>Birthday</strong></h3>
+                            <p>January 01 1901</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <%if(typeof user !=='undefined'){%>
+
+            <div class="content">
+                <form id="formpost" class="" action="/new/post" method="post" enctype="multipart/form-data">
+                    <input name="numberofpic" id="numberofpic" value="" style="display:none">
+                    <div class=" items-push">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <span>
+                  <h1 class="panel-title pull-left" style="font-size:30px;"><img class="" src="<%=user.profilepic%>" width="40px" height="35px" style=" margin-right:10px; padding-bottom:5px;">
+                  <% if (typeof user.name !== 'undefined' ){%>
+                    <%=user.name%>
+                  <%}else {%>
+                    <%=user.username%>
+                  <%}%>
+                  <% if (typeof user.name !== 'undefined' ){%>
+                    <i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="<%=user.name%> is sharing with you"></i></h1>
+                  <%}else {%>
+                    <i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="<%=user.username%> is sharing with you"></i></h1>
+                  <%}%>
+
+                  <div class="dropdown pull-right">
+                    <select class="btn btn-success " id="dropdownMenu1" name="sharewith" style="">
+                      <option><a href="#">Everyone</a></option>
+                      <option><a href="#"> Friends</a></option>
+                      <option><a href="#">Work</a></option>
+
+                                </select>
+
+                            </div>
+                            </span>
+                                <br><br>
+                                <div class="row">
+                                    <div class=" col-xs-offset-3 col-xs-7" style="text-align:center">
+
+                                        <div contenteditable="true" class ="changefont1" id="changefont" placeholder="Ask Away?" style="font-size:30px;  max-height: 400px;  overflow: auto;">
+                                        </div>
+                                        <input id="inputPostContent" type="text" name="postcontent" value="" style="display:none">
+
+                                    </div>
+
+
+
+
+
+
+                                    <script type="text/javascript">
+                                        var de = function(event) {
+                                            console.log(event);
+                                            var input = event.target;
+                                            console.log(input.id)
+                                            var inputclall = input.id;
+                                            $(`#${input.id}`).remove();
+                                            $(`.${inputclall}`).remove();
+
+                                        };
+                                    </script>
+                                </div>
+                                <div class="row" style="text-align:left; display: block;">
+
+                                    <div id="picGoesHere" style="margin:10px;">
+                                    </div>
+
+                                    <hr>
+
+
+                                    <span class="pull-left">
+                  <a href="" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-tags" aria-hidden="true"></i> #Tags</a>
+                  <label id ="postpiclabel" for="postpic" class="btn btn-link" style="text-decoration:none;"><input type="file" name="imgpost" id="postpic" style="  display:none; width:auto; height:auto;" ><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Photos</label >
+                        <a href="" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Contacts</a>
+                        </span>
+                                    <span class="pull-right">
+                            <button id ="buttonPost" class="btn btn-success " type="button" style="margin-right:15px;">Post
+                            </button>
+                            </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <%}%>
+        </div>
+    </div>
+</div>
