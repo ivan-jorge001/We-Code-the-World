@@ -1,553 +1,543 @@
 <%# ======================== <BODY> =================================%>
-<%# ======================== <BODY-MAIN CONTENT> =================================%>
-<%# ======================== <BODY> =================================%>
+    <%# ======================== <BODY-MAIN CONTENT> =================================%>
+        <%# ======================== <BODY> =================================%>
 
-<%- contentFor( 'main')%>
+            <%- contentFor( 'main')%>
 
-<!-- Page Header -->
+                <!-- Page Header -->
 
-<!-- END Page Header -->
-<%if(typeof user !=='undefined'){%>
+                <!-- END Page Header -->
+                <%if(typeof user !=='undefined'){%>
 
-<div class="content">
-<form id="formpost" class="" action="/new/post" method="post" enctype="multipart/form-data">
-<input name="numberofpic" id="numberofpic" value="" style="display:none">
-<div class=" items-push">
-<div class="panel panel-default">
-<div class="panel-body">
-<span>
-<h1 class="panel-title pull-left" style="font-size:30px;"><img class="" src="<%=user.profilepic%>" width="40px" height="35px" style=" margin-right:10px; padding-bottom:5px;">
-<% if (typeof user.name !== 'undefined' ){%>
-<%=user.name%>
-<%}else {%>
-<%=user.username%>
-<%}%>
-<% if (typeof user.name !== 'undefined' ){%>
-<i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="<%=user.name%> is sharing with you"></i></h1>
-<%}else {%>
-<i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="<%=user.username%> is sharing with you"></i></h1>
-<%}%>
+                    <div class="content">
+                        <form id="formpost" class="" action="/new/post" method="post" enctype="multipart/form-data">
+                            <input name="numberofpic" id="numberofpic" value="" style="display:none">
+                            <div class=" items-push">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <span>
+                          <h1 class="panel-title pull-left" style="font-size:30px;"><img class="" src="<%=user.profilepic%>" width="40px" height="35px" style=" margin-right:10px; padding-bottom:5px;">
+                          <% if (typeof user.name !== 'undefined' ){%>
+                            <%=user.name%>
+                          <%}else {%>
+                            <%=user.username%>
+                          <%}%>
+                          <% if (typeof user.name !== 'undefined' ){%>
+                            <i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="<%=user.name%> is sharing with you"></i></h1>
+                          <%}else {%>
+                            <i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="<%=user.username%> is sharing with you"></i></h1>
+                          <%}%>
 
-<div class="dropdown pull-right">
-<select class="btn btn-success " id="dropdownMenu1" name="sharewith" style="">
-<option><a href="#">Everyone</a></option>
-<option><a href="#"> Friends</a></option>
-<option><a href="#">Work</a></option>
+                          <div class="dropdown pull-right">
+                            <select class="btn btn-success " id="dropdownMenu1" name="sharewith" style="">
+                              <option><a href="#">Everyone</a></option>
+                              <option><a href="#"> Friends</a></option>
+                              <option><a href="#">Work</a></option>
 
-</select>
+                                        </select>
 
-</div>
-</span>
-<br><br>
-<div class="row">
-<div class=" col-xs-offset-3 col-xs-7" style="text-align:center">
+                                    </div>
+                                    </span>
+                                        <br><br>
+                                        <div class="row">
+                                            <div class=" col-xs-offset-3 col-xs-7" style="text-align:center">
 
-<div contenteditable="true" id="changefont" placeholder="Whats on your Mind?" style="font-size:30px;  max-height: 400px;  overflow: auto;">
-</div>
-<input id="inputPostContent" type="text" name="postcontent" value="" style="display:none">
+                                                <div contenteditable="true" id="changefont" placeholder="Whats on your Mind?" style="font-size:30px;  max-height: 400px;  overflow: auto;">
+                                                </div>
+                                                <input id="inputPostContent" type="text" name="postcontent" value="" style="display:none">
 
-</div>
-
-
+                                            </div>
 
 
 
 
-<script type="text/javascript">
-var de = function(event) {
-console.log(event);
-var input = event.target;
-console.log(input.id)
-var inputclall = input.id;
-$(`#${input.id}`).remove();
-$(`.${inputclall}`).remove();
 
-};
-</script>
-</div>
-<div class="row" style="text-align:left; display: block;">
 
-<div id="picGoesHere" style="margin:10px;">
-</div>
+                                            <script type="text/javascript">
+                                                var de = function(event) {
+                                                    console.log(event);
+                                                    var input = event.target;
+                                                    console.log(input.id)
+                                                    var inputclall = input.id;
+                                                    $(`#${input.id}`).remove();
+                                                    $(`.${inputclall}`).remove();
 
+                                                };
+                                            </script>
+                                        </div>
+                                        <div class="row" style="text-align:left; display: block;">
+
+                                            <div id="picGoesHere" style="margin:10px;">
+                                            </div>
+
+                                            <hr>
+
+
+                                            <span class="pull-left">
+                          <a href="" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-tags" aria-hidden="true"></i> #Tags</a>
+                          <label id ="postpiclabel" for="postpic" class="btn btn-link" style="text-decoration:none;"><input type="file" name="imgpost" id="postpic" style="  display:none; width:auto; height:auto;" ><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Photos</label >
+                                <a href="" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Contacts</a>
+                                </span>
+                                            <span class="pull-right">
+                                    <button id ="buttonPost" class="btn btn-success " type="button" style="margin-right:15px;">Post
+                                    </button>
+                                    </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <%}%>
+                        <!-- Page Content -->
+
+
+
+
+
+
+
+                        <%if(typeof reset !=='undefined' && reset === true ){%>
+                            <a id='newPassword' class="nav-link" data-toggle="modal" data-target="#newPass"></a>
+                            </li>
+                            <div class="container signuplogin modal fade" id='newPass' style="margin-top: 170px;">
+                                <div class="col-md-offset-3 col-md-5" id="">
+                                    <form action="" id="newpassform" method="post">
+                                        <div id="contact-form" class="form-container" data-form-container style="color: rgb(46, 125, 50); background: rgb(200, 230, 201);">
+                                            <div class="row">
+                                                <div class="form-title">
+                                                    <span>New Password </span>
+                                                </div>
+                                            </div>
+                                            <div class="input-container">
+                                                <div class="row">
+                                                    <span class="req-input message-box valid">
+                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="New Password" > </span>
+                                                    <input type="text" name="inputPassword" data-min-length="8" placeholder="New Password">
+                                                </div>
+                                                <div class="row">
+                                                    <span class="req-input message-box valid">
+                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Confirm Password" > </span>
+                                                    <input type="text" name="inputConfirmPass" data-min-length="8" placeholder="Confirm Password">
+                                                </div>
+                                                <div class="row submit-row">
+                                                    <button type="button" id="submitbut" class="btn btn-block submit-form valid">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <%}%>
+
+                                <div class="content container" style="padding:30px;">
+
+                                    <%var many = 0;%>
+
+                                        <%post.forEach((pos)=>{%>
+                                            <%many++;%>
+
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="pull-left">
+                                                            <a href="#">
+                                                <img class="media-object img-circle" src="<%=pos.profilepic%>" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                                            </a>
+                                                        </div>
+
+                                                        <h4>
+                                                <a href="/<%=pos.idofthePerson%>/profile" style="text-decoration:none;">
+                                                <% if (typeof pos.nameofthePerson!== 'undefined' ){%>
+                                                  <strong><%=pos.nameofthePerson%></strong>
+                                                <%}else {%>
+                                                  <strong><%=pos.usernameoftheperson%></strong>
+                                                <%}%>
+
+                                                </a> – <small><small>
+                                                <a href="#" style="text-decoration:none; color:grey;">
+                                                <i>
+                                                <i class="fa fa-clock-o" aria-hidden="true">
+                                                <%if (pos.createat < 1000) {%>
+                                                  </i> <%=pos.createat%> Miliseconds Ago</i>
+                                                <%}else if (pos.createat > 1000 && pos.createat < 60000){%>
+                                                <%const seconds =Math.floor( pos.createat *0.001);%>
+
+                                                  </i> <%=seconds%> Seconds Ago</i>
+                                                <%}else if (pos.createat > 60000 && pos.createat < 3600000){%>
+                                                <%const min =Math.floor( pos.createat *0.001*0.0166667);%>
+
+                                                  </i> <%=min%> Minutes Ago</i>
+                                                <%}else if (pos.createat > 3600000 && pos.createat < 86400000){%>
+                                                <%const hour =Math.floor( pos.createat *0.001*0.0166667*0.0166667);%>
+
+                                                  </i> <%=hour%> Hour Ago</i>
+                                                <%}else if (pos.createat > 86400000 && pos.createat < 604800000){%>
+                                                <%const day =Math.floor( pos.createat *0.001*0.0166667*0.0166667*0.0416667);%>
+
+                                                  </i> <%=day%> Day Ago</i>
+                                                <%}else if (pos.createat > 604800000 && pos.createat < 2419200000){%>
+                                                <%const week =Math.floor( pos.createat *0.001*0.0166667*0.0166667*0.0416667*0.142857);%>
+
+                                                  </i> <%=week%> Week Ago</i>
+                                                <%}else if (pos.createat > 2419200000 ){%>
+                                                <%const month =Math.floor( pos.createat *0.001*0.0166667*0.0166667*0.0416667*0.0328767*0.230137);%>
+                                                  </i> <%=month%> Month Ago</i>
+                                                <%}%>
+
+
+                                                </a>
+                                                </small>
+                                                </small>
+                                                </h4>
+
+
+                                                        <%if (typeof user !== 'undefined' ) {%>
+
+
+
+
+
+
+                                                            <%if (user._id.equals(pos.idofthePerson)) {%>
+                                                                <span>
+                                                              <div class="navbar-right">
+                                                                  <div class="dropdown">
+                                                                      <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                          <i class="fa fa-cog" aria-hidden="true"></i>
+                                                                          </button>
+                                                                          <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
+                                                                              <li><a href="/<%=pos.idofpost%>/<%=pos.category%>/delete"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
+                                                                          </ul>
+                                                                      </div>
+                                                                  </div>
+                                                                  </span>
+
+                                                                <%}%>
+                                                                    <%}%>
+                                                                        <hr>
+                                                                        <div class="post-content" style="margin-right:58px">
+
+                                                                            <div id="" contenteditable="" style="font-size:30px;  max-height: 400px;  overflow: auto;">
+                                                                                <label style="font-size:25px;"><%=pos.content%></label>
+
+                                                                            </div>
+                                                                            <%if (pos.photos.length > 0) {%>
+
+
+
+
+                                                                                <%if (pos.photos.length === 1) {%>
+                                                                                    <img class="<%=many%> img-responsive" style="max-height:800px; width:auto; margin:auto " src="<%=pos.photos[0]%>">
+                                                                                    <script type="text/javascript">
+                                                                                        $(`.<%=many%>`).on('click', () => {
+                                                                                            $(`#a<%=many%>`).modal('show');
+                                                                                        });
+                                                                                    </script>
+
+                                                                                    <div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:120px !important; " data-ride="carousel">
+                                                                                        <div class="">
+                                                                                            <button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                                        </div>
+                                                                                        <ol class="carousel-indicators">
+                                                                                            <li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
+
+                                                                                        </ol>
+                                                                                        <div class="carousel-inner" role="listbox">
+                                                                                            <div class="carousel-item active">
+                                                                                                <img class=" d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <%}%>
+                                                                                        <%if (pos.photos.length === 2) {%>
+                                                                                            <img class="<%=many%> img-responsive" style="max-height:400px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[0]%>">
+                                                                                            <img class="<%=many%> img-responsive" style="max-height:400px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[1]%>">
+                                                                                            <script type="text/javascript">
+                                                                                                $(`.<%=many%>`).on('click', () => {
+                                                                                                    $(`#a<%=many%>`).modal('show');
+                                                                                                });
+                                                                                            </script>
+
+                                                                                            <div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:100px !important; " data-ride="carousel">
+                                                                                                <div class="">
+                                                                                                    <button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                                                </div>
+                                                                                                <ol class="carousel-indicators">
+                                                                                                    <li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
+                                                                                                    <li data-target="#a<%=many%>" data-slide-to="1"></li>
+
+                                                                                                </ol>
+                                                                                                <div class="carousel-inner" role="listbox">
+                                                                                                    <div class="carousel-item active">
+                                                                                                        <img class=" d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
+                                                                                                    </div>
+                                                                                                    <div class="carousel-item">
+                                                                                                        <img class="a d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[1]%>" alt="Second slide">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <a class="carousel-control-prev" href="#a<%=many%>" role="button" data-slide="prev">
+                                                                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                    <span class="sr-only">Previous</span>
+                                                                                                </a>
+                                                                                                <a class="carousel-control-next" href="#a<%=many%>" role="button" data-slide="next">
+                                                                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                    <span class="sr-only">Next</span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <%}%>
+                                                                                                <%if (pos.photos.length === 3) {%>
+                                                                                                    <img class="<%=many%> img-responsive" style="max-height:200px; display:inline; width:auto; margin:5px; " src="<%=pos.photos[0]%>">
+                                                                                                    <img class="<%=many%> img-responsive" style="max-height:200px; display:inline; width:auto; margin:5px; " src="<%=pos.photos[1]%>">
+                                                                                                    <img class="<%=many%> img-responsive" style="max-height:200px; display:inline; width:auto; margin:5px; " src="<%=pos.photos[2]%>">
+                                                                                                    <script type="text/javascript">
+                                                                                                        $(`.<%=many%>`).on('click', () => {
+                                                                                                            $(`#a<%=many%>`).modal('show');
+                                                                                                        });
+                                                                                                    </script>
+
+                                                                                                    <div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:100px !important; " data-ride="carousel">
+                                                                                                        <div class="">
+                                                                                                            <button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                                                        </div>
+                                                                                                        <ol class="carousel-indicators">
+                                                                                                            <li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
+                                                                                                            <li data-target="#a<%=many%>" data-slide-to="1"></li>
+                                                                                                            <li data-target="#a<%=many%>" data-slide-to="2"></li>
+
+
+                                                                                                        </ol>
+                                                                                                        <div class="carousel-inner" role="listbox">
+                                                                                                            <div class="carousel-item active">
+                                                                                                                <img class=" d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
+                                                                                                            </div>
+                                                                                                            <div class="carousel-item">
+                                                                                                                <img class="a d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[1]%>" alt="Second slide">
+                                                                                                            </div>
+                                                                                                            <div class="carousel-item">
+                                                                                                                <img class="a d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[2]%>" alt="Third slide">
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <a class="carousel-control-prev" href="#a<%=many%>" role="button" data-slide="prev">
+                                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                            <span class="sr-only">Previous</span>
+                                                                                                        </a>
+                                                                                                        <a class="carousel-control-next" href="#a<%=many%>" role="button" data-slide="next">
+                                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                            <span class="sr-only">Next</span>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                    <%}%>
+                                                                                                        <%if (pos.photos.length === 4) {%>
+                                                                                                            <img class=" <%=many%> img-responsive" style="max-height:200px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[0]%>">
+                                                                                                            <img class=" <%=many%> img-responsive" style="max-height:200px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[1]%>">
+                                                                                                            <img class=" <%=many%> img-responsive" style="max-height:200px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[2]%>">
+                                                                                                            <img class=" <%=many%> img-responsive" style="max-height:200px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[3]%>">
+                                                                                                            <script type="text/javascript">
+                                                                                                                $(`.<%=many%>`).on('click', () => {
+                                                                                                                    $(`#a<%=many%>`).modal('show');
+                                                                                                                });
+                                                                                                            </script>
+
+                                                                                                            <div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:100px !important; " data-ride="carousel">
+                                                                                                                <div class="">
+                                                                                                                    <button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                                                                </div>
+                                                                                                                <ol class="carousel-indicators">
+                                                                                                                    <li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
+                                                                                                                    <li data-target="#a<%=many%>" data-slide-to="1"></li>
+                                                                                                                    <li data-target="#a<%=many%>" data-slide-to="2"></li>
+                                                                                                                    <li data-target="#a<%=many%>" data-slide-to="3"></li>
+
+                                                                                                                </ol>
+                                                                                                                <div class="carousel-inner" role="listbox">
+                                                                                                                    <div class="carousel-item active">
+                                                                                                                        <img class=" .5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
+                                                                                                                    </div>
+                                                                                                                    <div class="carousel-item">
+                                                                                                                        <img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[2]%>" alt="Second slide">
+                                                                                                                    </div>
+                                                                                                                    <div class="carousel-item">
+                                                                                                                        <img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[3]%>" alt="Third slide">
+                                                                                                                    </div>
+                                                                                                                    <div class="carousel-item">
+                                                                                                                        <img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[1]%>" alt="Fourth slide">
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <a class="carousel-control-prev" href="#a<%=many%>" role="button" data-slide="prev">
+                                                                                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                                    <span class="sr-only">Previous</span>
+                                                                                                                </a>
+                                                                                                                <a class="carousel-control-next" href="#a<%=many%>" role="button" data-slide="next">
+                                                                                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                                    <span class="sr-only">Next</span>
+                                                                                                                </a>
+                                                                                                            </div>
+                                                                                                            <%}%>
+                                                                                                                <%if (pos.photos.length === 5) {%>
+                                                                                                                    <img class="<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[0]%>">
+                                                                                                                    <img class="a<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[2]%>">
+                                                                                                                    <img class="<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[3]%>">
+                                                                                                                    <img class="<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[1]%>">
+                                                                                                                    <img class="<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[4]%>">
+
+                                                                                                                    <script type="text/javascript">
+                                                                                                                        $(`.<%=many%>`).on('click', () => {
+                                                                                                                            $(`#a<%=many%>`).modal('show');
+                                                                                                                        });
+                                                                                                                    </script>
+
+                                                                                                                    <div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:100px !important; " data-ride="carousel">
+                                                                                                                        <div class="">
+                                                                                                                            <button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                                                                        </div>
+                                                                                                                        <ol class="carousel-indicators">
+                                                                                                                            <li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
+                                                                                                                            <li data-target="#a<%=many%>" data-slide-to="1"></li>
+                                                                                                                            <li data-target="#a<%=many%>" data-slide-to="2"></li>
+                                                                                                                            <li data-target="#a<%=many%>" data-slide-to="3"></li>
+                                                                                                                            <li data-target="#a<%=many%>" data-slide-to="4"></li>
+
+                                                                                                                        </ol>
+                                                                                                                        <div class="carousel-inner" role="listbox">
+                                                                                                                            <div class="carousel-item active">
+                                                                                                                                <img class=" .5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
+                                                                                                                            </div>
+                                                                                                                            <div class="carousel-item">
+                                                                                                                                <img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[2]%>" alt="Second slide">
+                                                                                                                            </div>
+                                                                                                                            <div class="carousel-item">
+                                                                                                                                <img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[3]%>" alt="Third slide">
+                                                                                                                            </div>
+                                                                                                                            <div class="carousel-item">
+                                                                                                                                <img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[1]%>" alt="Fourth slide">
+                                                                                                                            </div>
+                                                                                                                            <div class="carousel-item">
+                                                                                                                                <img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[4]%>" alt="Fifth slide">
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <a class="carousel-control-prev" href="#a<%=many%>" role="button" data-slide="prev">
+                                                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="sr-only">Previous</span>
+                                                                                                                        </a>
+                                                                                                                        <a class="carousel-control-next" href="#a<%=many%>" role="button" data-slide="next">
+                                                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                                            <span class="sr-only">Next</span>
+                                                                                                                        </a>
+                                                                                                                    </div>
+                                                                                                                    <%}%>
+
+                                                                                                                        <%}%>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div>
+
+                                                                            <%if (typeof user !== 'undefined') {%>
+                                                                                <div class="pull-right btn-group-xs">
+                                                                                    <a class="btn btn-default btn-xs" href="/<%=pos.idofpost%>/<%=user._id%>/reshare"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
+                                                                                </div>
+                                                                                <%}%>
+                                                                                    <div class="pull-left">
+                                                                                        <%if (pos.category == 'Everyone') {%>
+                                                                                            <p class="text-muted" style="margin-left:5px; margin-bottom:5px !important;"><i class="fa fa-globe" aria-hidden="true"></i> <strong>Public </strong></p>
+                                                                                          <%}else if (pos.category== 'Work') {%>
+                                                                                            <p class="text-muted" style="margin-left:5px; margin-bottom:5px !important;"><i class="fa fa-briefcase" aria-hidden="true"></i> <strong>Work </strong></p>
+                                                                                          <%}else if (pos.category== 'Friends') {%>
+                                                                                            <p class="text-muted" style="margin-left:5px; margin-bottom:5px !important;"><i class="fa fa-users" aria-hidden="true"></i> <strong>Friends </strong></p>
+                                                                                          <%}%>
+                                                                                    </div>
+                                                                                    <br>
+                                                                        </div>
 <hr>
-
-
-<span class="pull-left">
-<a href="" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-tags" aria-hidden="true"></i> #Tags</a>
-<label id ="postpiclabel" for="postpic" class="btn btn-link" style="text-decoration:none;"><input type="file" name="imgpost" id="postpic" style="  display:none; width:auto; height:auto;" ><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Photos</label >
-<a href="" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Contacts</a>
-</span>
-<span class="pull-right">
-<button id ="buttonPost" class="btn btn-success " type="button" style="margin-right:15px;">Post
-</button>
-</span>
-</div>
-
-</div>
-</div>
-</div>
-</form>
-</div>
-<%}%>
-<!-- Page Content -->
-
-
-
-
-
-
-
-<%if(typeof reset !=='undefined' && reset === true ){%>
-<a id='newPassword' class="nav-link" data-toggle="modal" data-target="#newPass"></a>
-</li>
-<div class="container signuplogin modal fade" id='newPass' style="margin-top: 170px;">
-<div class="col-md-offset-3 col-md-5" id="">
-<form action="" id="newpassform" method="post">
-<div id="contact-form" class="form-container" data-form-container style="color: rgb(46, 125, 50); background: rgb(200, 230, 201);">
-<div class="row">
-<div class="form-title">
-<span>New Password </span>
-</div>
-</div>
-<div class="input-container">
-<div class="row">
-<span class="req-input message-box valid">
-<span class="input-status" data-toggle="tooltip" data-placement="top" title="New Password" > </span>
-<input type="text" name="inputPassword" data-min-length="8" placeholder="New Password">
-</div>
-<div class="row">
-<span class="req-input message-box valid">
-<span class="input-status" data-toggle="tooltip" data-placement="top" title="Confirm Password" > </span>
-<input type="text" name="inputConfirmPass" data-min-length="8" placeholder="Confirm Password">
-</div>
-<div class="row submit-row">
-<button type="button" id="submitbut" class="btn btn-block submit-form valid">Submit</button>
-</div>
-</div>
-</div>
-</form>
-</div>
-</div>
-<%}%>
-
-<div class="content container" style="padding:30px;">
-
-<%var many = 0;%>
-
-<%post.forEach((pos)=>{%>
-<%many++;%>
-
-
-<div class="panel panel-default">
-<div class="panel-body">
-<div class="pull-left">
-<a href="#">
-<img class="media-object img-circle" src="<%=pos.profilepic%>" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-</a>
-</div>
-
-<h4>
-<a href="/<%=pos.idofthePerson%>/profile" style="text-decoration:none;">
-<% if (typeof pos.nameofthePerson!== 'undefined' ){%>
-<strong><%=pos.nameofthePerson%></strong>
-<%}else {%>
-<strong><%=pos.usernameoftheperson%></strong>
-<%}%>
-
-</a> – <small><small>
-<a href="#" style="text-decoration:none; color:grey;">
-<i>
-<i class="fa fa-clock-o" aria-hidden="true">
-<%if (pos.createat < 1000) {%>
-</i> <%=pos.createat%> Miliseconds Ago</i>
-<%}else if (pos.createat > 1000 && pos.createat < 60000){%>
-<%const seconds =Math.floor( pos.createat *0.001);%>
-
-</i> <%=seconds%> Seconds Ago</i>
-<%}else if (pos.createat > 60000 && pos.createat < 3600000){%>
-<%const min =Math.floor( pos.createat *0.001*0.0166667);%>
-
-</i> <%=min%> Minutes Ago</i>
-<%}else if (pos.createat > 3600000 && pos.createat < 86400000){%>
-<%const hour =Math.floor( pos.createat *0.001*0.0166667*0.0166667);%>
-
-</i> <%=hour%> Hour Ago</i>
-<%}else if (pos.createat > 86400000 && pos.createat < 604800000){%>
-<%const day =Math.floor( pos.createat *0.001*0.0166667*0.0166667*0.0416667);%>
-
-</i> <%=day%> Day Ago</i>
-<%}else if (pos.createat > 604800000 && pos.createat < 2419200000){%>
-<%const week =Math.floor( pos.createat *0.001*0.0166667*0.0166667*0.0416667*0.142857);%>
-
-</i> <%=week%> Week Ago</i>
-<%}else if (pos.createat > 2419200000 ){%>
-<%const month =Math.floor( pos.createat *0.001*0.0166667*0.0166667*0.0416667*0.0328767*0.230137);%>
-</i> <%=month%> Month Ago</i>
-<%}%>
-
-
-</a>
-</small>
-</small>
-</h4>
-
-
-<%if (typeof user !== 'undefined' ) {%>
-
-
-
-
-
-
-<%if (user._id.equals(pos.idofthePerson)) {%>
-<span>
-<div class="navbar-right">
-<div class="dropdown">
-<button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-<i class="fa fa-cog" aria-hidden="true"></i>
-</button>
-<ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
-<li><a href="/<%=pos.idofpost%>/<%=pos.category%>/delete"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
-</ul>
-</div>
-</div>
-</span>
-
-<%}%>
-<%}%>
-<hr>
-<div class="post-content" style="margin-right:58px">
-
-<div id="" contenteditable="" style="font-size:30px;  max-height: 400px;  overflow: auto;">
-<label style="font-size:25px;"><%=pos.content%></label>
-
-</div>
-<%if (pos.photos.length > 0) {%>
-
-
-
-
-<%if (pos.photos.length === 1) {%>
-<img class="<%=many%> img-responsive" style="max-height:800px; width:auto; margin:auto " src="<%=pos.photos[0]%>">
-<script type="text/javascript">
-$(`.<%=many%>`).on('click', () => {
-$(`#a<%=many%>`).modal('show');
-});
-</script>
-
-<div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:120px !important; " data-ride="carousel">
-<div class="">
-<button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-</div>
-<ol class="carousel-indicators">
-<li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
-
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="carousel-item active">
-<img class=" d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
-</div>
-</div>
-</div>
-<%}%>
-<%if (pos.photos.length === 2) {%>
-<img class="<%=many%> img-responsive" style="max-height:400px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[0]%>">
-<img class="<%=many%> img-responsive" style="max-height:400px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[1]%>">
-<script type="text/javascript">
-$(`.<%=many%>`).on('click', () => {
-$(`#a<%=many%>`).modal('show');
-});
-</script>
-
-<div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:100px !important; " data-ride="carousel">
-<div class="">
-<button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-</div>
-<ol class="carousel-indicators">
-<li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
-<li data-target="#a<%=many%>" data-slide-to="1"></li>
-
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="carousel-item active">
-<img class=" d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
-</div>
-<div class="carousel-item">
-<img class="a d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[1]%>" alt="Second slide">
-</div>
-</div>
-<a class="carousel-control-prev" href="#a<%=many%>" role="button" data-slide="prev">
-<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="carousel-control-next" href="#a<%=many%>" role="button" data-slide="next">
-<span class="carousel-control-next-icon" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-<%}%>
-<%if (pos.photos.length === 3) {%>
-<img class="<%=many%> img-responsive" style="max-height:200px; display:inline; width:auto; margin:5px; " src="<%=pos.photos[0]%>">
-<img class="<%=many%> img-responsive" style="max-height:200px; display:inline; width:auto; margin:5px; " src="<%=pos.photos[1]%>">
-<img class="<%=many%> img-responsive" style="max-height:200px; display:inline; width:auto; margin:5px; " src="<%=pos.photos[2]%>">
-<script type="text/javascript">
-$(`.<%=many%>`).on('click', () => {
-$(`#a<%=many%>`).modal('show');
-});
-</script>
-
-<div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:100px !important; " data-ride="carousel">
-<div class="">
-<button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-</div>
-<ol class="carousel-indicators">
-<li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
-<li data-target="#a<%=many%>" data-slide-to="1"></li>
-<li data-target="#a<%=many%>" data-slide-to="2"></li>
-
-
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="carousel-item active">
-<img class=" d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
-</div>
-<div class="carousel-item">
-<img class="a d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[1]%>" alt="Second slide">
-</div>
-<div class="carousel-item">
-<img class="a d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[2]%>" alt="Third slide">
-</div>
-</div>
-<a class="carousel-control-prev" href="#a<%=many%>" role="button" data-slide="prev">
-<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="carousel-control-next" href="#a<%=many%>" role="button" data-slide="next">
-<span class="carousel-control-next-icon" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-<%}%>
-<%if (pos.photos.length === 4) {%>
-<img class=" <%=many%> img-responsive" style="max-height:200px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[0]%>">
-<img class=" <%=many%> img-responsive" style="max-height:200px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[1]%>">
-<img class=" <%=many%> img-responsive" style="max-height:200px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[2]%>">
-<img class=" <%=many%> img-responsive" style="max-height:200px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[3]%>">
-<script type="text/javascript">
-$(`.<%=many%>`).on('click', () => {
-$(`#a<%=many%>`).modal('show');
-});
-</script>
-
-<div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:100px !important; " data-ride="carousel">
-<div class="">
-<button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-</div>
-<ol class="carousel-indicators">
-<li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
-<li data-target="#a<%=many%>" data-slide-to="1"></li>
-<li data-target="#a<%=many%>" data-slide-to="2"></li>
-<li data-target="#a<%=many%>" data-slide-to="3"></li>
-
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="carousel-item active">
-<img class=" .5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
-</div>
-<div class="carousel-item">
-<img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[2]%>" alt="Second slide">
-</div>
-<div class="carousel-item">
-<img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[3]%>" alt="Third slide">
-</div>
-<div class="carousel-item">
-<img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[1]%>" alt="Fourth slide">
-</div>
-</div>
-<a class="carousel-control-prev" href="#a<%=many%>" role="button" data-slide="prev">
-<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="carousel-control-next" href="#a<%=many%>" role="button" data-slide="next">
-<span class="carousel-control-next-icon" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-<%}%>
-<%if (pos.photos.length === 5) {%>
-<img class="<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[0]%>">
-<img class="a<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[2]%>">
-<img class="<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[3]%>">
-<img class="<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[1]%>">
-<img class="<%=many%> img-responsive" style="max-height:150px; width:auto; display:inline; margin:5px; " src="<%=pos.photos[4]%>">
-
-<script type="text/javascript">
-$(`.<%=many%>`).on('click', () => {
-$(`#a<%=many%>`).modal('show');
-});
-</script>
-
-<div id="a<%=many%>" class="carousel slide modal fade" style="position:fixed !important; top:100px !important; " data-ride="carousel">
-<div class="">
-<button type="button" id="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-</div>
-<ol class="carousel-indicators">
-<li data-target="#a<%=many%>" data-slide-to="0" class="active"></li>
-<li data-target="#a<%=many%>" data-slide-to="1"></li>
-<li data-target="#a<%=many%>" data-slide-to="2"></li>
-<li data-target="#a<%=many%>" data-slide-to="3"></li>
-<li data-target="#a<%=many%>" data-slide-to="4"></li>
-
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="carousel-item active">
-<img class=" .5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[0]%>" alt="First slide">
-</div>
-<div class="carousel-item">
-<img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[2]%>" alt="Second slide">
-</div>
-<div class="carousel-item">
-<img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[3]%>" alt="Third slide">
-</div>
-<div class="carousel-item">
-<img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[1]%>" alt="Fourth slide">
-</div>
-<div class="carousel-item">
-<img class=".5 d-block img-fluid" style="max-height:550px !important; margin: auto" src="<%=pos.photos[4]%>" alt="Fifth slide">
-</div>
-</div>
-<a class="carousel-control-prev" href="#a<%=many%>" role="button" data-slide="prev">
-<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="carousel-control-next" href="#a<%=many%>" role="button" data-slide="next">
-<span class="carousel-control-next-icon" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-<%}%>
-
-<%}%>
-</div>
-<hr>
-<div>
-
-<%if (typeof user !== 'undefined') {%>
-<div class="pull-right btn-group-xs">
-<a class="btn btn-default btn-xs" href="/<%=pos.idofpost%>/<%=user._id%>/reshare"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
-</div>
-<%}%>
-<div class="pull-left">
-<%if (pos.category == 'Everyone') {%>
-<p class="text-muted" style="margin-left:5px; margin-bottom:5px !important;"><i class="fa fa-globe" aria-hidden="true"></i> <strong>Public </strong></p>
-<%}else if (pos.category== 'Work') {%>
-<p class="text-muted" style="margin-left:5px; margin-bottom:5px !important;"><i class="fa fa-briefcase" aria-hidden="true"></i> <strong>Work </strong></p>
-<%}else if (pos.category== 'Friends') {%>
-<p class="text-muted" style="margin-left:5px; margin-bottom:5px !important;"><i class="fa fa-users" aria-hidden="true"></i> <strong>Friends </strong></p>
-<%}%>
-</div>
-<br>
-</div>
-<hr>
-
 <%if (pos.comment.length > 0 ) {%>
-<div>
+  <div>
+  <%if (pos.comment.length > 2) {%>
+    <a class="btn btn-default btn-xs" href="/<%=pos.idofpost%>/show"><i class="fa fa-bars" aria-hidden="true"></i> Show
+
+    <%=pos.comment.length-2%>
+     more comments</a>
+   <%}%>
+    <hr>
+    <%var counter = 0;%>
+    <%pos.comment.forEach((commen)=>{%>
+      <%counter++;%>
+      <%if (counter > 0 && counter <3) {%>
+        <div class="post-content" style="border:1px black solid">
+          <div class="panel-default">
+            <div class="panel-body">
+              <div class="pull-left">
+                <a href="#">
+                  <img class="media-object img-circle" src="<%=commen.authorPhoto%>" width="35px" height="35px" style="margin-right:8px; margin-top:-5px; ">
+                </a>
+                </div>
+                <h4 style="display:inline;"><a href="#" style="text-decoration:none; display:inline;"><strong><%=commen.authorName%></strong></a></h4>
+                <label style="text-decoration:none; color:grey;">
+                  <i> --- <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    <%if (commen.timeCreated < 1000) {%>
+                      <%=commen.timeCreated%> Miliseconds Ago
+                    <%}else if (commen.timeCreated > 1000 && commen.timeCreated < 60000){%>
+                      <%const seconds =Math.floor( commen.timeCreated *0.001);%>
+                      <%=seconds%> Seconds Ago
+                    <%}else if (commen.timeCreated > 60000 && commen.timeCreated < 3600000){%>
+                      <%const min =Math.floor( commen.timeCreated *0.001*0.0166667);%>
+                      <%=min%> Minutes Ago
+                    <%}else if (commen.timeCreated > 3600000 && commen.timeCreated < 86400000){%>
+                      <%const hour =Math.floor( commen.timeCreated *0.001*0.0166667*0.0166667);%>
+                      <%=hour%> Hour Ago
+                    <%}else if (commen.timeCreated > 86400000 && commen.timeCreated < 604800000){%>
+                      <%const day =Math.floor( commen.timeCreated *0.001*0.0166667*0.0166667*0.0416667);%>
+                      <%=day%> Day Ago
+                    <%}else if (commen.timeCreated > 604800000 && commen.timeCreated < 2419200000){%>
+                      <%const week =Math.floor( commen.timeCreated *0.001*0.0166667*0.0166667*0.0416667*0.142857);%>
+                      <%=week%> Week Ago
+                    <%}else if (commen.timeCreated > 2419200000 ){%>
+                      <%const month =Math.floor( commen.timeCreated *0.001*0.0166667*0.0166667*0.0416667*0.0328767*0.230137);%>
+                      <%=month%> Month Ago
+                      <%}%>
+                    </i>
+                  </label>
+                  <hr>
+                  <div class="post-content">
+                    <%=commen.content%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+          <%}%>
+        <%});%>
+      </div>
+    <%}%>
+
+                                                                <div id="picGoesCom" style="margin:10px;">
+                                                                        </div>
+                                                                        <div class="media row">
+                                                                            <%if (typeof user !== 'undefined') {%>
 
 
+                                                                                <div class="pull-left" style="margin-left:15px !important;">
+                                                                                    <form class="" action="/<%=pos.idofpost%>/comment" method="post">
+                                                                                        <a href="/<%=user._id%>/profile">
+                                                                                        <img class="media-object img-circle" src="<%=user.profilepic%>" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                                                                        </a>
+                                                                                </div>
 
-<a class="btn btn-default btn-xs"><i class="fa fa-bars" aria-hidden="true"></i> Show <%=pos.comment.length-2%> more comments</a>
-<hr>
-<%var counter = 0;%>
-<%pos.comment.forEach((commen)=>{%>
-<%counter++;%>
-<%if (counter > 0 && counter <3) {%>
+                                                                                <div class="media-body col-xs-12">
 
+                                                                                    <div class=" col-xs-9 " style="display:inline;">
+                                                                                        <textarea class="form-control " rows="1" placeholder="Comment" name="content" style="display:inline;"></textarea>
 
-
-<div class="post-content" style="border:1px black solid">
-<div class="panel-default">
-<div class="panel-body">
-<div class="pull-left">
-<a href="#">
-<img class="media-object img-circle" src="<%=commen.authorPhoto%>" width="35px" height="35px" style="margin-right:8px; margin-top:-5px; ">
-
-</a>
-</div>
-<h4 style="display:inline;"><a href="#" style="text-decoration:none; display:inline;"><strong><%=commen.authorName%></strong></a></h4>
-
-<label  style="text-decoration:none; color:grey;"><i> --- <i class="fa fa-clock-o" aria-hidden="true"></i>
-<%if (commen.timeCreated < 1000) {%>
-<%=commen.timeCreated%> Miliseconds Ago
-<%}else if (commen.timeCreated > 1000 && commen.timeCreated < 60000){%>
-<%const seconds =Math.floor( commen.timeCreated *0.001);%>
-
-<%=seconds%> Seconds Ago
-<%}else if (commen.timeCreated > 60000 && commen.timeCreated < 3600000){%>
-<%const min =Math.floor( commen.timeCreated *0.001*0.0166667);%>
-
-<%=min%> Minutes Ago
-<%}else if (commen.timeCreated > 3600000 && commen.timeCreated < 86400000){%>
-<%const hour =Math.floor( commen.timeCreated *0.001*0.0166667*0.0166667);%>
-
-<%=hour%> Hour Ago
-<%}else if (commen.timeCreated > 86400000 && commen.timeCreated < 604800000){%>
-<%const day =Math.floor( commen.timeCreated *0.001*0.0166667*0.0166667*0.0416667);%>
-
-<%=day%> Day Ago
-<%}else if (commen.timeCreated > 604800000 && commen.timeCreated < 2419200000){%>
-<%const week =Math.floor( commen.timeCreated *0.001*0.0166667*0.0166667*0.0416667*0.142857);%>
-
-<%=week%> Week Ago
-<%}else if (commen.timeCreated > 2419200000 ){%>
-<%const month =Math.floor( commen.timeCreated *0.001*0.0166667*0.0166667*0.0416667*0.0328767*0.230137);%>
-<%=month%> Month Ago
-<%}%>
+                                                                                    </div>
+                                                                                    <label id="commentpiclabel" for="commentpic" class="  s3-btn2" style="padding:5px; margin-left:5px; color:black; display:inline; float:left;"><input type="file" name="imgcomment" id="commentpic" style="  display:none; width:auto; height:auto;" ><i class="fa fa-camera" aria-hidden="true"></i></label >
+                                                                                        <button class="s3-btn4" style="padding:5px; color:black; margin-left:5px; display:inline; float:left;" type='submit'>Post</button>
 
 
-
-</i></label>
-<hr>
-<div class="post-content">
-
-<%=commen.content%>
-</div>
-</div>
-</div>
-</div>
-<hr>
-<%}%>
-<%})%>
-</div>
-<%}%>
-<div id="picGoesCom" style="margin:10px;">
-</div>
-<div class="media row">
-<%if (typeof user !== 'undefined') {%>
-
-
-<div class="pull-left" style="margin-left:15px !important;">
-<form class="" action="/<%=pos.idofpost%>/comment" method="post">
-<a href="/<%=user._id%>/profile">
-<img class="media-object img-circle" src="<%=user.profilepic%>" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-</a>
-</div>
-
-<div class="media-body col-xs-12">
-
-<div class=" col-xs-9 " style="display:inline;">
-<textarea class="form-control " rows="1" placeholder="Comment" name="content" style="display:inline;"></textarea>
-
-</div>
-<label id="commentpiclabel" for="commentpic" class="  s3-btn2" style="padding:5px; margin-left:5px; color:black; display:inline; float:left;"><input type="file" name="imgcomment" id="commentpic" style="  display:none; width:auto; height:auto;" ><i class="fa fa-camera" aria-hidden="true"></i></label >
-<button class="s3-btn4" style="padding:5px; color:black; margin-left:5px; display:inline; float:left;" type='submit'>Post</button>
-
-
-</form>
-</div>
-<%}%>
-</div>
-</div>
-</div>
-<%});%>
-</div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                <%}%>
+                                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%});%>
+                                </div>
