@@ -329,6 +329,16 @@
               </label>
               <hr>
               <div class="post-content">
+
+              <%if (commen.comentPic.length > 1) {%>
+                <h1>asasas</h1>
+                <%commen.comentPic.forEarch((onephoto)=>{%>
+                  <img class="img-circle" src="<%=onephoto%>" width="35px" height="35px" >
+
+                  <%});%>
+              <%}%>
+              </div>
+              <div class="post-content">
                 <%=commen.content%>
               </div>
             </div>

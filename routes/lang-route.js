@@ -168,26 +168,16 @@ router.get('/language/:name/:id/main', (req, res, next) => {
 
 
 
-      setTimeout(function(d) {
-        function rend(d) {
+      setTimeout(function() {
+
           res.render('lang/createLan-view.ejs', {
             successMessage: req.flash('success'),
             failMessage: req.flash('error'),
             post: postForEveryone,
-            useronpage: d,
             lang: theLang
           });
-        }
-        if (req.user !== undefined) {
 
-          if (req.user._id.equals(theUser._id)) {
-            rend('same');
-          } else {
-            rend('different');
-          }
-        } else {
-          rend('anon');
-        }
+
 
         postForEveryone = [];
       }, 500);

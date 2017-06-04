@@ -47,14 +47,14 @@ router.get('/', (req, res, next) => {
                                   return;
                                 }
                                 if (userwhoComment) {
+                                  console.log(coment.photos,'3sssssssssssssdddddddddddddddddddd');
                                   var comments = {
                                     authorPhoto:userwhoComment.profilepic,
                                     content:coment.content,
                                     timeCreated:d.getTime() - coment.createdAt.getTime(),
                                     comentPic:coment.photos
-
-
                                   };
+                                  console.log(comments.comentPic);
                                   if (userwhoComment.name !== undefined) {
                                     comments.authorName = userwhoComment.name;
                                   }else {

@@ -452,6 +452,16 @@
                                   </label>
                                   <hr>
                                   <div class="post-content">
+
+                                  <%if (commen.comentPic.length > 1) {%>
+                                    <h1>asasas</h1>
+                                    <%commen.comentPic.forEarch((onephoto)=>{%>
+                                      <img class="img-circle" src="<%=onephoto%>" width="35px" height="35px" >
+
+                                      <%});%>
+                                  <%}%>
+                                  </div>
+                                  <div class="post-content">
                                     <%=commen.content%>
                                   </div>
                                 </div>
@@ -466,21 +476,28 @@
                     </div>
                     <div class="media row">
                     <%if (typeof user !== 'undefined') {%>
-                    <form class="" action="/<%=pos.idofpost%>/comment" method="post">
-                    <div class="pull-left" style="margin-left:15px !important;">
-                      <a href="/<%=user._id%>/profile">
-                        <img class="media-object img-circle" src="<%=user.profilepic%>" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                      </a>
-                    </div>
-                    <div class="media-body col-xs-12">
-                      <div class=" col-xs-9 " style="display:inline;">
-                        <textarea class="form-control " rows="1" placeholder="Comment" name="content" style="display:inline;"></textarea>
+
+
+                      <div class="pull-left" style="margin-left:15px !important;">
+                        <form class="" action="/<%=pos.idofpost%>/comment" method="post">
+                          <a href="/<%=user._id%>/profile">
+                                                                  <img class="media-object img-circle" src="<%=user.profilepic%>" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                                                                  </a>
                       </div>
-                      <label id="commentpiclabel" for="commentpic" class="  s3-btn2" style="padding:5px; margin-left:5px; color:black; display:inline; float:left;"><input type="file" name="imgcomment" id="commentpic" style="  display:none; width:auto; height:auto;" ><i class="fa fa-camera" aria-hidden="true"></i></label >
-                      <button class="s3-btn4" style="padding:5px; color:black; margin-left:5px; display:inline; float:left;" type='submit'>Post</button>
-                    </div>
-                    </form>
-                    <%}%>
+
+                      <div class="media-body col-xs-12">
+
+                        <div class=" col-xs-9 " style="display:inline;">
+                          <textarea class="form-control " rows="1" placeholder="Comment" name="content" style="display:inline;"></textarea>
+
+                        </div>
+                        <label id="commentpiclabel" for="commentpic" class="  s3-btn2" style="padding:5px; margin-left:5px; color:black; display:inline; float:left;"><input type="file" name="imgcomment" id="commentpic" style="  display:none; width:auto; height:auto;" ><i class="fa fa-camera" aria-hidden="true"></i></label >
+                        <button class="s3-btn4" style="padding:5px; color:black; margin-left:5px; display:inline; float:left;" type='submit'>Post</button>
+
+
+                                                                  </form>
+                                                              </div>
+                                                          <%}%>
                     </div>
                     </div>
                     </div>

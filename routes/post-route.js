@@ -203,7 +203,7 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
 });
 
 var uploadCom = multer({
-  dest: path.join(__dirname, '../public/postpic')
+  dest: path.join(__dirname, '../public/commentpic')
 });
 
 var cpUploadCom = upload.fields([{
@@ -219,9 +219,10 @@ router.post('/:idofpost/comment', ensure.ensureLoggedIn('/'), cpUploadCom, (req,
     author: req.user._id
   };
 
+  console.log(req.files,'sssssssssssssssssssssssssssssssssssdddddddddddddddd');
   if (req.files !== undefined) {
-    req.files.imgcomment.forEach((pic) => {
-      comment.photos.push(pic);
+    req.files.imgcomment.forEach((file) => {
+      comment.photos.push(`/commentpic/${file.filename}`);
     });
   }
   Post.findById(postId, (err, foundPost) => {
@@ -231,6 +232,7 @@ router.post('/:idofpost/comment', ensure.ensureLoggedIn('/'), cpUploadCom, (req,
     }
     if (foundPost) {
       const OneCom = new Com(comment);
+      console.log(OneCom);
       foundPost.comment.push(OneCom);
 
       foundPost.save((err) => {
