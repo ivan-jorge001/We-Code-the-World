@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const infoLang = require('./lang-info-model.js');
-const QuA = require('./QuA-model.js');
+const Post = require('./post-model.js');
 
 const langSchema = new Schema({
   name:{type:String},
@@ -10,8 +10,9 @@ tools:[infoLang.schema],
 framework:[infoLang.schema],
 libaries:[infoLang.schema],
 addedByWho:{type:String},
-question:[QuA.schema],
-colorRep:{type:String}
+question:[Post.schema],
+colorRep:{type:String},
+docum:{type:String}
 },{
   timestamps: true
 });

@@ -68,6 +68,7 @@ const userSchema = new Schema({
       postForFriend:[
            String
       ],
+      languageQua:[],
       postForWork:[
            String
       ],
