@@ -26,7 +26,7 @@ var cpUpload = upload.fields([{
 }]);
 
 
-router.post('/:kind/:TFLid/post', (req, res, next) => {
+router.post('/:kind/:TFLid/posts', ensure.ensureLoggedIn('/'), cpUpload, (req, res, next) => {
   const TFLid = req.params.TFLid;
   const kind = req.params.kind;
 
@@ -76,12 +76,6 @@ router.post('/:kind/:TFLid/post', (req, res, next) => {
                   return;
                 }
               });
-              newPost.save((err) => {
-                if (err) {
-                  next(err);
-                  return;
-                }
-              });
 
               req.flash('success', "Your question was successful");
               res.redirect(`/${kind}/${tool.name}/${tool._id}/main`);
@@ -105,12 +99,6 @@ router.post('/:kind/:TFLid/post', (req, res, next) => {
                 id: newPost._id
               });
               req.user.save((err) => {
-                if (err) {
-                  next(err);
-                  return;
-                }
-              });
-              newPost.save((err) => {
                 if (err) {
                   next(err);
                   return;
@@ -144,12 +132,7 @@ router.post('/:kind/:TFLid/post', (req, res, next) => {
                   return;
                 }
               });
-              newPost.save((err) => {
-                if (err) {
-                  next(err);
-                  return;
-                }
-              });
+
 
               req.flash('success', "Your question was successful");
               res.redirect(`/${kind}/${oneLib.name}/${oneLib._id}/main`);
@@ -189,27 +172,28 @@ router.post('/new/:lang/post', ensure.ensureLoggedIn('/'), cpUpload, (req, res, 
       return;
     }
     thelang.question.push(newPost);
+    console.log('pingaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+
     thelang.save((err) => {
       if (err) {
         next(err);
         return;
       }
-      req.user.post.languageQua.push({
-        name: thelang.name,
-        id: thelang._id
-      });
-      req.user.save((err) => {
-        if (err) {
-          next(err);
-          return;
-        }
-      });
-      newPost.save((err) => {
-        if (err) {
-          next(err);
-          return;
-        }
-      });
+      console.log('pingaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+
+      next();
+    });
+    req.user.post.languageQua.push({
+      name: thelang.name,
+      id: thelang._id
+    });
+    req.user.save((err) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      console.log('pingaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+
 
       req.flash('success', "Your question was successful");
       res.redirect(`/language/${thelang.name}/${thelang._id}/main`);
@@ -380,7 +364,7 @@ router.post('/create/lang', ensure.ensureLoggedIn('/'), (req, res, next) => {
   }
 });
 
-router.post('/:idlan/:whats/create', (req, res, next) => {
+router.post('/:idlan/:whats/create', ensure.ensureLoggedIn('/'), (req, res, next) => {
   const whatisit = req.params.whats;
   const langID = req.params.idlan;
 
@@ -579,7 +563,8 @@ router.get('/:kind/:name/:id/main', (req, res, next) => {
                   failMessage: req.flash('error'),
                   post: postForEveryone,
                   lang: frame,
-                  kind: kind
+                  kind: kind,
+                  langu: theLang
                 });
 
 
@@ -699,7 +684,8 @@ router.get('/:kind/:name/:id/main', (req, res, next) => {
                   failMessage: req.flash('error'),
                   post: postForEveryone,
                   lang: frame,
-                  kind: kind
+                  kind: kind,
+                  langu: theLang
                 });
 
 
@@ -819,7 +805,8 @@ router.get('/:kind/:name/:id/main', (req, res, next) => {
                   failMessage: req.flash('error'),
                   post: postForEveryone,
                   lang: frame,
-                  kind: kind
+                  kind: kind,
+                  langu: theLang
                 });
 
 
@@ -839,70 +826,107 @@ router.get('/:kind/:name/:id/main', (req, res, next) => {
 });
 
 router.get('/:whatisit/:langid/:TFLid/delete', (req, res, next) => {
+  console.log('get in hehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+
   lang.findById(req.params.langid, (err, theLang) => {
+    if (err) {
+      next(err);
+      return;
+    }
     const TFLid = req.params.TFLid;
     const whatisit = req.params.whatisit;
-    if (whatisit === 'Tool') {
-      theLang.tools.forEach((frame) => {
-        console.log(frame._id, '===========', TFLid);
-        if (frame._id.equals(TFLid)) {
 
 
-          var index = theLang.tools.indexOf(frame);
+
+    if (whatisit === 'language') {
+      theLang.question.forEach((onePost) => {
+        if (onePost._id.equals(TFLid)) {
+          var index = theLang.question.indexOf(onePost);
           if (index > -1) {
-            theLang.tools.splice(index, 1);
+            theLang.question.splice(index, 1);
           }
           theLang.save((err) => {
             if (err) {
               next(err);
               return;
             }
-            req.flash('success', 'Language was deleted');
-            res.redirect('/');
+            req.flash('success', 'Post was deleted');
+            res.redirect(`/language/${theLang.name}/${theLang._id}/main`);
 
           });
         }
+      });
+    }
+    if (whatisit === 'Tool') {
+      theLang.tools.forEach((frame) => {
+
+        frame.question.forEach((onepost) => {
+          if (onepost._id.equals(TFLid)) {
+            var index = frame.question.indexOf(onepost);
+            if (index > -1) {
+              frame.question.splice(index, 1);
+            }
+            theLang.save((err) => {
+              if (err) {
+                next(err);
+                return;
+              }
+              req.flash('success', 'Post was deleted');
+
+              res.redirect(`/Tool/${frame.name}/${frame._id}/main`);
+
+            });
+          }
+        });
+
       });
     }
     if (whatisit === 'Library') {
       theLang.libaries.forEach((frame) => {
-        if (frame._id.equals(TFLid)) {
-          var index = theLang.libaries.indexOf(frame);
-          if (index > -1) {
-            theLang.libaries.splice(index, 1);
-          }
-          theLang.save((err) => {
-            if (err) {
-              next(err);
-              return;
+
+        frame.question.forEach((onepost) => {
+          if (onepost._id.equals(TFLid)) {
+            var index = frame.question.indexOf(onepost);
+            if (index > -1) {
+              frame.question.splice(index, 1);
             }
-            req.flash('success', 'Language was deleted');
+            theLang.save((err) => {
+              if (err) {
+                next(err);
+                return;
+              }
+              req.flash('success', 'Post was deleted');
 
-            res.redirect('/');
+              res.redirect(`/Library/${frame.name}/${frame._id}/main`);
 
-          });
-        }
+            });
+          }
+        });
+
       });
-
     }
     if (whatisit === 'Framework') {
       theLang.framework.forEach((frame) => {
-        if (frame._id.equals(TFLid)) {
-          var index = theLang.framework.indexOf(frame);
-          if (index > -1) {
-            theLang.framework.splice(index, 1);
-          }
-          theLang.save((err) => {
-            if (err) {
-              next(err);
-              return;
+
+        frame.question.forEach((onepost) => {
+          if (onepost._id.equals(TFLid)) {
+            var index = frame.question.indexOf(onepost);
+            if (index > -1) {
+              frame.question.splice(index, 1);
             }
-            req.flash('success', 'Language was deleted');
+            theLang.save((err) => {
+              if (err) {
+                next(err);
+                return;
+              }
+              req.flash('success', 'Post was deleted');
 
-            res.redirect('/');
+              res.redirect(`/Framework/${frame.name}/${frame._id}/main`);
 
-          });
-        }
+            });
+          }
+        });
+
       });
 
     }

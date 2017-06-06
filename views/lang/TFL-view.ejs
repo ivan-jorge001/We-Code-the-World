@@ -49,7 +49,7 @@
                   <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <%if(typeof user !=='undefined' ){%>
 
-                        <form id="formpost" class="" action="/<%=kind%>/<%=lang._id%>/post" method="post" enctype="multipart/form-data">
+                        <form id="formpost" class="" action="/<%=kind%>/<%=lang._id%>/posts" method="post" enctype="multipart/form-data">
                           <input name="numberofpic" id="numberofpic" value="" style="display:none">
                           <div class=" items-push">
                             <div class="panel panel-default">
@@ -157,7 +157,7 @@
                                       <i class="fa fa-cog" aria-hidden="true"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
-                                      <li><a href="/<%=pos.idofpost%>/<%=pos.category%>/delete"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
+                                      <li><a href="/<%=kind%>/<%=langu._id%>/<%=pos.idofpost%>/delete"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
                                     </ul>
                                   </div>
                                 </div>

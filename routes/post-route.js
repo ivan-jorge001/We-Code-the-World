@@ -254,9 +254,9 @@ router.post('/:idofpost/comment', ensure.ensureLoggedIn('/'), cpUploadCom, (req,
         }
         // if (theLang.question.length > 0) {
 
-console.log(theLang,'thisssssssssssss is first layer Lang>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+        console.log(theLang, 'thisssssssssssss is first layer Lang>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
         theLang.forEach((oneLang) => {
-          console.log(oneLang,'secoond layer oneLangsssssssssssssssssssssssssssssssssssssssssssssssssssssssss');
+          console.log(oneLang, 'secoond layer oneLangsssssssssssssssssssssssssssssssssssssssssssssssssssssssss');
 
           if (err) {
             next(err);
@@ -265,15 +265,15 @@ console.log(theLang,'thisssssssssssss is first layer Lang>>>>>>>>>>>>>>>>>>>>>>>
           if (oneLang) {
             oneLang.question.forEach((oneQuest) => {
 
-              console.log(oneQuest,'thirs pone question sssssssssssssssssssssssssssssssssssssssssssss');
+              console.log(oneQuest, 'thirs pone question sssssssssssssssssssssssssssssssssssssssssssss');
 
               if (oneQuest._id.equals(postId)) {
                 console.log('it got i here id are ');
 
                 const OneCom = new Com(comment);
-                console.log(OneCom,'++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+                console.log(OneCom, '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
                 oneQuest.comment.push(OneCom);
-                console.log(oneQuest,';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;');
+                console.log(oneQuest, ';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;');
                 oneLang.save((err) => {
                   if (err) {
                     next(err);
@@ -284,13 +284,48 @@ console.log(theLang,'thisssssssssssss is first layer Lang>>>>>>>>>>>>>>>>>>>>>>>
                 });
 
               }
+
+            });
+
+          }
+
+          ForTFL(oneLang.framework,'Framework');
+          ForTFL(oneLang.tools,'Tool');
+          ForTFL(oneLang.libaries,'Library');
+
+          function ForTFL(loopF,kind) {
+//
+            loopF.forEach((oneFram) => {
+              oneFram.question.forEach((onepost) => {
+
+
+                if (onepost._id.equals(postId)) {
+
+
+                  const OneCom = new Com(comment);
+                  onepost.comment.push(OneCom);
+
+                  oneLang.save((err) => {
+                    if (err) {
+                      next(err);
+                      return;
+                    }
+                    req.flash('success', 'Comment was Posted');
+                    res.redirect(`/${kind}/${oneFram.name}/${oneFram._id}/main`);
+                  });
+
+
+                }
+              });
             });
           }
+
+          // //////////if
         });
         // }
       });
 
-    }else {
+    } else {
       req.flash('error', 'Ohh something happen');
       res.redirect(`/error`);
     }
