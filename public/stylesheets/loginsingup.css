@@ -629,3 +629,12 @@ height: 60px !important;
 width:60px !important;
     }
   }
+
+  #page-container {background-color: transparent !important;}
+  #main-container {
+      background-color: transparent !important;
+
+  }
+  body{
+    background-color: :transparent !important;
+  }
