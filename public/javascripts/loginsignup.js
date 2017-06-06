@@ -141,8 +141,10 @@ langCancel = $('#lang-Cancel');
 
 basicCancel.on('click',()=>{
   console.log('i get in here');
-$('.show-basic').fadeIn(1000);
-$('.form-basic').fadeOut();
+$('.form-basic').fadeOut(1000,()=>{
+  $('.show-basic').fadeIn(1000);
+
+});
 });
 langCancel.on('click',()=>{
   console.log('i get in here');
@@ -155,8 +157,10 @@ $('.form-password').fadeOut(1000);
 
 basic.on('click',()=>{
   console.log('i get in here');
-$('.show-basic').fadeOut();
-$('.form-basic').fadeIn(1000);
+$('.show-basic').fadeOut(1000,()=>{
+
+  $('.form-basic').fadeIn(1000);
+});
 });
 lang.on('click',()=>{
   console.log('i get in here');
