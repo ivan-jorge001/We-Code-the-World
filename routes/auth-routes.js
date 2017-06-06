@@ -47,9 +47,9 @@ router.post('/user/signup', ensure.ensureNotLoggedIn('/home'), (req, res, next) 
 });
 
 router.post('/user/login', ensure.ensureNotLoggedIn('/home'), passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/home',
     successFlash: true, // req.flash('success')
-    failureRedirect: '/',
+    failureRedirect: '/home',
     failureFlash: true // req.flash('error')
 }));
 
@@ -65,8 +65,8 @@ router.get('/user/logout',ensure.ensureLoggedIn('/home'), (req, res, next) => {
 router.get('/auth/facebook/',ensure.ensureNotLoggedIn('/home'), passport.authenticate('facebook'));
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successFlash: 'Your login was successful with your Facebook',
-    successRedirect: '/',
-    failureRedirect: '/',
+    successRedirect: '/home',
+    failureRedirect: '/home',
     failureFlash: 'You Facebook login was unsuccesful'
 }));
 router.get('/auth/google/',ensure.ensureNotLoggedIn('/home'), passport.authenticate('google', {
@@ -76,8 +76,8 @@ router.get('/auth/google/',ensure.ensureNotLoggedIn('/home'), passport.authentic
 }));
 
 router.get('/auth/google/callback',ensure.ensureNotLoggedIn('/home'), passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/',
+    successRedirect: '/home',
+    failureRedirect: '/home',
     successFlash: 'Your Google account was verified',
     failMessage: 'Your Google account cant be verified'
 
@@ -86,8 +86,8 @@ router.get('/auth/linkedin', ensure.ensureNotLoggedIn('/home'),passport.authenti
     state: 'SOME STATE'
 }));
 router.get('/auth/link/callback',ensure.ensureNotLoggedIn('/home'), passport.authenticate('linkedin', {
-    successRedirect: '/',
-    failureRedirect: '/',
+    successRedirect: '/home',
+    failureRedirect: '/home',
     successFlash: 'Your Linkedin account has been verified',
     failureFlash: "Your Linkedin account couldn't be verified"
 }));
