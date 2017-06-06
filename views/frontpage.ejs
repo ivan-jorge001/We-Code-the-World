@@ -1,8 +1,48 @@
-<%# =========================================================================================================%>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				color: #808080;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+
+				background-color: #ffffff;
+				margin: 0px;
+				overflow: hidden;
+			}
+
+			#info {
+				position: absolute;
+				top: 0px; width: 100%;
+				padding: 5px;
+			}
+
+			a {
+
+				color: #0080ff;
+			}
+
+		</style>
+	</head>
+	<!-- Latest compiled and minified CSS -->
 
 
-	<body>
+	<body style="padding-top:0px !important;">
+    <link rel="stylesheet" id="css-main" href="/assets/css/oneui.min.css">
+    <link rel="stylesheet" href="/stylesheets/loginsingup.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
 
@@ -11,7 +51,7 @@
 
 		<script src="scripts/Projector.js"></script>
 		<script src="scripts/CanvasRenderer.js"></script>
-		<script src="scripts/app.js"></script>
+		<script src="scripts/a.js"></script>
 <div class="row1" style="">
 
 		<span class ="col-xs-9"  id="openfirspage" style="position:absolute;  border:none; background-color:rgba(0,0,0,0);"><i class="fa fa-bars openfirspage"  aria-hidden="true" style="font-size:50px; color:white; margin:60px;"></i></span>
@@ -22,7 +62,7 @@
 </div>
 <div class="row2" style="display:none">
 
-		<span class ="col-xs-9"  id="close" style="dsplay:none; position:absolute;  border:none; background-color:rgba(0,0,0,0);"><i class="fa fa-times "  aria-hidden="true" style="font-size:50px; color:white; margin:60px;"></i></span>
+		<span class ="col-xs-2"  id="close"  style="dsplay:none; position:absolute;  border:none; background-color:rgba(0,0,0,0); right:0px;"><i class="fa fa-times "  aria-hidden="true" style="font-size:50px; color:white; margin:60px;"></i></span>
 
 
 
@@ -33,19 +73,18 @@
 
 	var close = document.getElementById( 'close' );
 				 close.addEventListener( 'click', ()=>{
-console.log('pingaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+
 				 	$('#container1').fadeOut(1500,()=>{
 					$('#world').fadeIn(1900);
 					$('.row1').fadeIn();
 					$('.row2').fadeOut();
 
-
 });
 				 }, false );
 
 				 </script>
-<div class="row" style="">
-<h2 class="col-xs-offset-3 col-xs-7" id="quote" style="position:absolute; color:#f8f8f8; margin-top:470px;"></h2>
+<div class="row" id = 'skyview' style="">
+<%-body-%>
 
 </div>
 
@@ -378,7 +417,10 @@ $('#world').fadeOut(1200,()=>{
 $('#container1').fadeIn(1300);
 $('.row2').fadeIn();
 
+$('#skyview h1').remove();
+$('#skyview').append('<nav class="col-xs-offset-3 col-xs-6" style="position:absolute; margin-top:300px;"><ul><li class="btn btn-primary btn-lg btn-block btn-huge"style="margin:60px; font-size:30px; background-color:rgba(46,109,104,0.5);" id="create" data-toggle="modal" data-target="#signuplogin">Create an Account</li><li style="margin:60px; font-size:30px; background-color:rgba(46,109,104,0.5);" class="btn btn-primary btn-lg btn-block btn-huge" id="login"  data-toggle="modal" data-target="#signuplogin">Login </li><li style="margin:60px; font-size:30px; background-color:rgba(46,109,104,0.5);" class="btn btn-primary btn-lg btn-block btn-huge" ><a href="/home" style="text-decoration:none; color:black;">Login As Anonymous</a></li></ul></nav>');
 });
+
 
 
 // $('#world').fadeOut(1000,()=>{
@@ -392,11 +434,99 @@ $('.row2').fadeIn();
 
 </script>
 
+<div class="container signuplogin modal fade" id='signuplogin' style="margin-top: 170px;">
+  <div class="row">
+    <div class="col-md-offset-3 col-md-5" id="signuplogin1">
+      <form id="formLogin" action="/user/login" method="post">
+        <div id="login-form" class="form-container" data-form-container style="color: rgb(198, 40, 40); background: rgb(255, 205, 210);">
+          <div class="row">
+            <div class="form-title col-xs-12">
+              <span>Login</span>
+            </div>
+          </div>
+          <div class="input-container">
+            <div class="row" style="display:none">
+              <span class="req-input valid confirm-password">
+                                                                          <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your email."> </span>
+              <input type="email" data-min-length="8" placeholder="Email" name="email">
+              </span>
+            </div>
+
+            <div class="row">
+              <span class="req-input valid">
+                                                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Input your Username."> </span>
+              <input type="text" data-min-length="8" placeholder="Username" name="username">
+              </span>
+            </div>
+
+            <div class="row">
+              <span class="req-input input-password invalid">
+                                                                          <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password must be at least 8 characters long."> </span>
+              <input type="password" data-min-length="8" placeholder="Password" name="password">
+              </span>
+            </div>
+
+            <div class="row" style="display:none">
+              <span class="req-input confirm-password">
+                                          <span class="input-status" data-toggle="tooltip" data-placement="top" title="Password Must Match Initial Password Field."> </span>
+              <input type="password" data-min-length="8" placeholder="Confirm Password" name="confirmPassword">
+              </span>
+            </div>
+
+            <div class="row">
+              <a class="create-account col-xs-12"> Create an Account </a>
+              <br>
+
+              <a id="forgotPass" class="col-xs-12"> Forgot Password? </a>
+
+            </div>
+
+            <div class="row submit-row">
+              <button class="btn btn-block submit-form invalid">Login</button>
+            </div>
+            <div class="oauth-buttons">
+              <a href="/auth/facebook"><i class="fa fa-facebook"></i> </a>
+              <a href="/auth/google"><i class="fa fa-google-plus"></i> </a>
+              <a href="/auth/linkedin"><i class="fa fa-linkedin"></i> </a>
+            </div>
+
+
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-md-offset-3 col-md-5" id="forgotPassDIV" style="display:none;">
+      <form action="/forgot/password" method="post">
+        <div id="contact-form" class="form-container" data-form-container style="color: rgb(46, 125, 50); background: rgb(200, 230, 201);">
+          <div class="row">
+            <div class="form-title col-xs-12">
+              <span> Reset Your Password </span>
+            </div>
+          </div>
+          <div class="input-container">
+            <div class="row">
+              <div class="form-title col-xs-12">
+                <span style="font-size:20px;"> Please Insert Your <br>Username or Password </span>
+              </div>
+            </div>
+
+            <div class="row">
+              <span class="req-input message-box valid">
+                                            <span class="input-status" data-toggle="tooltip" data-placement="top" title="Email or Username"> </span>
+              <input type="text" name="inputForgotpass" data-min-length="8">
+            </div>
+            <div class="row submit-row">
+              <button type="submit" class="btn btn-block submit-form valid">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/sb-admin.min.js"></script>
+<script src="/assets/js/oneui.min.js"></script>
+
 	</body>
-
-
-
-
-
-
-<%# ============================================================================================%>
+</html>

@@ -19,7 +19,7 @@ var cpUpload = upload.fields([{
 }]);
 
 
-router.post('/new/post', ensure.ensureLoggedIn('/'), cpUpload, (req, res, next) => {
+router.post('/new/post', ensure.ensureLoggedIn('/home'), cpUpload, (req, res, next) => {
 
 
   const share = req.body.sharewith;
@@ -61,11 +61,11 @@ router.post('/new/post', ensure.ensureLoggedIn('/'), cpUpload, (req, res, next) 
     });
 
     req.flash('success', "Your Post was successful");
-    res.redirect('/');
+    res.redirect('/home');
   });
   // res.send(req.files);
 });
-router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next) => {
+router.get('/:id/:category/delete', ensure.ensureLoggedIn('/home'), (req, res, next) => {
   const postId = req.params.id;
   const postCa = req.params.category;
 
@@ -104,13 +104,13 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
 
               req.user.post.postForFriend.remove(postId);
 
-              res.redirect('/');
+              res.redirect('/home');
             }
           });
 
         } else {
           req.flash('error', 'You Don`t Have Permission');
-          res.redirect('/');
+          res.redirect('/home');
         }
       }
     });
@@ -147,13 +147,13 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
 
               req.user.post.postForWork.remove(postId);
 
-              res.redirect('/');
+              res.redirect('/home');
             }
           });
 
         } else {
           req.flash('error', 'You Don`t Have Permission');
-          res.redirect('/');
+          res.redirect('/home');
         }
       }
     });
@@ -189,13 +189,13 @@ router.get('/:id/:category/delete', ensure.ensureLoggedIn('/'), (req, res, next)
 
               req.user.post.postForEveryone.remove(postId);
 
-              res.redirect('/');
+              res.redirect('/home');
             }
           });
 
         } else {
           req.flash('error', 'You Don`t Have Permission');
-          res.redirect('/');
+          res.redirect('/home');
         }
       }
     });
@@ -212,7 +212,7 @@ var cpUploadCom = uploadCom.fields([{
   maxCount: 6
 }]);
 
-router.post('/:idofpost/comment', ensure.ensureLoggedIn('/'), cpUploadCom, (req, res, next) => {
+router.post('/:idofpost/comment', ensure.ensureLoggedIn('/home'), cpUploadCom, (req, res, next) => {
   const postId = req.params.idofpost;
 
   var comment = {
@@ -242,7 +242,7 @@ router.post('/:idofpost/comment', ensure.ensureLoggedIn('/'), cpUploadCom, (req,
           return;
         }
         req.flash('success', 'Comment was Posted');
-        res.redirect('/');
+        res.redirect('/home');
       });
 
     } else if (!foundPost) {

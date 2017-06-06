@@ -71,7 +71,11 @@ app.use((req, res, next) => {
 });
 
 
-
+app.get('/', function(req, res) {
+      res.render('quickview', {
+        layout: 'frontpage.ejs'
+      });
+});
 // ===========================================ROUTES=====================================
 const index = require('./routes/index');
 app.use('/', index);

@@ -26,7 +26,7 @@ var cpUpload = upload.fields([{
 }]);
 
 
-router.post('/:kind/:TFLid/posts', ensure.ensureLoggedIn('/'), cpUpload, (req, res, next) => {
+router.post('/:kind/:TFLid/posts', ensure.ensureLoggedIn('/home'), cpUpload, (req, res, next) => {
   const TFLid = req.params.TFLid;
   const kind = req.params.kind;
 
@@ -145,7 +145,7 @@ router.post('/:kind/:TFLid/posts', ensure.ensureLoggedIn('/'), cpUpload, (req, r
   });
 });
 
-router.post('/new/:lang/post', ensure.ensureLoggedIn('/'), cpUpload, (req, res, next) => {
+router.post('/new/:lang/post', ensure.ensureLoggedIn('/home'), cpUpload, (req, res, next) => {
 
 
   const langId = req.params.lang;
@@ -318,7 +318,7 @@ router.get('/language/:name/:id/main', (req, res, next) => {
 
 
 
-router.post('/create/lang', ensure.ensureLoggedIn('/'), (req, res, next) => {
+router.post('/create/lang', ensure.ensureLoggedIn('/home'), (req, res, next) => {
 
 
   var arrayOf = ['Java', 'C', 'C++', 'C#', 'Python', 'Visual Basic .NET', 'PHP', 'JavaScript', 'Swift', 'Perl', 'Ruby', 'Delphi/Object Pascal', 'Assembly language', 'R', 'Visual Basic', 'Objective-C', 'Go', 'MATLAB', 'PL', 'Scratch', 'SAS', 'D', 'Dart', 'ABAP', 'COBOL', 'Ada', 'Fortran', 'Transact-SQL', 'Lua', 'Scala', 'Logo', 'F#', 'Lisp', 'LabVIEW', 'Prolog', 'Haskell', 'Scheme', 'Groovy', 'RPG (OS/400)', 'Apex', 'Erlang', 'MQL4', 'Rust', 'Bash', 'Ladder Logic', 'Q', 'Julia', 'Alice', 'VHDL', 'Awk'];
@@ -364,7 +364,7 @@ router.post('/create/lang', ensure.ensureLoggedIn('/'), (req, res, next) => {
   }
 });
 
-router.post('/:idlan/:whats/create', ensure.ensureLoggedIn('/'), (req, res, next) => {
+router.post('/:idlan/:whats/create', ensure.ensureLoggedIn('/home'), (req, res, next) => {
   const whatisit = req.params.whats;
   const langID = req.params.idlan;
 

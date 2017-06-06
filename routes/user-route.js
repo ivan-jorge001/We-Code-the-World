@@ -14,7 +14,7 @@ var postForEveryone = [];
 var postForFriend = [];
 var postForWork = [];
 
-router.post('/forgot/password', ensure.ensureNotLoggedIn('/'), (req, res, next) => {
+router.post('/forgot/password', ensure.ensureNotLoggedIn('/home'), (req, res, next) => {
     async.waterfall([
         function(done) {
             crypto.randomBytes(20, function(err, buf) {
@@ -32,7 +32,7 @@ router.post('/forgot/password', ensure.ensureNotLoggedIn('/'), (req, res, next) 
                 }
                 if (!user) {
                     req.flash('error', 'No account with that email address exists.');
-                    return res.redirect('/');
+                    return res.redirect('/home');
                 }
                 user.resetPasswordToken = token;
                 user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
@@ -70,7 +70,7 @@ router.post('/forgot/password', ensure.ensureNotLoggedIn('/'), (req, res, next) 
         }
     ], function(err) {
         if (err) return next(err);
-        res.redirect('/');
+        res.redirect('/home');
     });
 });
 
@@ -82,7 +82,7 @@ router.post('/forgot/password', ensure.ensureNotLoggedIn('/'), (req, res, next) 
 
 
 
-router.get("/profile", ensure.ensureLoggedIn('/'), (req, res, next) => {
+router.get("/profile", ensure.ensureLoggedIn('/home'), (req, res, next) => {
     res.render('user/profile-view.ejs', {
         successMessage: req.flash('success'),
         failMessage: req.flash('error')
@@ -91,7 +91,7 @@ router.get("/profile", ensure.ensureLoggedIn('/'), (req, res, next) => {
 const profileUpload = multer({
     dest: path.join(__dirname, '../public/profilepic')
 });
-router.post('/profile/profilepic', ensure.ensureLoggedIn('/'), profileUpload.single('inputUpload'), (req, res, next) => {
+router.post('/profile/profilepic', ensure.ensureLoggedIn('/home'), profileUpload.single('inputUpload'), (req, res, next) => {
     console.log('gets in the post');
     User.findByIdAndUpdate(req.user._id, {
         profilepic: `/profilepic/${req.file.filename}`
@@ -105,7 +105,7 @@ router.post('/profile/profilepic', ensure.ensureLoggedIn('/'), profileUpload.sin
         res.redirect('/profile');
     });
 });
-router.post('/profile/basic', ensure.ensureLoggedIn('/'), (req, res, next) => {
+router.post('/profile/basic', ensure.ensureLoggedIn('/home'), (req, res, next) => {
     User.findOne({
         username: req.body.inputUsername
     }, (err, found) => {
@@ -133,7 +133,7 @@ router.post('/profile/basic', ensure.ensureLoggedIn('/'), (req, res, next) => {
         res.redirect('/profile');
     });
 });
-router.post('/profile/password', ensure.ensureLoggedIn('/'), (req, res, next) => {
+router.post('/profile/password', ensure.ensureLoggedIn('/home'), (req, res, next) => {
     const current = req.body.inputCurrentPassword,
         confirmPassword = req.body.inputConfirmPass,
         actualPassword = req.body.inputPassword;
@@ -176,7 +176,7 @@ router.post('/profile/password', ensure.ensureLoggedIn('/'), (req, res, next) =>
     });
 
 });
-router.post('/profile/new', ensure.ensureLoggedIn('/'), (req, res, next) => {
+router.post('/profile/new', ensure.ensureLoggedIn('/home'), (req, res, next) => {
     const
         confirmPassword = req.body.inputConfirmPass,
         actualPassword = req.body.inputPassword;
@@ -222,7 +222,7 @@ router.get('/reset/:token', function(req, res) {
     }, function(err, user) {
         if (!user) {
             req.flash('error', 'Password reset token is invalid or has expired.');
-            return res.redirect('/');
+            return res.redirect('/home');
         }
         res.render('index', {
             reset: true
@@ -244,7 +244,7 @@ router.post('/reset/:token', (req, res, next) => {
         }
         if (!user) {
             req.flash('error', 'Password reset token is invalid or has expired.');
-            return res.redirect('/');
+            return res.redirect('/home');
         }
 
         const
@@ -311,7 +311,7 @@ router.post('/reset/:token', (req, res, next) => {
             done(err);
         });
         req.flash('success', 'Success! Your password has been changed.');
-        res.redirect('/');
+        res.redirect('/home');
 
     });
 });
