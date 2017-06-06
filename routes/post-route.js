@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/post-model.js');
 const User = require('../models/user-model.js');
+const Lang = require('../models/lang-model.js');
 
 const Com = require('../models/comment-model.js');
 const multer = require('multer');
 const path = require('path');
 const ensure = require('connect-ensure-login');
-var array=[];
+var array = [];
 var upload = multer({
   dest: path.join(__dirname, '../public/postpic')
 });
@@ -206,7 +207,7 @@ var uploadCom = multer({
   dest: path.join(__dirname, '../public/commentpic')
 });
 
-var cpUploadCom = upload.fields([{
+var cpUploadCom = uploadCom.fields([{
   name: 'imgcomment',
   maxCount: 6
 }]);
@@ -216,11 +217,11 @@ router.post('/:idofpost/comment', ensure.ensureLoggedIn('/'), cpUploadCom, (req,
 
   var comment = {
     content: req.body.content,
-    author: req.user._id
+    author: req.user._id,
+    photos: [],
   };
 
-  console.log(req.files,'sssssssssssssssssssssssssssssssssssdddddddddddddddd');
-  if (req.files !== undefined) {
+  if (req.files.imgcomment !== undefined) {
     req.files.imgcomment.forEach((file) => {
       comment.photos.push(`/commentpic/${file.filename}`);
     });
@@ -243,21 +244,68 @@ router.post('/:idofpost/comment', ensure.ensureLoggedIn('/'), cpUploadCom, (req,
         req.flash('success', 'Comment was Posted');
         res.redirect('/');
       });
-    } else {
-      req.flash('error', 'Comment was NOT Posted');
-      res.redirect('/');
+
+    } else if (!foundPost) {
+
+      Lang.find({}, (err, theLang) => {
+        if (err) {
+          next(err);
+          return;
+        }
+        // if (theLang.question.length > 0) {
+
+console.log(theLang,'thisssssssssssss is first layer Lang>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+        theLang.forEach((oneLang) => {
+          console.log(oneLang,'secoond layer oneLangsssssssssssssssssssssssssssssssssssssssssssssssssssssssss');
+
+          if (err) {
+            next(err);
+            return;
+          }
+          if (oneLang) {
+            oneLang.question.forEach((oneQuest) => {
+
+              console.log(oneQuest,'thirs pone question sssssssssssssssssssssssssssssssssssssssssssss');
+
+              if (oneQuest._id.equals(postId)) {
+                console.log('it got i here id are ');
+
+                const OneCom = new Com(comment);
+                console.log(OneCom,'++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+                oneQuest.comment.push(OneCom);
+                console.log(oneQuest,';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;');
+                oneLang.save((err) => {
+                  if (err) {
+                    next(err);
+                    return;
+                  }
+                  req.flash('success', 'Comment was Posted');
+                  res.redirect(`/language/${oneLang.name}/${oneLang._id}/main`);
+                });
+
+              }
+            });
+          }
+        });
+        // }
+      });
+
+    }else {
+      req.flash('error', 'Ohh something happen');
+      res.redirect(`/error`);
     }
   });
+
 });
 
-router.get('/:id/show',(req,res,next)=>{
-  Post.findById(req.params.id,(err,foundpost)=>{
+router.get('/:id/show', (req, res, next) => {
+  Post.findById(req.params.id, (err, foundpost) => {
     if (err) {
       next(err);
       return;
     }
     if (foundpost) {
-      User.findById(foundpost.userwhocreateit,(err,theUser)=>{
+      User.findById(foundpost.userwhocreateit, (err, theUser) => {
         var d = new Date();
         if (err) {
           next(err);
@@ -265,47 +313,47 @@ router.get('/:id/show',(req,res,next)=>{
         }
         if (theUser) {
           var postContent = {
-            category:foundpost.whocanseeit,
-            comment:[],
-              nameofthePerson: theUser.name,
-              usernameoftheperson:theUser.username,
-              idofpost:foundpost._id,
-              idofthePerson: foundpost.userwhocreateit,
-              content: foundpost.content,
-              photos: foundpost.photos,
-              profilepic: theUser.profilepic,
-              createat: d.getTime() - foundpost.createdAt.getTime(),
+            category: foundpost.whocanseeit,
+            comment: [],
+            nameofthePerson: theUser.name,
+            usernameoftheperson: theUser.username,
+            idofpost: foundpost._id,
+            idofthePerson: foundpost.userwhocreateit,
+            content: foundpost.content,
+            photos: foundpost.photos,
+            profilepic: theUser.profilepic,
+            createat: d.getTime() - foundpost.createdAt.getTime(),
 
           };
-          foundpost.comment.forEach((coment)=>{
-            User.findById(coment.author,(err,userwhoComment)=>{
+          foundpost.comment.forEach((coment) => {
+            User.findById(coment.author, (err, userwhoComment) => {
               if (err) {
                 next(err);
                 return;
               }
               if (userwhoComment) {
                 var comments = {
-                  authorPhoto:userwhoComment.profilepic,
-                  content:coment.content,
-                  timeCreated:d.getTime() - coment.createdAt.getTime(),
-                  comentPic:coment.photos
+                  authorPhoto: userwhoComment.profilepic,
+                  content: coment.content,
+                  timeCreated: d.getTime() - coment.createdAt.getTime(),
+                  comentPic: coment.photos
 
 
                 };
                 if (userwhoComment.name !== undefined) {
                   comments.authorName = userwhoComment.name;
-                }else {
+                } else {
                   comments.authorName = userwhoComment.username;
                 }
 
 
-                 postContent.comment.push(comments);
-                 postContent.comment.sort(function(a, b) {
-                   a = a.timeCreated;
-                   b = b.timeCreated;
-                   return a > b ? 11 : a < b ? -1 : 0;
-                 });
-                 console.log(postContent.comment);
+                postContent.comment.push(comments);
+                postContent.comment.sort(function(a, b) {
+                  a = a.timeCreated;
+                  b = b.timeCreated;
+                  return a > b ? 11 : a < b ? -1 : 0;
+                });
+                console.log(postContent.comment);
               }
 
 
@@ -317,16 +365,16 @@ router.get('/:id/show',(req,res,next)=>{
         }
       });
       setTimeout(function() {
-console.log(array+'lllllllllllllllllllllllllllllllllllllll');
-              res.render('post/post-view.ejs', {
-                  successMessage: req.flash('success'),
-                  failMessage: req.flash('error'),
-                  post: array,
+        console.log(array + 'lllllllllllllllllllllllllllllllllllllll');
+        res.render('post/post-view.ejs', {
+          successMessage: req.flash('success'),
+          failMessage: req.flash('error'),
+          post: array,
 
-              });
+        });
 
 
-          array = [];
+        array = [];
       }, 900);
     }
 

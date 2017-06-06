@@ -12,7 +12,8 @@ libaries:[infoLang.schema],
 addedByWho:{type:String},
 question:[Post.schema],
 colorRep:{type:String},
-docum:{type:String}
+docum:{type:String},
+tutorials: [{target: {type: String},content: {type: String},whoPuttutorial: {type: String}}]
 },{
   timestamps: true
 });

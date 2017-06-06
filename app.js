@@ -1,14 +1,15 @@
-const express      = require('express');
-const path         = require('path');
-const favicon      = require('serve-favicon');
-const logger       = require('morgan');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
 const cookieParser = require('cookie-parser');
-const bodyParser   = require('body-parser');
-const layouts      = require('express-ejs-layouts');
-const mongoose     = require('mongoose');
-const session      = require('express-session');
-const passport     = require('passport');
-const flash        = require('connect-flash');
+const bodyParser = require('body-parser');
+const layouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
+const flash = require('connect-flash');
+const Lang = require('./models/lang-model.js');
 require('dotenv').config();
 require('./config/passport-config.js');
 
@@ -28,11 +29,13 @@ app.locals.title = 'Express - Generated with IronGenerator';
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
-app.use( session({
+app.use(session({
   secret: 'wecodetheworld',
   resave: true,
   saveUninitialized: true
@@ -45,14 +48,30 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
   if (req.user) {
     res.locals.user = req.user;
 
   }
   next();
 });
+app.use((req, res, next) => {
+  Lang.find({}, (err, Language) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    if (Language) {
+
+      res.locals.Language = Language;
+
+    }
+    next();
+  });
+});
+
+
+
 // ===========================================ROUTES=====================================
 const index = require('./routes/index');
 app.use('/', index);

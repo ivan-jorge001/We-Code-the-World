@@ -1,6 +1,7 @@
 
 
 
+
 $('.next').on('click',()=>{
   $('.carousel').carousel('next');
 });
@@ -20,6 +21,40 @@ $('#formpost').submit();
 
 
 $(document).ready(function(){
+
+  $('#buttonCreateT').on('click',()=>{
+    $('#addasome').text('Add a Tool');
+    $('.input-status').attr('title',`Name of the Tool`);
+    $('#selectLanguage').attr('placeholder',`   Tool Name`);
+     var id = $('.idofLang').val();
+     console.log(id);
+    $('#newthing').attr('action',`/${id}/Tool/create`);
+    $('#createLang').modal('show');
+
+  });
+  $('#buttonCreateF').on('click',()=>{
+    $('#addasome').text('Add a Framework');
+    $('.input-status').attr('title',`Name of the Framework`);
+    $('#selectLanguage').attr('placeholder',`   Framework Name`);
+     var id = $('.idofLang').val();
+     console.log(id);
+    $('#newthing').attr('action',`/${id}/Framework/create`);
+    $('#createLang').modal('show');
+  });
+  $('#buttonCreateL').on('click',()=>{
+    $('#addasome').text('Add a library');
+    $('.input-status').attr('title',`Name of the library`);
+    $('#selectLanguage').attr('placeholder',`   Library Name`);
+     var id = $('.idofLang').val();
+     console.log(id);
+    $('#newthing').attr('action',`/${id}/Library/create`);
+    $('#createLang').modal('show');
+
+  });
+$('#colorofLang').on('change',()=>{
+$('#selectedcolor').attr('style',`color:${$('#colorofLang').val()}`);
+});
+
 
   $('#buttonCreate').click(function(){
       $("#createLang").modal();

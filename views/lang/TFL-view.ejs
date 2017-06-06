@@ -7,7 +7,7 @@
         <div class="panel-body">
           <div class="media-body ">
             <div class="" align="center">
-              <img class=" img-responsive" src="<%=lang.profilepic%>" style=" width:300px !important; height:300px !important;">
+              <img class=" img-responsive" src="<%=lang.photo%>" style=" width:300px !important; height:300px !important;">
             </div>
             <div class="media-body">
 
@@ -16,74 +16,30 @@
                 <p style="font-size:17px;">
                   <%=lang.name%>
                 </p>
-                <%if(!lang.docum === ''){%>
+                <%if(typeof lang.Docs !== 'undefined'){%>
                   <hr>
                   <h3><strong>Documentation</strong></h3>
                   <p>
-                  <%=lang.docum%>
+                  <%=lang.Docs%>
                   </p>
                 <%}%>
                 <input class="idofLang" value="<%=lang._id%>" style="display:none;">
                 <hr>
-                <h3><strong>Framework</strong></h3>
-                <%if(lang.framework.length > 0){%>
-                  <%lang.framework.forEach((oneFram)=>{%>
-                    <label for="<%=oneFram%>" id="<%=oneFram%>" class=" deleteLanlabel s3-btn5 <%=oneFram%>" name="" onclick="window.location.href='/Framework/<%=oneFram.name%>/<%=oneFram._id%>/main'"  style="padding:7px; width:auto; margin:5px;"><%=oneFram.name%></label>
+                <h3><strong>Tutorials</strong></h3>
+                <%if(lang.tutorials.length > 0){%>
+                  <%lang.tutorials.forEach((oneLibra)=>{%>
+                    <label for="<%=oneLibra%>" id="<%=oneLibra%>" class="deleteLanlabel s3-btn5 <%=oneLibra%>" name="" onclick="window.location.href='/Tool/<%=oneLibra.name%>/<%=oneLibra._id%>/main'" style="padding:7px; width:auto; margin:5px;"><%=oneLibra.name%></label>
                     <%});%>
                     <%if(typeof user !=='undefined' ){%>
-                    <button class="s3-btn2" id="buttonCreateF" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
+                    <button class="s3-btn3" id="buttonCreateL" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
                     <%}%>
                     <%}else {%>
-                      <label for="None" id="None" class=" s3-btn5 deleteLanlabel  None" name="" style="padding:7px; width:auto; margin:5px;">None</label>
+                      <label for="None" id="None" class="deleteLanlabel s3-btn5 None" name="" style="padding:7px; width:auto; margin:5px;"><%=lang.tutorials.length%></label>
                       <%if(typeof user !=='undefined' ){%>
-                      <button class="s3-btn2" id="buttonCreateF" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
+                      <button class="s3-btn3" id="buttonCreateL" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
                       <%}%>
                       <%}%>
                       <hr>
-                      <h3><strong>Tools</strong></h3>
-                      <%if(lang.tools.length > 0){%>
-                        <%lang.tools.forEach((oneTool)=>{%>
-                          <label for="<%=oneTool%>" id="<%=oneTool%>" class="deleteLanlabel s3-btn5 <%=oneTool%>" name=""  onclick="window.location.href='/Tool/<%=oneTool.name%>/<%=oneTool._id%>/main'" style="padding:7px; width:auto; margin:5px;"><%=oneTool.name%></label>
-                          <%});%>
-                          <%if(typeof user !=='undefined' ){%>
-                          <button class="s3-btn4" id="buttonCreateT" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
-                          <%}%>
-                          <%}else {%>
-                            <label for="None" id="None" class="deleteLanlabel s3-btn5 None" name="" style="padding:7px; width:auto; margin:5px;">None</label>
-                            <%if(typeof user !=='undefined' ){%>
-                            <button class="s3-btn4" id="buttonCreateT" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
-                            <%}%>
-                            <%}%>
-                            <hr>
-                            <h3><strong>Libraries</strong></h3>
-                            <%if(lang.libaries.length > 0){%>
-                              <%lang.libaries.forEach((oneLibra)=>{%>
-                                <label for="<%=oneLibra%>" id="<%=oneLibra%>" class="deleteLanlabel s3-btn5 <%=oneLibra%>" name="" onclick="window.location.href='/Library/<%=oneLibra.name%>/<%=oneLibra._id%>/main'" style="padding:7px; width:auto; margin:5px;"><%=oneLibra.name%></label>
-                                <%});%>
-                                <%if(typeof user !=='undefined' ){%>
-                                <button class="s3-btn3" id="buttonCreateL" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
-                                <%}%>
-                                <%}else {%>
-                                  <label for="None" id="None" class="deleteLanlabel s3-btn5 None" name="" style="padding:7px; width:auto; margin:5px;">None</label>
-                                  <%if(typeof user !=='undefined' ){%>
-                                  <button class="s3-btn3" id="buttonCreateL" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
-                                  <%}%>
-                                  <%}%>
-                                  <hr>
-                                  <h3><strong>Tutorials</strong></h3>
-                                  <%if(lang.tutorials.length > 0){%>
-                                    <%lang.tutorials.forEach((oneLibra)=>{%>
-                                      <label for="<%=oneLibra%>" id="<%=oneLibra%>" class="deleteLanlabel s3-btn5 <%=oneLibra%>" name="" onclick="window.location.href='/Tool/<%=oneLibra.name%>/<%=oneLibra._id%>/main'" style="padding:7px; width:auto; margin:5px;"><%=oneLibra.name%></label>
-                                      <%});%>
-                                      <%if(typeof user !=='undefined' ){%>
-                                      <button class="s3-btn3" id="buttonCreateL" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
-                                      <%}%>
-                                      <%}else {%>
-                                        <label for="None" id="None" class="deleteLanlabel s3-btn5 None" name="" style="padding:7px; width:auto; margin:5px;"><%=lang.tutorials.length%></label>
-                                        <%if(typeof user !=='undefined' ){%>
-                                        <button class="s3-btn3" id="buttonCreateL" style="float:right; margin-right:15px; padding:0px 5px; "><a  style=" padding:0px 0px;" ><i class="fa fa-plus" style=" margin-right:0px;" aria-hidden="true"></i></a> </button>
-                                        <%}%>
-                                        <%}%>
 
                           </div>
                         </div>
@@ -93,7 +49,7 @@
                   <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <%if(typeof user !=='undefined' ){%>
 
-                        <form id="formpost" class="" action="/new/<%=lang._id%>/post" method="post" enctype="multipart/form-data">
+                        <form id="formpost" class="" action="/<%=kind%>/<%=lang._id%>/post" method="post" enctype="multipart/form-data">
                           <input name="numberofpic" id="numberofpic" value="" style="display:none">
                           <div class=" items-push">
                             <div class="panel panel-default">

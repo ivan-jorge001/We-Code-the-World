@@ -8,13 +8,13 @@ var array = [];
 /* GET home page. */
 router.get('/', (req, res, next) => {
     User.find({}, (err, theUser) => {
-
+console.log('gets in here');
         if (err) {
             next(err);
             return;
         }
         if (theUser) {
-            console.log(theUser);
+
             theUser.forEach((theUsers) => {
 
                 theUsers.post.postForEveryone.forEach((postsId) => {
@@ -47,14 +47,13 @@ router.get('/', (req, res, next) => {
                                   return;
                                 }
                                 if (userwhoComment) {
-                                  console.log(coment.photos,'3sssssssssssssdddddddddddddddddddd');
+
                                   var comments = {
                                     authorPhoto:userwhoComment.profilepic,
                                     content:coment.content,
                                     timeCreated:d.getTime() - coment.createdAt.getTime(),
                                     comentPic:coment.photos
                                   };
-                                  console.log(comments.comentPic);
                                   if (userwhoComment.name !== undefined) {
                                     comments.authorName = userwhoComment.name;
                                   }else {
@@ -68,7 +67,7 @@ router.get('/', (req, res, next) => {
                                      b = b.timeCreated;
                                      return a > b ? 11 : a < b ? -1 : 0;
                                    });
-                                   console.log(postContent.comment);
+
                                 }
 
 
@@ -81,7 +80,7 @@ router.get('/', (req, res, next) => {
                                 b = b.createat;
                                 return a > b ? 11 : a < b ? -1 : 0;
                             });
-                            console.log(postContent);
+
                         }
                     });
                 });
@@ -99,7 +98,6 @@ router.get('/', (req, res, next) => {
                     });
                 }
                 if (req.user !== undefined) {
-                  console.log(req.user._id.toString());
 
                         rend('login');
 

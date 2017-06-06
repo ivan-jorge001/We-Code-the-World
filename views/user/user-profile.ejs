@@ -121,7 +121,9 @@
                       <%}%>
                     <%}%>
                     <%var many = 0;%>
+                    <%var commentPic = 1221355533120;%>
                     <%post.forEach((pos)=>{%>
+                      <%commentPic++;%>
                       <%many++;%>
                       <div class="panel panel-default">
                         <div class="panel-body">
@@ -448,8 +450,28 @@
                                   </label>
                                   <hr>
                                   <div class="post-content">
-                                    <%=commen.content%>
+                                  <%=commen.content%>
                                   </div>
+                                  <hr>
+                                  <%if (commen.comentPic.length > 0) {%>
+                                    <%var many2 = 100;%>
+                                    <%commen.comentPic.forEach((onephoto)=>{%>
+                                      <%many2++;%>
+                                      <img class="img-responsive <%=many2%><%=commentPic%> comentimg" id="comentImage" src="<%=onephoto%>" style=" margin:10px; height:130px; width:150px; display:inline; float:left;"  >
+
+                                      <script type="text/javascript">
+                                        $(`.<%=many2%><%=commentPic%>`).on('click', () => {
+                                          $(`#<%=many2%><%=commentPic%>`).modal('show');
+                                        });
+                                      </script>
+                                      <div class="modal fade" id="<%=many2%><%=commentPic%>">
+                                      <img class="img-fluid  " id="comentImage" src="<%=onephoto%>" style="max-height:450px !important; display: block;  margin-left:auto; margin-right: auto; top:300px; position:relative; "  >
+
+                                      </div>
+                                       <%});%>
+
+
+                                  <%}%>
                                 </div>
                               </div>
                             </div>
@@ -458,35 +480,36 @@
                         <%});%>
                       </div>
                     <%}%>
-              <div id="picGoesCom" style="margin:10px;">
-              </div>
-              <div class="media row">
-              <%if (typeof user !== 'undefined') {%>
+                    <form class="" action="/<%=pos.idofpost%>/comment" method="post" enctype="multipart/form-data">
+                      <div id="picGoesCom<%=commentPic%>" style="margin:10px;">
+                      </div>
+                      <div class="media row">
+                        <%if (typeof user !== 'undefined') {%>
 
 
-                <div class="pull-left" style="margin-left:15px !important;">
-                  <form class="" action="/<%=pos.idofpost%>/comment" method="post">
-                    <a href="/<%=user._id%>/profile">
-                                                            <img class="media-object img-circle" src="<%=user.profilepic%>" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                                                            </a>
-                </div>
+                          <div class="pull-left" style="margin-left:15px !important;">
+                              <a href="/<%=user._id%>/profile">
+                                <img class="media-object img-circle" src="<%=user.profilepic%>" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                              </a>
+                          </div>
 
-                <div class="media-body col-xs-12">
+                          <div class="media-body col-xs-12">
 
-                  <div class=" col-xs-9 " style="display:inline;">
-                    <textarea class="form-control " rows="1" placeholder="Comment" name="content" style="display:inline;"></textarea>
+                            <div class=" col-xs-9 " style="display:inline;">
+                              <textarea class="form-control " rows="1" placeholder="Comment" name="content" style="display:inline;"></textarea>
 
-                  </div>
-                  <label id="commentpiclabel" for="commentpic" class="  s3-btn2" style="padding:5px; margin-left:5px; color:black; display:inline; float:left;"><input type="file" name="imgcomment" id="commentpic" style="  display:none; width:auto; height:auto;" ><i class="fa fa-camera" aria-hidden="true"></i></label >
-                  <button class="s3-btn4" style="padding:5px; color:black; margin-left:5px; display:inline; float:left;" type='submit'>Post</button>
+                            </div>
+                            <label id="commentpiclabel" for="<%=commentPic%>commentpic" class="  s3-btn2" style="padding:5px; margin-left:5px; color:black; display:inline; float:left;"><input type="file"  class="<%=commentPic%>" id="<%=commentPic%>commentpic"  style="  display:none; width:auto; height:auto;" ><i class="fa fa-camera" aria-hidden="true"></i></label >
+                            <input  value="<%=commentPic%>" class= "justkeeptrack" style="display:none;"  style="">
+                            <button class="s3-btn4" style="padding:5px; color:black; margin-left:5px; display:inline; float:left;" type='submit'>Post</button>
 
 
-                                                            </form>
-                                                        </div>
-                                                    <%}%>
-              </div>
-            </div>
-          </div>
+                            </div>
+                            <%}%>
+                            </div>
+                            </form>
+                            </div>
+                          </div>
         <%});%>
       </div>
   </div>

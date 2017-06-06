@@ -68,7 +68,7 @@ var picTo = w.value;
 
 
               $(`#picGoesCom${picTo}`).append(`<img src="${source}" id="${count}" class="commentimg" style="margin:5px; height:100px;"  onclick ="de(event)">`);
-              $(`#commentpic`).clone().appendTo(`#picGoesCom${picTo}`).attr('id', `${count}`).attr('class', `${count}`);
+              $(`#${picTo}commentpic`).clone().appendTo(`#picGoesCom${picTo}`).attr('id', `${count}`).attr('class', `${count}`).attr('name','imgcomment');
             }
 
 
