@@ -98,7 +98,7 @@
 
 
 
-            <%if(typeof reset !=='undefined' && reset === true ){%>
+            <%if(typeof reset !=='undefined' ){%>
               <a id='newPassword' class="nav-link" data-toggle="modal" data-target="#newPass"></a>
               </li>
               <div class="container signuplogin modal fade" id='newPass' style="margin-top: 170px;">
@@ -133,6 +133,7 @@
 
                 <div class="content container" style="padding:30px;">
 
+                  <%if (typeof post !== 'undefined' ) {%>
                   <%var many = 0;%>
                   <%var commentPic = 1221355533120;%>
                     <%post.forEach((pos)=>{%>
@@ -567,4 +568,5 @@
                                               </div>
                                             </div>
                                         <%});%>
+                                        <%};%>
                                 </div>

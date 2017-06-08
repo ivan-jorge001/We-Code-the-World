@@ -50,10 +50,10 @@
   <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
   <!-- <link rel="stylesheet" id="css-theme" href="/assets/css/themes/flat.min.css"> -->
   <!-- END Stylesheets -->
-  <script src="scripts/three.js"></script>
+  <%# <script src="scripts/three.js"></script>
 
   <script src="scripts/Projector.js"></script>
-  <script src="scripts/CanvasRenderer.js"></script>
+  <script src="scripts/CanvasRenderer.js"></script>%>
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -71,7 +71,7 @@
 
       <nav></nav>
     </div>
-
+<%#
 		<script>
 			var camera, scene, renderer;
 			var texture_placeholder,
@@ -220,7 +220,7 @@ $('.row2').fadeIn();
 });
 
 
-</script>
+</script>%>
 
   <div id="noty-holder"></div>
   <%# THIS IS FOR THE NOTIFICATION %>
@@ -549,7 +549,7 @@ $('.row2').fadeIn();
 
 
                             <!-- Main Container -->
-                            <main id="main-container" style="background-color:transparent !important; position:absolute; top:0px;">
+                            <main id="main-container" >
 
                               <%if(typeof main !== "undefined"){%>
 

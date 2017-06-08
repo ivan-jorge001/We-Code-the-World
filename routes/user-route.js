@@ -214,6 +214,7 @@ router.post('/profile/new', ensure.ensureLoggedIn('/home'), (req, res, next) => 
 });
 
 router.get('/reset/:token', function(req, res) {
+
     User.findOne({
         resetPasswordToken: req.params.token,
         resetPasswordExpires: {
@@ -221,12 +222,17 @@ router.get('/reset/:token', function(req, res) {
         }
     }, function(err, user) {
         if (!user) {
+
+
             req.flash('error', 'Password reset token is invalid or has expired.');
             return res.redirect('/home');
         }
-        res.render('index', {
-            reset: true
-        });
+if (user) {
+console.log(user);
+  res.render('index', {
+    reset: true
+  });
+}
     });
 });
 router.post('/reset/:token', (req, res, next) => {
